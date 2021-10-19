@@ -1,9 +1,9 @@
-
+import Form from '../src/pages/Form';
 
 function App() {
   return (
     <div>
-        <p>Wiktor kozak z gita</p>
+       <Form />
     </div>
   );
 }
