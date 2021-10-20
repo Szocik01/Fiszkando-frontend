@@ -1,9 +1,14 @@
-import Form from '../src/pages/Form';
+import { Switch, Route } from "react-router-dom";
+import Form from "../src/pages/Form";
 
 function App() {
   return (
     <div>
-       <Form />
+      <Switch>
+        <Route path="/authentication">
+          <Form />
+        </Route>
+      </Switch>
     </div>
   );
 }
