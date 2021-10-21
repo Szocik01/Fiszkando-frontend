@@ -96,19 +96,15 @@ span{
   transition: .5s;  
 }
 #login{
-    /* position: absolute; */
     transform: translateX(0);
 }
 #loginOff{
-    /* position: absolute; */
     transform: translateX(200%);
 }
 #register{
-    /* position: absolute; */
     transform: translateX(200%);
 }
 #registerOff{
-    /* position: absolute; */
     transform: translateX(0);
 }
 #btnMoveOn{
@@ -117,9 +113,6 @@ span{
 #btnMoveOff{
     transform: translateX(0);
 }
-
-
-
 @media (min-width: 768px){
     .container{
         width: 25rem;

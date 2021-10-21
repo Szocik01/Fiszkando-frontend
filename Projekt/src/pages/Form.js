@@ -1,5 +1,5 @@
 import styles from "./Form.module.css";
-import { Fragment, useState } from "react";
+import {Fragment, useState } from "react";
 import Input from '../../src/components/Input';
 import logoFB from '../image/fb.png';
 import logoGP from '../image/gp.png';
@@ -9,6 +9,8 @@ import ButtonShow from '../components/buttonShow';
 const Form = () =>{
     const [change, setChange] = useState(true);
     const [changePassword, setchangePassword] = useState(false);
+    const [button, setButton] = useState(false);
+
 
     const loginMoveHandler = () => {
         setChange(true);
@@ -18,6 +20,13 @@ const Form = () =>{
     }
     const passwordHandler = () =>{
         setchangePassword(!changePassword);
+    };
+    const showButtonHandler1 = event =>{
+        if(event.target.value.trim()===''){
+            setButton(false);
+        }else{
+            setButton(true);
+        }
     };
     
     return (
@@ -35,9 +44,9 @@ const Form = () =>{
                 </div>
                 <div className={styles.main}>
                    <form id={change ? styles.login : styles.loginOff} className={styles.input_grup}>
+                        {button?<ButtonShow type="button" onClick={passwordHandler}>Show</ButtonShow>:''}
                         <Input type="text" id="loginL">Login</Input>
-                        <ButtonShow type="button" onClick={passwordHandler}>Show</ButtonShow>
-                        <Input  type={changePassword ? 'text' : 'password'} id="passwordL">Hasło</Input>
+                        <Input  type={changePassword ? 'text' : 'password'} id="passwordL" onChange={showButtonHandler1}>Hasło</Input>
                         <div className={styles.checbox_input}>
                             <input type="checkbox" className={styles.chech_box}/><span>Remember Password</span>
                         </div>

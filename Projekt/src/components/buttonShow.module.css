@@ -3,7 +3,7 @@
     position: absolute;
     border: none;
     left: 11.8rem;
-    top: 4.2rem;
+    top: 4.3rem;
     cursor: pointer;
     z-index: 2;
     border-radius: 1rem;
@@ -13,7 +13,4 @@
 .button:active,
 .button:hover{
     background-color: #ccc;
-}
-.buttonOff{
-    display: none;
 }
