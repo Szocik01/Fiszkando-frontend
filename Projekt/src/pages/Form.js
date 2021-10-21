@@ -6,26 +6,20 @@ import logoGP from '../image/gp.png';
 import logoTW from '../image/tw.png';
 
 const Form = () =>{
-    const [login, setLogin] = useState(true);
-    const [register, setRegister] = useState(true);
-    const [btnMove, setBtnMove] = useState(true);
+    const [change, setChange] = useState(true);
 
     const loginMoveHandler = () => {
-        setLogin(true);
-        setRegister(true);
-        setBtnMove(true);
+        setChange(true);
     };
     const registerMoveHandler = () =>{
-        setLogin(false);
-        setRegister(false);
-        setBtnMove(false);
+        setChange(false);
     }
     
     return (
         <div className={styles.image}>
             <div className={styles.container}>
                 <div className={styles.nav}>
-                    <div id={btnMove ? styles.btnMoveOff : styles.btnMoveOn} className={styles.btn}></div>
+                    <div id={change ? styles.btnMoveOff : styles.btnMoveOn} className={styles.btn}></div>
                     <button type="button" className={styles.toggle_btn} onClick={loginMoveHandler}>Login</button>
                     <button type="button" className={styles.toggle_btn} onClick={registerMoveHandler}>Reginster</button>
                 </div>
@@ -35,7 +29,7 @@ const Form = () =>{
                     <img src={logoGP} alt="logoGP"/>
                 </div>
                 <div className={styles.main}>
-                   <form id={login ? styles.login : styles.loginOff} className={styles.input_grup}>
+                   <form id={change ? styles.login : styles.loginOff} className={styles.input_grup}>
                         <Input type="text" id="loginL">Login</Input>
                         <Input type="password" id="passwordL">Hasło</Input>
                         <div className={styles.checbox_input}>
@@ -43,7 +37,7 @@ const Form = () =>{
                         </div>
                         <button type="submit" className={styles.submit_btn}>Submit</button>
                    </form>
-                   <form id={register ? styles.register : styles.registerOff} className={styles.input_grup}>
+                   <form id={change ? styles.register : styles.registerOff} className={styles.input_grup}>
                         <Input type="text" id="loginR">Login</Input>
                         <Input type="email" id="mail">E-Mail</Input>
                         <Input type="password" id="passwordR">Password</Input>
