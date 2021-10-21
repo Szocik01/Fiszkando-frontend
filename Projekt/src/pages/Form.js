@@ -4,9 +4,11 @@ import Input from '../../src/components/Input';
 import logoFB from '../image/fb.png';
 import logoGP from '../image/gp.png';
 import logoTW from '../image/tw.png';
+import ButtonShow from '../components/buttonShow';
 
 const Form = () =>{
     const [change, setChange] = useState(true);
+    const [changePassword, setchangePassword] = useState(false);
 
     const loginMoveHandler = () => {
         setChange(true);
@@ -14,6 +16,9 @@ const Form = () =>{
     const registerMoveHandler = () =>{
         setChange(false);
     }
+    const passwordHandler = () =>{
+        setchangePassword(!changePassword);
+    };
     
     return (
         <div className={styles.image}>
@@ -31,7 +36,8 @@ const Form = () =>{
                 <div className={styles.main}>
                    <form id={change ? styles.login : styles.loginOff} className={styles.input_grup}>
                         <Input type="text" id="loginL">Login</Input>
-                        <Input type="password" id="passwordL">Hasło</Input>
+                        <ButtonShow type="button" onClick={passwordHandler}>Show</ButtonShow>
+                        <Input  type={changePassword ? 'text' : 'password'} id="passwordL">Hasło</Input>
                         <div className={styles.checbox_input}>
                             <input type="checkbox" className={styles.chech_box}/><span>Remember Password</span>
                         </div>

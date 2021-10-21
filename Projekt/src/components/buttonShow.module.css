@@ -1,0 +1,19 @@
+.button{
+    display: block;
+    position: absolute;
+    border: none;
+    left: 11.8rem;
+    top: 4.2rem;
+    cursor: pointer;
+    z-index: 2;
+    border-radius: 1rem;
+    padding: 0.1rem 0.5rem;
+    background-color: #fff;
+}
+.button:active,
+.button:hover{
+    background-color: #ccc;
+}
+.buttonOff{
+    display: none;
+}
