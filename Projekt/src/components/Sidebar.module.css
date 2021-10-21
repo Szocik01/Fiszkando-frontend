@@ -1,0 +1,27 @@
+.sidebar
+{
+    width: 4rem;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    box-shadow: black 0px 0px 3px 1px;
+    
+}
+
+.mainBar
+{
+    background-color: rgb(44, 44, 44);
+    z-index: 100;
+}
+
+.slider
+{
+    background-color: rgb(100, 100, 100);
+    z-index: 90;
+    transition: all 0.2s ease-out;
+}
+
+.mainBar:hover+.slider
+{
+    width: 18rem;
+}

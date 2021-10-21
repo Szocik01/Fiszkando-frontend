@@ -1,5 +1,5 @@
 import styles from "./Form.module.css";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import Input from '../../src/components/Input';
 import logoFB from '../image/fb.png';
 import logoGP from '../image/gp.png';
@@ -50,7 +50,6 @@ const Form = () =>{
                 </div>
             </div>
         </div>
-        
     );
 };
 
