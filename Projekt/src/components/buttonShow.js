@@ -1,7 +1,7 @@
-import styles from './buttonShow.module.css';
+
 const ButtonShow = props =>{
     return (
-        <button className={styles.button} type={props.type} onClick={props.onClick}>{props.children}</button>
+        <button className={props.className} type={props.type} onClick={props.onClick} id={props.id}>{props.children}</button>
     );
 };
 

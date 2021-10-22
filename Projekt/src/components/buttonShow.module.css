@@ -10,6 +10,13 @@
     padding: 0.1rem 0.5rem;
     background-color: #fff;
 }
+.buttonSecend{
+    top: 7.3rem;
+}
+.buttonThird{
+    top: 10.2rem;
+}
+
 .button:active,
 .button:hover{
     background-color: #ccc;

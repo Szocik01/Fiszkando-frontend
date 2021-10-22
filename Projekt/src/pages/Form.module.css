@@ -68,6 +68,17 @@
     color: white;
 
 }
+button:disabled{
+    background: #ccc;
+    color: #292929;
+    border-color: #ccc;
+    cursor: not-allowed;
+    width: 100%;
+    padding: 0.7rem;
+    border: 0;
+    outline: none;
+    border-radius: 2rem;
+}
 .chech_box{
     margin: 30px 10px 30px 0;
 }
