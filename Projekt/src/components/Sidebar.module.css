@@ -1,3 +1,5 @@
+
+
 .sidebar
 {
     width: 4rem;
@@ -12,16 +14,95 @@
 {
     background-color: rgb(44, 44, 44);
     z-index: 100;
+    transition: all 0.1s linear;
+}
+
+.mainBarItem
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 4rem;
+}
+
+.icon,
+.iconFirst
+{
+    font-size: 2rem;
+    color:  white;
+    transition: 0.2s ease-out all;
+}
+
+.mainBar:hover .iconFirst,
+.slider:hover+.mainBar .iconFirst
+{
+    transform: rotate(-180deg);
 }
 
 .slider
 {
     background-color: rgb(100, 100, 100);
     z-index: 90;
-    transition: all 0.2s ease-out;
+    transition: all 0.3s ease-out;
 }
 
-.mainBar:hover+.slider
+.sliderList
 {
-    width: 18rem;
+    width: 100%;
+    height: 100%;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0px;
+}
+
+.sliderItem
+{
+    width: 100%;
+    height: 4rem;
+    padding-left: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 1.2rem;
+    color: rgb(224, 224, 224);
+    font-weight: 700;
+    transition: all 0.2s ease-in-out;
+}
+
+.sliderItem:hover
+{
+    background-color: rgb(77, 77, 77);
+    color: white;
+}
+
+.theme
+{
+    margin-top: auto;
+}
+
+.mainBar:hover+.slider,
+.slider:hover
+{
+    width: 20rem;
+}
+
+@media screen and (max-width:768px)
+{
+    .slider
+    {
+        display: none;
+    }
+
+    .mainBar
+    {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        height: 4rem;
+        width: 100vw;
+    }
 }

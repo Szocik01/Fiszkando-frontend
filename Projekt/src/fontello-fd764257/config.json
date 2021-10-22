@@ -1,0 +1,52 @@
+{
+  "name": "",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "399ef63b1e23ab1b761dfbb5591fa4da",
+      "css": "main",
+      "code": 59392,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "27531040afb54140f4d449321c9cec3a",
+      "css": "pytanie",
+      "code": 59394,
+      "src": "typicons"
+    },
+    {
+      "uid": "1b58555745e7378f7634ee7c63eada46",
+      "css": "baza",
+      "code": 61449,
+      "src": "mfglabs"
+    },
+    {
+      "uid": "7b6c617d6d1e3f22db493839f0483bf6",
+      "css": "test",
+      "code": 59395,
+      "src": "elusive"
+    },
+    {
+      "uid": "26aba7edd46944209b4961670675a813",
+      "css": "ustawienia",
+      "code": 59396,
+      "src": "websymbols"
+    },
+    {
+      "uid": "98687378abd1faf8f6af97c254eb6cd6",
+      "css": "mod",
+      "code": 59397,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "7034e4d22866af82bef811f52fb1ba46",
+      "css": "admin",
+      "code": 61729,
+      "src": "fontawesome"
+    }
+  ]
+}
