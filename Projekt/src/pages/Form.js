@@ -35,7 +35,7 @@ const Form = () =>{
                 <div className={styles.nav}>
                     <div id={change ? styles.btnMoveOff : styles.btnMoveOn} className={styles.btn}></div>
                     <button type="button" className={styles.toggle_btn} onClick={loginMoveHandler}>Login</button>
-                    <button type="button" className={styles.toggle_btn} onClick={registerMoveHandler}>Reginster</button>
+                    <button type="button" className={styles.toggle_btn} onClick={registerMoveHandler}>Register</button>
                 </div>
                 <div className={styles.head}>
                     <img src={logoFB} alt="logoFB"/>

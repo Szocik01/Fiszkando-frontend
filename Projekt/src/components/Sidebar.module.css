@@ -1,13 +1,18 @@
-
+.sidebarContainer
+{
+    width: auto;
+    height: 100vh;
+    position: absolute;
+    left:0;
+}
 
 .sidebar
 {
-    width: 4rem;
-    height: 100vh;
     position: absolute;
     left: 0;
-    box-shadow: black 0px 0px 3px 1px;
-    
+    width: 4rem;
+    height: 100%;
+    box-shadow: rgb(27, 27, 27) 0px 0px 4px 1px;
 }
 
 .mainBar
@@ -31,11 +36,10 @@
 {
     font-size: 2rem;
     color:  white;
-    transition: 0.2s ease-out all;
+    transition: 0.3s ease-out all;
 }
 
-.mainBar:hover .iconFirst,
-.slider:hover+.mainBar .iconFirst
+.sidebarContainer:hover .iconFirst
 {
     transform: rotate(-180deg);
 }
@@ -54,7 +58,7 @@
     list-style-type: none;
     display: flex;
     flex-direction: column;
-    padding: 5px 0px;
+    padding-bottom: 5px;
 }
 
 .sliderItem
@@ -73,10 +77,30 @@
     transition: all 0.2s ease-in-out;
 }
 
+.navlinkStyle
+{
+    text-decoration: none;
+}
+
 .sliderItem:hover
 {
     background-color: rgb(77, 77, 77);
     color: white;
+}
+
+.mainItemActive
+{
+    background-color: rgb(22, 22, 22);
+    box-shadow: rgb(20, 20, 20) 0px 0px 5px 1px;
+    transition: ease-out 0.4s all;
+}
+
+.sliderItemActive
+{
+    background-color: rgb(56, 56, 56); 
+    box-shadow: rgb(41, 41, 41) 0px 0px 5px 1px;
+    color: white;
+    transition: ease-out 0.4s all;
 }
 
 .theme
