@@ -28,7 +28,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 4rem;
+    height: 5rem;
 }
 
 .icon,
@@ -64,7 +64,7 @@
 .sliderItem
 {
     width: 100%;
-    height: 4rem;
+    height: 5rem;
     padding-left: 2rem;
     display: flex;
     align-items: center;
@@ -121,6 +121,7 @@
         display: none;
     }
 
+    .sidebarContainer,
     .mainBar
     {
         position: fixed;
@@ -128,5 +129,42 @@
         left: 0;
         height: 4rem;
         width: 100vw;
+    }
+
+    .sliderList
+    {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .mainBarItem
+    {
+        height: 100%;
+        width: calc(100vw/7);
+    }
+
+    .iconFirst,
+    .sidebarContainer:hover .iconFirst
+    {
+        transition: none;
+        transform: rotate(-90deg);
+    }
+}
+
+@media screen and (max-width:319px)
+{
+    .icon,
+    .iconFirst
+    {
+        font-size: 1.5rem;
+    }
+
+    .sidebarContainer,
+    .mainBar
+    {
+        height: 3rem;
     }
 }
