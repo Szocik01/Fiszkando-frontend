@@ -2,34 +2,34 @@ import styles from "./Form.module.css";
 import stylesButton from '../components/buttonShow.module.css';
 import {Fragment, useState, useEffect } from "react";
 import Input from '../../src/components/Input';
-import logoFB from '../image/fb.png';
-import logoGP from '../image/gp.png';
-import logoTW from '../image/tw.png';
 import ButtonShow from '../components/buttonShow';
+import testUtils from "react-dom/test-utils";
 
 const Form = () =>{
     const [inputsInfo, setinputsInfo] = useState({loginL: '', passwordL: '', loginR: '', mail: '',passwordR: '', check_passwordR: ''});
     const [button, setButton] = useState({passwordL: false, passwordR: false, check_passwordR: false});
     const [change, setChange] = useState(true);
-    const [changePassword, setchangePassword] = useState(false);
-    const [formValid, setFormValid] = useState(false);
-
+    const [changePassword, setchangePassword] = useState({buttonPasswordL: false, buttonPasswordR: false, buttoncheck_passwordR: false});
+    const [formValid, setFormValid] = useState(true);
     const loginMoveHandler = () => {
         setChange(true);
     };
     const registerMoveHandler = () =>{
         setChange(false);
     }
-    const passwordHandler = () =>{
-        setchangePassword((prevState)=>{
-            return !prevState;
-        });
+    const passwordHandler = (event) =>{
+        for(const key in changePassword){
+            if(key===event.target.id){
+                setchangePassword((prevState)=>{
+                    return {...prevState, [key]: !prevState[key]};
+                });
+            }
+        }
     };
     const formTechnikHandler = event =>{
         for(const key in button){
             if(key===event.target.id){
                 if(event.target.value.trim()===''){
-                    console.log(key)
                     setButton((prevState)=>{
                         return {...prevState,[key]:false}
                     });
@@ -49,6 +49,7 @@ const Form = () =>{
         }
     };
     useEffect(()=>{
+       
         if(inputsInfo.loginL.trim()==='' || inputsInfo.passwordL.trim()===''){
             setFormValid(false);
         }
@@ -78,31 +79,28 @@ const Form = () =>{
                     <button type="button" className={styles.toggle_btn} onClick={registerMoveHandler}>Register</button>
                 </div>
                 <div className={styles.head}>
-                    <img src={logoFB} alt="logoFB"/>
-                    <img src={logoTW} alt="logoTW"/>
-                    <img src={logoGP} alt="logoGP"/>
                 </div>
                 <div className={styles.main}>
-                   <form id={change ? styles.login : styles.loginOff} className={styles.input_grup} onSubmit={loginSubmitHandler}>
-                        {button.passwordL ? <ButtonShow type="button" onClick={passwordHandler} className={stylesButton.button}>Show</ButtonShow> : ''}
+                   <form id={change ? styles.login : styles.loginOff} className={styles.input_grup}>
+                        {button.passwordL ? <ButtonShow type="button" id="buttonPasswordL" onClick={passwordHandler} className={stylesButton.button}>{changePassword.buttonPasswordL ? 'Hide' : 'Show'}</ButtonShow> : ''}
                         <Input type="text" id="loginL" onChange={formTechnikHandler}>Login</Input>
-                        <Input  type={changePassword ? 'text' : 'password'} id="passwordL" onChange={formTechnikHandler}>Hasło</Input>
+                        <Input  type={changePassword.buttonPasswordL ? 'text' : 'password'} id="passwordL" onChange={formTechnikHandler}>Hasło</Input>
                         <div className={styles.checbox_input}>
                             <input type="checkbox" className={styles.chech_box}/><span>Remember Password</span>
                         </div>
-                        <button disabled={!formValid} type="submit" className={styles.submit_btn}>Submit</button>
+                        <button disabled={!formValid} type="submit" id="buttonSubmit" className={styles.submit_btn} onSubmit={loginSubmitHandler}>Submit</button>
                    </form>
-                   <form id={change ? styles.register : styles.registerOff} className={styles.input_grup} onSubmit={registerSubmitHandler}>
-                        {button.passwordR ? <ButtonShow type="button" onClick={passwordHandler} className={buttonSecend}>Show</ButtonShow> : ''}
-                        {button.check_passwordR ? <ButtonShow type="button" onClick={passwordHandler} className={buttonThird}>Show</ButtonShow> : ''}
+                   <form id={change ? styles.register : styles.registerOff} className={styles.input_grup}>
+                        {button.passwordR ? <ButtonShow type="button" id="buttonPasswordR" onClick={passwordHandler} className={buttonSecend}>{changePassword.buttonPasswordR ? 'Hide' : 'Show'}</ButtonShow> : ''}
+                        {button.check_passwordR ? <ButtonShow type="button" id="buttoncheck_passwordR" onClick={passwordHandler} className={buttonThird}>{changePassword.buttoncheck_passwordR ? 'Hide' : 'Show'}</ButtonShow> : ''}
                         <Input type="text" id="loginR" onChange={formTechnikHandler}>Login</Input>
                         <Input type="email" id="mail" onChange={formTechnikHandler}>E-Mail</Input>
-                        <Input type={changePassword ? 'text' : 'password'} id="passwordR" onChange={formTechnikHandler}>Password</Input>
-                        <Input type={changePassword ? 'text' : 'password'} id="check_passwordR" onChange={formTechnikHandler}>Repeat password</Input>
+                        <Input type={changePassword.buttonPasswordR ? 'text' : 'password'} id="passwordR" onChange={formTechnikHandler}>Password</Input>
+                        <Input type={changePassword.buttoncheck_passwordR ? 'text' : 'password'} id="check_passwordR" onChange={formTechnikHandler}>Repeat password</Input>
                         <div className={styles.checbox_input}>
                             <input type="checkbox" className={styles.chech_box}/><span>I agree to the terms</span>
                         </div>
-                        <button disabled={!formValid} type="submit" className={styles.submit_btn}>Register</button>
+                        <button disabled={!formValid} type="submit" id="buttonRegister" className={styles.submit_btn} onSubmit={registerSubmitHandler}>Register</button>
                    </form>
                 </div>
             </div>
