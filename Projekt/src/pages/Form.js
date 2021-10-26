@@ -10,7 +10,8 @@ const Form = () =>{
     const [button, setButton] = useState({passwordL: false, passwordR: false, check_passwordR: false});
     const [change, setChange] = useState(true);
     const [changePassword, setchangePassword] = useState({buttonPasswordL: false, buttonPasswordR: false, buttoncheck_passwordR: false});
-    const [formValid, setFormValid] = useState(true);
+    const [formValid1, setFormValid1] = useState(false);// do poprawy później
+    const [formValid2, setFormValid2] = useState(false);// do poprawy później
     const loginMoveHandler = () => {
         setChange(true);
     };
@@ -49,16 +50,16 @@ const Form = () =>{
         }
     };
     useEffect(()=>{
-       
-        if(inputsInfo.loginL.trim()==='' || inputsInfo.passwordL.trim()===''){
-            setFormValid(false);
+        if(inputsInfo.loginL.trim()==='' || inputsInfo.passwordL.trim()===''){ // do poprawy później
+            setFormValid1(false);
+        }if(inputsInfo.loginR.trim()==='' || inputsInfo.mail.trim()===''|| inputsInfo.passwordR.trim()===''|| inputsInfo.check_passwordR.trim()==='' || inputsInfo.passwordR!==inputsInfo.check_passwordR){ // do poprawy później
+            setFormValid2(false);
+        }if(inputsInfo.loginL.trim()!=='' && inputsInfo.passwordL.trim()!==''){ // do poprawy później
+            setFormValid1(true);
+        }if(inputsInfo.loginR.trim()!=='' && inputsInfo.mail.trim()!=='' && inputsInfo.passwordR.trim()!=='' && inputsInfo.check_passwordR.trim()!=='' && inputsInfo.passwordR===inputsInfo.check_passwordR){ // do poprawy później
+            setFormValid2(true);
         }
-        // if(inputsInfo.loginR.trim()==='' || inputsInfo.mail.trim()===''|| inputsInfo.passwordR.trim()===''|| inputsInfo.check_passwordR.trim()===''){
-        //     setFormValid(false);
-        // }
-        else{
-            setFormValid(true);
-        }
+        
     },[inputsInfo]);
 
     const buttonSecend = `${stylesButton.button} ${stylesButton.buttonSecend}`;
@@ -66,9 +67,11 @@ const Form = () =>{
 
     const loginSubmitHandler = (event) =>{
         event.preventDefault();
+        console.log(inputsInfo.loginL, inputsInfo.passwordL);
     };
     const registerSubmitHandler = (event) =>{
         event.preventDefault();
+        console.log(inputsInfo.loginR, inputsInfo.mail, inputsInfo.passwordR, inputsInfo.check_passwordR);
     };
     return (
         <div className={styles.image}>
@@ -81,16 +84,16 @@ const Form = () =>{
                 <div className={styles.head}>
                 </div>
                 <div className={styles.main}>
-                   <form id={change ? styles.login : styles.loginOff} className={styles.input_grup}>
+                   <form id={change ? styles.login : styles.loginOff} className={styles.input_grup} onSubmit={loginSubmitHandler}>
                         {button.passwordL ? <ButtonShow type="button" id="buttonPasswordL" onClick={passwordHandler} className={stylesButton.button}>{changePassword.buttonPasswordL ? 'Hide' : 'Show'}</ButtonShow> : ''}
                         <Input type="text" id="loginL" onChange={formTechnikHandler}>Login</Input>
                         <Input  type={changePassword.buttonPasswordL ? 'text' : 'password'} id="passwordL" onChange={formTechnikHandler}>Hasło</Input>
                         <div className={styles.checbox_input}>
                             <input type="checkbox" className={styles.chech_box}/><span>Remember Password</span>
                         </div>
-                        <button disabled={!formValid} type="submit" id="buttonSubmit" className={styles.submit_btn} onSubmit={loginSubmitHandler}>Submit</button>
+                        <button disabled={!formValid1} type="submit" id="buttonSubmit" className={styles.submit_btn} onChange={formTechnikHandler}>Submit</button>
                    </form>
-                   <form id={change ? styles.register : styles.registerOff} className={styles.input_grup}>
+                   <form id={change ? styles.register : styles.registerOff} className={styles.input_grup} onSubmit={registerSubmitHandler}>
                         {button.passwordR ? <ButtonShow type="button" id="buttonPasswordR" onClick={passwordHandler} className={buttonSecend}>{changePassword.buttonPasswordR ? 'Hide' : 'Show'}</ButtonShow> : ''}
                         {button.check_passwordR ? <ButtonShow type="button" id="buttoncheck_passwordR" onClick={passwordHandler} className={buttonThird}>{changePassword.buttoncheck_passwordR ? 'Hide' : 'Show'}</ButtonShow> : ''}
                         <Input type="text" id="loginR" onChange={formTechnikHandler}>Login</Input>
@@ -100,7 +103,7 @@ const Form = () =>{
                         <div className={styles.checbox_input}>
                             <input type="checkbox" className={styles.chech_box}/><span>I agree to the terms</span>
                         </div>
-                        <button disabled={!formValid} type="submit" id="buttonRegister" className={styles.submit_btn} onSubmit={registerSubmitHandler}>Register</button>
+                        <button disabled={!formValid2} type="submit" id="buttonRegister" className={styles.submit_btn} onChange={formTechnikHandler}>Register</button>
                    </form>
                 </div>
             </div>
