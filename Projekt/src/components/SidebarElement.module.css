@@ -1,7 +1,7 @@
 :root
 {
     --icon-color:white;
-    --icon-color-hovered:#ab0bbd;
+    --icon-color-hovered:rgb(102, 65, 250);
 }
 
 .linkStyle

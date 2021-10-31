@@ -1,10 +1,10 @@
 :root
 {
-    --elements-color-light:#ab0bbd;
+    --elements-color-light:rgb(132, 101, 255);
     --logo-color:white;
     --button-background-color:white;
-    --button-shadow:#772780;
-    --font-color:#4e0f46;
+    --button-shadow:rgb(73, 47, 173);
+    --font-color:rgb(44, 24, 126);
 }
 
 .navbar
