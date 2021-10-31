@@ -1,0 +1,57 @@
+:root
+{
+    --icon-color:white;
+    --icon-color-hovered:#ab0bbd;
+}
+
+.linkStyle
+{
+    text-decoration: none;
+}
+
+.linkContainer
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 3.4rem;
+}
+
+.icon
+{
+    font-size: 1.1rem;
+    color: var(--icon-color);
+    margin-left: 0.5rem;
+    transition: color 0.1s ease-out;
+}
+
+.linkTextContainer
+{
+    margin-left: 0.7rem;
+    font-weight: 700;  
+    color: var(--icon-color);
+    white-space: nowrap;
+    font-size: 0.8rem;
+    transition: color 0.1 ease-out;
+}
+
+.hovered .icon,
+.hovered .linkTextContainer
+{
+  color: var(--icon-color-hovered) ;
+}
+
+@media screen and (min-width: 426px)
+{
+    .icon
+  {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+  }
+
+  .linkTextContainer
+  {
+    margin-left: 1.2rem;
+    font-size: 1rem;
+  }
+}
