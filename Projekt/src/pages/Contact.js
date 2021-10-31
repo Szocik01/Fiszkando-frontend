@@ -8,8 +8,7 @@ export default function Contacts()
 
     useEffect(()=>{
         dispatch(positionActions.pagePositionChange(5*3.4));
-        console.log("contacts loaded")
-    },[])
+    },[dispatch])
 
     return null;
 }

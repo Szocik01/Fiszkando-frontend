@@ -40,21 +40,18 @@ export default function Sidebar() {
           style={{ marginTop: `${position}rem` }}></div>
       </div>
       <ul className={style.sidebarLinkList} onMouseLeave={onMouseLeaveHandler}>
-        <Link to="/" className={style.linkStyle}>
           <li
             className={`${style.linkContainer} ${
               position === 0 && style.hovered
-            }`}
-            onMouseEnter={onMouseEnterHandler}>
+            }`} onMouseEnter={onMouseEnterHandler}>
             <i
               onClick={unfoldingHandler}
-              className={`icon-main ${style.icon} ${
-                isUnfolded ? style.rotate : ""
-              }`}
+              className={`icon-main ${style.icon} ${isUnfolded ? style.rotate : ""}`}
             ></i>
+            <Link to="/" className={style.linkStyle}>
             <div className={style.linkTextContainer}>Strona główna</div>
+            </Link>
           </li>
-        </Link>
         <SidebarElement
           iconClass="icon-pytanie"
           link="/questions"
