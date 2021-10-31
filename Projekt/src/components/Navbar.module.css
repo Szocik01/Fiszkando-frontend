@@ -1,26 +1,34 @@
+:root
+{
+    --elements-color-light:#ab0bbd;
+    --logo-color:white;
+    --button-background-color:white;
+    --button-shadow:#772780;
+    --font-color:#4e0f46;
+}
+
 .navbar
 {
     width: 100%;
-    background-color: rgb(0, 0, 112);
+    background-color: var(--elements-color-light);
     display: flex;
     flex-direction: row;
     align-items: center;
     height: 3rem;
-    z-index: 10;
 }
 
 .logo
 {
-    font-size: 22px;
+    font-size: 1.2rem;
     padding: 5px;
-    color: white;
+    color: var(--logo-color);
     text-decoration: none;
 }
 
 .loginButtons
 {
     margin-left: auto;
-    width: 15rem;
+    width: 9rem;
     display: flex;
     justify-content: space-evenly;
 }
@@ -28,14 +36,16 @@
 .authButton
 {
     text-decoration: none;
-    color: rgb(0, 0, 0);
-    background-color: rgb(255, 255, 255);
-    border: 1px rgb(212, 212, 212);
-    padding: 0.3rem;
-    width: 6rem;
-    text-align: center;
+    height: 1.8rem;
+    font-size: 0.9rem;
+    color: var(--font-color);
+    background-color: var(--button-background-color);
+    width:  3.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 6px;
-    box-shadow: rgb(43, 43, 255) 0px 0px 6px 2px;
+    box-shadow: var(--button-shadow) 0px 0px 6px 2px;
     transition: 0.3s all ease-out;
 }
 
@@ -44,22 +54,28 @@
     transform: scale(1.1);
 }
 
-.menuToggler
-{
-    display: none;
-}
 
-@media screen and (max-width: 426px)
+@media screen and (min-width: 426px)
 {
     .loginButtons
     {
-        width: 11rem;
+        width: 15rem;
     }
 
     .authButton
     {
-        width: 4.5rem;
+        width:6rem;
+        height: 2rem;
+        font-size: 1.1rem;
     }
 
+    .logo
+    {
+        font-size: 1.3rem;
+    }
 
+    .navbar
+    {
+        height: 5rem;
+    }
 }

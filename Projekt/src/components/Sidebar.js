@@ -1,110 +1,100 @@
 import style from "./Sidebar.module.css";
-import { NavLink } from "react-router-dom";
-import "../fontello-fd764257/css/fontello.css";
+import SidebarElement from "./SidebarElement";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { positionActions } from "../storage/redux-index";
 
 export default function Sidebar() {
+  const [isUnfolded, setIsUnfolded] = useState(false);
+  const dispatch = useDispatch();
+
+  const position = useSelector((state) => {
+    return state.sidebarPosition.hoverPosition;
+  });
+
+  function onMouseLeaveHandler() {
+    dispatch(positionActions.onLeavePositionChange());
+  }
+
+  function onMouseEnterHandler() {
+    //funkcja stworzona tylko dla pierwszego elementu stąd stała wartość 0
+    dispatch(positionActions.hoverPositionChange(0));
+  }
+
+  function unfoldingHandler() {
+    setIsUnfolded((prevState) => {
+      return !prevState;
+    });
+  }
+  //"3.4rem"
   return (
-    <div className={style.sidebarContainer}>
-      <nav className={`${style.sidebar} ${style.mainBar}`}>
-        <ul className={style.sliderList}>
-          <NavLink to="/" activeClassName={style.mainItemActive} exact>
-            <li className={style.mainBarItem}>
-              <i className={`icon-main ${style.iconFirst}`}></i>
-            </li>
-          </NavLink>
-          <NavLink to="/questions" activeClassName={style.mainItemActive} exact>
-            <li className={style.mainBarItem}>
-              <i className={`icon-pytanie ${style.icon}`}></i>
-            </li>
-          </NavLink>
-          <NavLink to="/test" activeClassName={style.mainItemActive} exact>
-            <li className={style.mainBarItem}>
-              <i className={`icon-test ${style.icon}`}></i>
-            </li>
-          </NavLink>
-          <NavLink to="/question_base" activeClassName={style.mainItemActive} exact>
-            <li className={style.mainBarItem}>
-              <i className={`icon-baza ${style.icon}`}></i>
-            </li>
-          </NavLink>
-          <NavLink to="/settings" activeClassName={style.mainItemActive} exact>
-            <li className={style.mainBarItem}>
-              <i className={`icon-ustawienia ${style.icon}`}></i>
-            </li>
-          </NavLink>
-          <NavLink to="/mod" activeClassName={style.mainItemActive} exact>
-            <li className={style.mainBarItem}>
-              <i className={`icon-mod ${style.icon}`}></i>
-            </li>
-          </NavLink>
-          <NavLink to="/admin" activeClassName={style.mainItemActive} exact>
-            <li className={style.mainBarItem}>
-              <i className={`icon-admin ${style.icon}`}></i>
-            </li>
-          </NavLink>
-        </ul>
-      </nav>
-      <nav className={`${style.sidebar} ${style.slider}`}>
-        <ul className={style.sliderList}>
-          <NavLink
-            to="/"
-            activeClassName={style.sliderItemActive}
-            className={style.navlinkStyle}
-            exact
-          >
-            <li className={style.sliderItem}>Strona główna</li>
-          </NavLink>
-          <NavLink
-            to="/questions"
-            activeClassName={style.sliderItemActive}
-            className={style.navlinkStyle}
-            exact
-          >
-            <li className={style.sliderItem}>Pojedyncze pytania</li>
-          </NavLink>
-          <NavLink
-            to="/test"
-            activeClassName={style.sliderItemActive}
-            className={style.navlinkStyle}
-            exact
-          >
-            <li className={style.sliderItem}>Test wiedzy</li>
-          </NavLink>
-          <NavLink
-            to="/question_base"
-            activeClassName={style.sliderItemActive}
-            className={style.navlinkStyle}
-            exact
-          >
-            <li className={style.sliderItem}>Baza pytań</li>
-          </NavLink>
-          <NavLink
-            to="/settings"
-            activeClassName={style.sliderItemActive}
-            className={style.navlinkStyle}
-            exact
-          >
-            <li className={style.sliderItem}>Ustawienia konta</li>
-          </NavLink>
-          <NavLink
-            to="/mod"
-            activeClassName={style.sliderItemActive}
-            className={style.navlinkStyle}
-            exact
-          >
-            <li className={style.sliderItem}>Panel Mod</li>
-          </NavLink>
-          <NavLink
-            to="/admin"
-            activeClassName={style.sliderItemActive}
-            className={style.navlinkStyle}
-            exact
-          >
-            <li className={style.sliderItem}>Panel Admin</li>
-          </NavLink>
-          <li className={`${style.sliderItem} ${style.theme}`}>Theme</li>
-        </ul>
-      </nav>
-    </div>
+    <nav
+      className={`${style.sidebarContainer} ${
+        isUnfolded && style.sidebarUnfolded
+      }`}
+    >
+      <div className={style.taggerDiv}>
+        <div
+          className={style.taggerElement}
+          style={{ marginTop: `${position}rem` }}></div>
+      </div>
+      <ul className={style.sidebarLinkList} onMouseLeave={onMouseLeaveHandler}>
+          <li
+            className={`${style.linkContainer} ${
+              position === 0 && style.hovered
+            }`} onMouseEnter={onMouseEnterHandler}>
+            <i
+              onClick={unfoldingHandler}
+              className={`icon-main ${style.icon} ${isUnfolded ? style.rotate : ""}`}
+            ></i>
+            <Link to="/" className={style.linkStyle}>
+            <div className={style.linkTextContainer}>Strona główna</div>
+            </Link>
+          </li>
+        <SidebarElement
+          iconClass="icon-pytanie"
+          link="/questions"
+          linkText="Pojedyncze pytania"
+          marginValue={1 * 3.4}
+        />
+        <SidebarElement
+          iconClass="icon-test"
+          link="/test"
+          linkText="Test wiedzy"
+          marginValue={2 * 3.4}
+        />
+        <SidebarElement
+          iconClass="icon-baza"
+          link="/question_base"
+          linkText="Baza pytań"
+          marginValue={3 * 3.4}
+        />
+        <SidebarElement
+          iconClass="icon-ustawienia"
+          link="/settings"
+          linkText="Ustawienia"
+          marginValue={4 * 3.4}
+        />
+        <SidebarElement
+          iconClass="icon-my"
+          link="/contact"
+          linkText="Kontakt"
+          marginValue={5 * 3.4}
+        />
+        <SidebarElement
+          iconClass="icon-mod"
+          link="/mod"
+          linkText="Panel mod"
+          marginValue={6 * 3.4}
+        />
+        <SidebarElement
+          iconClass="icon-admin"
+          link="/admin"
+          linkText="Panel admin"
+          marginValue={7 * 3.4}
+        />
+      </ul>
+    </nav>
   );
 }
