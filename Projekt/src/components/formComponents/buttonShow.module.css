@@ -2,8 +2,8 @@
     display: block;
     position: absolute;
     border: none;
-    left: 11.8rem;
-    top: 5rem;
+    left: 12.3rem;
+    top: 4.3rem;
     cursor: pointer;
     z-index: 2;
     border-radius: 1rem;
@@ -11,10 +11,10 @@
     background-color: #fff;
 }
 .buttonSecend{
-    top: 8.2rem;
+    top: 1.5rem;
 }
 .buttonThird{
-    top: 11.5rem;
+    top: 1.5rem;
 }
 
 .button:active,

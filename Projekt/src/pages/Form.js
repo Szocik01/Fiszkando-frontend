@@ -7,73 +7,49 @@ import testUtils from "react-dom/test-utils";
 
 const Form = () =>{
     const [inputsInfo, setinputsInfo] = useState({mailL: '', passwordL: '', loginR: '', mail: '',passwordR: '', check_passwordR: ''});
-    const [button, setButton] = useState({passwordL: false, passwordR: false, check_passwordR: false});
-    const [buttonCheckBox, setbuttonCheckBox] = useState({rememberPassword: false, changePassword: false});
-    const [change, setChange] = useState(true);
-    const [changePassword, setchangePassword] = useState({buttonPasswordL: false, buttonPasswordR: false, buttoncheck_passwordR: false});
     const [formValid1, setFormValid1] = useState(false);// do poprawy później
     const [formValid2, setFormValid2] = useState(false);// do poprawy później
-    const [validatorInputs, setValidatorInputs] = useState({mailL: false, passwordL: false, loginR: false, mail: false, passwordR: false, check_passwordR: false});
-    const [repetPassword, setRepetPassword] = useState(false);
-    const loginMoveHandler = () => {
-        setChange(true);
-    };
-    const registerMoveHandler = () =>{
-        setChange(false);
-    }
-    const changeRememberPasswordHandler = (event) =>{
-        for(const key in buttonCheckBox){
-            if(event.target.id === key){
-                setbuttonCheckBox((prevState)=>{
-                    return {...prevState, [key]:!prevState[key]}
-                })
-            }
-        }
-    }
-    const passwordHandler = (event) =>{
-        for(const key in changePassword){
-            if(key===event.target.id){
-                setchangePassword((prevState)=>{
-                    return {...prevState, [key]: !prevState[key]};
-                });
-            }
-        }
-    };
+    const [repetPassword, setRepetPassword] = useState(false); //sprawdzenie haseł, czy są takie same
+    const [buttonShow, setButtonShow] = useState({passwordL: false, passwordR: false, check_passwordR: false});// do poprawy później
+    const [validatorInputs, setValidatorInputs] = useState({
+        mailL: false, 
+        passwordL: false, 
+        loginR: false, 
+        mail: false, 
+        passwordR: false, 
+        check_passwordR: false, 
+        buttonPasswordL: false, 
+        buttonPasswordR: false, 
+        buttoncheck_passwordR: false, 
+        rememberPassword: false, 
+        changePassword: false,
+        loginMove: true
+    });
     const formTechnikHandler = event =>{
-        for(const key in button){
-            if(key===event.target.id){
-                if(event.target.value.trim()===''){
-                    setButton((prevState)=>{
-                        return {...prevState,[key]:false}
-                    });
-                }else{
-                    setButton((prevState)=>{
-                        return {...prevState, [key]:true}
-                    });
-                }
-            }
-        } 
-        for(const key in inputsInfo){
-            if(key===event.target.id ){
-                setinputsInfo((prevState)=>{
-                    return {...prevState, [key]: event.target.value};
-                });
-            }
-        }
         for(const key in validatorInputs){
             if(key===event.target.id){
-                if(key==='passwordL' || key==='passwordR'){
+                if(key==='passwordL' || key==='passwordR' || key==='check_passwordR'){ //validacja długości znaków
                     if(event.target.value.length < 8){
                         setValidatorInputs((prevState)=>{
                             return {...prevState, [key]:true}
                         });
-                    }else{
+                    }
+                    else{
                         setValidatorInputs((prevState)=>{
                             return {...prevState, [key]:false}
                         });
                     }
-                }
-                if(key==='mailL' || key==='mail'){
+                }if(key==='passwordL' || key==='passwordR' || key==='check_passwordR'){// pokazywanie przycisków
+                    if(event.target.value.trim()===''){ 
+                        setButtonShow((prevState)=>{
+                            return {...prevState,[key]:false}
+                        });
+                    }else{
+                        setButtonShow((prevState)=>{
+                            return {...prevState, [key]:true}
+                        });
+                    }
+                }if(key==='mailL' || key==='mail'){ //validacja znaku "@"
                     if(event.target.value.includes('@')){
                         setValidatorInputs((prevState)=>{
                             return {...prevState, [key]:false}
@@ -83,7 +59,22 @@ const Form = () =>{
                             return {...prevState, [key]:true}
                         });
                     }
+                }if(key==='buttonPasswordL' || key==='buttonPasswordR' || key==='buttoncheck_passwordR'){ // zmienianie wartości z text na password
+                    setValidatorInputs((prevState)=>{
+                        return {...prevState, [key]: !prevState[key]};
+                    });
+                }if(key==='loginMove'){ // animacja przycisku LOGIN/REJESTRACJA
+                    setValidatorInputs((prevState)=>{
+                        return {...prevState, [key]:!prevState[key]};
+                    })
+                }if(key==='rememberPassword'){ // sprawdzanie checboxów
+                    setValidatorInputs((prevState)=>{
+                        return {...prevState, [key]:!prevState[key]}
+                    });
                 }
+                setinputsInfo((prevState)=>{//powoduje wypisanie znaków
+                    return {...prevState, [key]: event.target.value};
+                });
             }
         }
     };
@@ -116,10 +107,10 @@ const Form = () =>{
         event.preventDefault();
         const enteredMail = inputsInfo.mailL;
         const enteredPassword = inputsInfo.passwordL;
-        const rememberPassword = buttonCheckBox.rememberPassword;
+        const rememberPassword = validatorInputs.rememberPassword;
         console.log(enteredMail, enteredPassword, rememberPassword);
 
-        fetch('#',
+        fetch('http://localhost:8080/login',
             {
                 method: 'POST',
                 body: JSON.stringify({
@@ -132,7 +123,8 @@ const Form = () =>{
                 }
             }
         ).then(res =>{
-            if(res.status===202){
+            console.log(res);
+            if(res.status===200){
                 console.log('Dane są poprawne!');
             }else if(res.status===400){
                 console.log('Hasła są różne');
@@ -146,7 +138,7 @@ const Form = () =>{
         });
 
     };
-    const registerSubmitHandler = (event) =>{
+    const registerSubmitHandler = async (event) =>{
         event.preventDefault();
         const enteredLogin = inputsInfo.loginR
         const enteredMail = inputsInfo.mail;
@@ -154,21 +146,23 @@ const Form = () =>{
         const enteredPasswordRepat = inputsInfo.check_passwordR;
         console.log(enteredLogin, enteredMail, enteredPassword, enteredPasswordRepat);
 
-        fetch('#',
-        {
-            method: 'POST',
-            body: JSON.stringify({
-                username: enteredLogin,
-                email: enteredMail,
-                password: enteredPassword,
-                repate: enteredPasswordRepat
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(res =>{
+        try{
+            const res = await fetch('http://localhost:8080/register',
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    username: enteredLogin,
+                    email: enteredMail,
+                    password: enteredPassword,
+                    // repate: enteredPasswordRepat
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
             if(res.status===201){
                 console.log('Utworzono nowego uzytkownika');
+                console.log(res);
             }else if(res.status===400){
                 console.log('Niepopprawne dane wyslane z frontendu');
             }else if(res.status===403){
@@ -176,37 +170,42 @@ const Form = () =>{
             }else{
                 console.log('Chuj wie co sie odjebalo w mongodb ale nie udalo sie utworzyc usera');
             }
-        });
+        }catch(error){
+            console.log(error);
+        }
+        
     };
     return (
         <div className={styles.image}>
             <div className={styles.container}>
                 <div className={styles.nav}>
-                    <div id={change ? styles.btnMoveOff : styles.btnMoveOn} className={styles.btn}></div>
+                    <div id={validatorInputs.loginMove ? styles.btnMoveOff : styles.btnMoveOn} className={styles.btn}></div>
                     <div className={styles.navCenter}>
-                        <button type="button" className={change ? `${styles.toggle_btn}` : `${styles.toggle_btn} ${styles.btnColor}`} onClick={loginMoveHandler}>Login</button>
+                        <button type="button" id="loginMove" className={validatorInputs.loginMove ? `${styles.toggle_btn} ${styles.toggle_btnColor1}` : `${styles.toggle_btn} `} onClick={formTechnikHandler}>Login</button>
                     </div>
                     <div className={styles.navCenter}>
-                        <button type="button" className={change ? styles.toggle_btn : styles.btnColor} onClick={registerMoveHandler}>Register</button></div>
+                        <button type="button" id="loginMove" className={validatorInputs.loginMove ? styles.toggle_btn : `${styles.toggle_btn} ${styles.toggle_btnColor1}`} onClick={formTechnikHandler}>Register</button></div>
                 </div>
                 <div className={styles.main}>
-                   <form id={change ? styles.login : styles.loginOff} className={styles.input_grup} onSubmit={loginSubmitHandler}>
-                        {/* {button.passwordL ? <ButtonShow 
-                            type="button" 
-                            id="buttonPasswordL" 
-                            onClick={passwordHandler} 
-                            className={stylesButton.button}>
-                            {changePassword.buttonPasswordL ? 'Hide' : 'Show'}
-                        </ButtonShow> : ''} */}
-                        <Input 
-                            type="email" 
-                            id="mailL" 
-                            onChange={formTechnikHandler}
-                            >E-mail
-                        </Input>
+                   <form id={validatorInputs.loginMove ? styles.login : styles.loginOff} className={styles.input_grup} onSubmit={loginSubmitHandler}>
+                       <div className={styles.inputAndButton}>
+                        {buttonShow.passwordL ? <ButtonShow 
+                                type="button" 
+                                id="buttonPasswordL" 
+                                onClick={formTechnikHandler} 
+                                className={stylesButton.button}>
+                                {validatorInputs.buttonPasswordL ? 'Hide' : 'Show'}
+                            </ButtonShow> : ''}
+                            <Input 
+                                type="email" 
+                                id="mailL" 
+                                onChange={formTechnikHandler}
+                                >E-mail
+                            </Input>
+                       </div>
                         {validatorInputs.mailL ? <p className={styles.paragraf}>Proszę wpisać poprawny adres</p> : ''}
                         <Input  
-                            type={changePassword.buttonPasswordL ? 'text' : 'password'} 
+                            type={validatorInputs.buttonPasswordL ? 'text' : 'password'} 
                             id="passwordL" 
                             onChange={formTechnikHandler}>Hasło
                         </Input>
@@ -216,7 +215,7 @@ const Form = () =>{
                                 type="checkbox" 
                                 className={styles.chech_box} 
                                 id="rememberPassword" 
-                                onChange={changeRememberPasswordHandler}
+                                onChange={formTechnikHandler}
                             />
                             <span>Remember Password</span>
                         </div>
@@ -228,19 +227,7 @@ const Form = () =>{
                             onChange={formTechnikHandler}>Submit
                         </button>
                    </form>
-                   <form id={change ? styles.register : styles.registerOff} className={styles.input_grup} onSubmit={registerSubmitHandler}>
-                        {button.passwordR ? <ButtonShow 
-                            type="button" 
-                            id="buttonPasswordR" 
-                            onClick={passwordHandler} 
-                            className={buttonSecend}>{changePassword.buttonPasswordR ? 'Hide' : 'Show'}
-                        </ButtonShow> : ''}
-                        {button.check_passwordR ? <ButtonShow 
-                            type="button" 
-                            id="buttoncheck_passwordR" 
-                            onClick={passwordHandler} 
-                            className={buttonThird}>{changePassword.buttoncheck_passwordR ? 'Hide' : 'Show'}
-                        </ButtonShow> : ''}
+                   <form id={validatorInputs.loginMove ? styles.register : styles.registerOff} className={styles.input_grup} onSubmit={registerSubmitHandler}>
                         <Input 
                             type="text" 
                             id="loginR" 
@@ -252,24 +239,40 @@ const Form = () =>{
                             onChange={formTechnikHandler}>E-Mail
                         </Input>
                         {validatorInputs.mail ? <p className={styles.paragraf}>Proszę wpisać poprawny adres</p> : ''}
-                        <Input 
-                            type={changePassword.buttonPasswordR ? 'text' : 'password'} 
-                            id="passwordR" 
-                            onChange={formTechnikHandler}>Password
-                        </Input>
+                        <div className={styles.inputAndButton}>
+                            {buttonShow.passwordR ? <ButtonShow 
+                                type="button" 
+                                id="buttonPasswordR" 
+                                onClick={formTechnikHandler} 
+                                className={buttonSecend}>{validatorInputs.buttonPasswordR ? 'Hide' : 'Show'}
+                            </ButtonShow> : ''}
+                            <Input 
+                                type={validatorInputs.buttonPasswordR ? 'text' : 'password'} 
+                                id="passwordR" 
+                                onChange={formTechnikHandler}>Password
+                            </Input>
+                        </div>
                         {validatorInputs.passwordR ? <p className={styles.paragraf}>Długość Hasła musi miec minimum 8 znaków!</p> : ''}
-                        <Input 
-                            type={changePassword.buttoncheck_passwordR ? 'text' : 'password'} 
-                            id="check_passwordR" 
-                            onChange={formTechnikHandler}>Repeat password
-                        </Input>
-                        {repetPassword ? <p className={styles.paragraf}>Są niepoprawne</p> : ''}
+                        <div className={styles.inputAndButton}>
+                            {buttonShow.check_passwordR ? <ButtonShow 
+                                type="button" 
+                                id="buttoncheck_passwordR" 
+                                onClick={formTechnikHandler} 
+                                className={buttonThird}>{validatorInputs.buttoncheck_passwordR ? 'Hide' : 'Show'}
+                            </ButtonShow> : ''}
+                            <Input 
+                                type={validatorInputs.buttoncheck_passwordR ? 'text' : 'password'} 
+                                id="check_passwordR" 
+                                onChange={formTechnikHandler}>Repeat password
+                            </Input>
+                        </div>
+                        {repetPassword ? <p className={styles.paragraf}>Hasła są niepoprawne</p> : ''}
                         <div className={styles.checbox_input}>
                             <input 
                             type="checkbox" 
                             className={styles.chech_box} 
                             id="changePassword" 
-                            onChange={changeRememberPasswordHandler}
+                            onChange={formTechnikHandler}
                             />
                             <span>I agree to the terms</span>
                         </div>
