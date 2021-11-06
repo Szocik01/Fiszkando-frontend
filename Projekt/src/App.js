@@ -1,4 +1,4 @@
-import { Switch, Route } from "react-router-dom";
+import { Route,Routes } from "react-router-dom";
 import Form from "../src/pages/Form";
 import NavComponents from "./components/NavComponents";
 import Main from "./pages/Main";
@@ -8,17 +8,11 @@ function App() {
   return (
     <div>
       <NavComponents />
-      <Switch>
-        <Route path="/" exact>
-          <Main />
-        </Route>
-        <Route path="/contact">
-          <Contact />
-        </Route>
-        <Route path="/authentication">
-          <Form />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Main />}/>
+        <Route path="/contact" element={<Contact />}/>
+        <Route path="/authentication" element={<Form />}/>
+      </Routes>
     </div>
   );
 }
