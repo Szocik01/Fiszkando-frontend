@@ -30,13 +30,13 @@
   flex-direction: row;
   align-items: center;
   height: 3.4rem;
+  cursor: pointer;
 }
 
 .icon {
   font-size: 1.1rem;
   color: var(--icon-color);
   margin-left: 0.5rem;
-  cursor: pointer;
   transition: transform 0.2s ease-out;
   transition: color 0.1 ease-out;
 }

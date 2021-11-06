@@ -1,6 +1,6 @@
 import { Route,Routes } from "react-router-dom";
 import Form from "../src/pages/Form";
-import NavComponents from "./components/NavComponents";
+import NavComponents from "./components/navigationComponents/NavComponents";
 import Main from "./pages/Main";
 import Contact from "./pages/Contact";
 

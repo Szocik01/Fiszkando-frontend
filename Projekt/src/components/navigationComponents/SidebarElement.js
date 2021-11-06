@@ -1,8 +1,8 @@
-import "../fontello-ed4ba0c8/css/fontello.css";
+import "../../fontello-ed4ba0c8/css/fontello.css";
 import { Link } from "react-router-dom";
 import style from "./SidebarElement.module.css";
 import { useDispatch,useSelector } from "react-redux";
-import { positionActions } from "../storage/redux-index";
+import { positionActions } from "../../storage/redux-index";
 
 export default function SidebarElement(props) {
 
