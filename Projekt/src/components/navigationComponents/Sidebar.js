@@ -3,7 +3,7 @@ import SidebarElement from "./SidebarElement";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { positionActions } from "../storage/redux-index";
+import { positionActions } from "../../storage/redux-index";
 
 export default function Sidebar() {
   const [isUnfolded, setIsUnfolded] = useState(false);
