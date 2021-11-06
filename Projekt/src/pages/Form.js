@@ -2,6 +2,7 @@ import styles from "./Form.module.css";
 import stylesButton from '../components/formComponents/buttonShow.module.css';
 import {Fragment, useState, useEffect } from "react";
 import Input from '../components/formComponents/Input';
+import Spiner from "../components/formComponents/Spinner";
 import ButtonShow from '../components/formComponents/buttonShow';
 import testUtils from "react-dom/test-utils";
 
@@ -11,6 +12,7 @@ const Form = () =>{
     const [formValid2, setFormValid2] = useState(false);// do poprawy później
     const [repetPassword, setRepetPassword] = useState(false); //sprawdzenie haseł, czy są takie same
     const [buttonShow, setButtonShow] = useState({passwordL: false, passwordR: false, check_passwordR: false});// do poprawy później
+    const [loadingSpiner, setLoadingSpiner] = useState(false);
     const [validatorInputs, setValidatorInputs] = useState({
         mailL: false, 
         passwordL: false, 
@@ -103,14 +105,15 @@ const Form = () =>{
     const buttonSecend = `${stylesButton.button} ${stylesButton.buttonSecend}`;
     const buttonThird = `${stylesButton.button} ${stylesButton.buttonThird}`;
 
-    const loginSubmitHandler = (event) =>{
+    const loginSubmitHandler = async (event) =>{
         event.preventDefault();
         const enteredMail = inputsInfo.mailL;
         const enteredPassword = inputsInfo.passwordL;
         const rememberPassword = validatorInputs.rememberPassword;
         console.log(enteredMail, enteredPassword, rememberPassword);
-
-        fetch('http://localhost:8080/login',
+        try{
+            setLoadingSpiner(true);
+            const res = await fetch('http://localhost:8080/login',
             {
                 method: 'POST',
                 body: JSON.stringify({
@@ -121,11 +124,11 @@ const Form = () =>{
                 headers : {
                     "Content-Type": "application/json"
                 }
-            }
-        ).then(res =>{
-            console.log(res);
+            });
+            const tokken = res.json();
             if(res.status===200){
                 console.log('Dane są poprawne!');
+                console.log(tokken);
             }else if(res.status===400){
                 console.log('Hasła są różne');
             }else if(res.status===404){
@@ -133,9 +136,11 @@ const Form = () =>{
             }else{
                 console.log('Cos sie odjebalo chuj wie co');
             }
-        }).catch(error=>{
+            // return res.json();
+        }catch(error){
             console.log(error);
-        });
+        }
+        setLoadingSpiner(false);
 
     };
     const registerSubmitHandler = async (event) =>{
@@ -147,6 +152,7 @@ const Form = () =>{
         console.log(enteredLogin, enteredMail, enteredPassword, enteredPasswordRepat);
 
         try{
+            setLoadingSpiner(true);
             const res = await fetch('http://localhost:8080/register',
             {
                 method: 'POST',
@@ -173,10 +179,12 @@ const Form = () =>{
         }catch(error){
             console.log(error);
         }
+        setLoadingSpiner(false);
         
     };
     return (
         <div className={styles.image}>
+            {loadingSpiner ? <Spiner>{validatorInputs.loginMove ? "Loading..." : "Register..."}</Spiner>: ''}
             <div className={styles.container}>
                 <div className={styles.nav}>
                     <div id={validatorInputs.loginMove ? styles.btnMoveOff : styles.btnMoveOn} className={styles.btn}></div>
