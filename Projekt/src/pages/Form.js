@@ -1,10 +1,11 @@
 import styles from "./Form.module.css";
+import { useDispatch } from "react-redux";
 import stylesButton from '../components/formComponents/buttonShow.module.css';
-import {Fragment, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Input from '../components/formComponents/Input';
 import Spiner from "../components/formComponents/Spinner";
 import ButtonShow from '../components/formComponents/buttonShow';
-import testUtils from "react-dom/test-utils";
+import { Authoindenty } from '../storage/redux-index'
 
 const Form = () =>{
     const [inputsInfo, setinputsInfo] = useState({mailL: '', passwordL: '', loginR: '', mail: '',passwordR: '', check_passwordR: ''});
@@ -27,6 +28,8 @@ const Form = () =>{
         changePassword: false,
         loginMove: true
     });
+    const dispatch = useDispatch();
+
     const formTechnikHandler = event =>{
         for(const key in validatorInputs){
             if(key===event.target.id){
@@ -125,11 +128,30 @@ const Form = () =>{
                     "Content-Type": "application/json"
                 }
             });
-            const tokken = res.json();
+            const tokken = await res.json();
             if(res.status===200){
                 console.log('Dane są poprawne!');
                 console.log(tokken);
-            }else if(res.status===400){
+                dispatch(Authoindenty.IndetificationShow({
+                    uid: tokken.auth.UID,
+                    token: tokken.auth.token.token,
+                    rememberToken: tokken.auth.token.rememberMeToken,
+                    expire: tokken.auth.token.expire
+                }));
+               
+                
+                // document.cookie = `token=${tokken.auth.token.token}`;
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            else if(res.status===400){
                 console.log('Hasła są różne');
             }else if(res.status===404){
                 console.log('Nie znaleziono uzytkownika z podanym adresem mailowym');

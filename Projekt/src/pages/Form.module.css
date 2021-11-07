@@ -5,7 +5,7 @@
 }
 .image{
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 3rem);
     background-image: url('../image/banner.jpg');
     background-size: cover;
     background-attachment: fixed;
@@ -146,5 +146,10 @@ span{
         margin: auto;
         margin-top: 3rem;
         margin-bottom: 5rem;
+    }
+}
+@media (min-width: 426px) {
+    .image{
+        height: calc(100vh - 5rem);
     }
 }
