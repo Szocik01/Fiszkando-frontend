@@ -1,7 +1,7 @@
 
 const ButtonShow = props =>{
     return (
-        <button className={props.className} type={props.type} onClick={props.onClick} id={props.id}>{props.children}</button>
+        <button className={props.className} type={props.type} onClick={props.onClick} id={props.id} disabled={props.disabled}>{props.children}</button>
     );
 };
 

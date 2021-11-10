@@ -6,12 +6,13 @@
 .image{
     width: 100%;
     height: calc(100vh - 3rem);
-    background-image: url('../image/banner.jpg');
+    /* background-image: url('../image/banner.jpg'); */
     background-size: cover;
     background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #ccc;
 }
 .container{
     width: 16.5rem;
@@ -22,8 +23,8 @@
     position: relative;
     overflow: hidden;
     z-index: 10;
-    border-radius: 2rem;
-    box-shadow: 1px 9px 30px 13px rgba(142, 80, 228, 1);
+    border-radius: 1rem;
+    box-shadow: 16px 8px 19px -7px rgba(190, 41, 251, 1);
 }
 .nav{
     position: relative;
@@ -50,12 +51,19 @@
     font-size: 0.7rem;
     color: red;
 }
+.paragrafadd{
+    text-align: center;
+    margin: 3rem 0;
+}
 .main{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     flex-direction: column;
-    height: 40%;
+    height: 30%;
+}
+.mainSeccend{
+    height: 15%;
 }
 .input_grup{
     width: 15rem;
@@ -73,7 +81,6 @@
     outline: none;
     border-radius: 2rem;
     color: white;
-
 }
 button:disabled{
     background: #ccc;
@@ -86,14 +93,29 @@ button:disabled{
     outline: none;
     border-radius: 2rem;
 }
+.checbox_input{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
 .chech_box{
     margin: 30px 10px 30px 0;
+}
+.stopka{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 20vh;
+    align-items: flex-end;
+    width: 100%;
+    position: absolute;
+}
+.stopka1{
+    height: 14.5vh;
 }
 span{
     color: #777;
     font-size: 12px;
-    bottom: 66px;
-    position: absolute;
 }
 .toggle_btn{
     padding: 0.5rem 0.6rem;
@@ -140,7 +162,7 @@ span{
     .container{
         width: 22rem;
         height: 38rem;
-        box-shadow: 26px 24px 24px 8px rgba(142, 80, 228, 1);
+        box-shadow: 16px 8px 19px -7px rgba(190, 41, 251, 1);
     }
     .nav{
         margin: auto;

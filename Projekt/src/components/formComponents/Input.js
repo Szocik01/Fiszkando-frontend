@@ -15,8 +15,6 @@ const Input = props =>{
             setInputValide(false);
             return;
         }
-        // setMoving(true);
-        // setInputValide(true);
     };
     return (
         <div className={styles.input_container}>

@@ -16,12 +16,10 @@
     border-radius: 100%;
     border-top: 10px solid rgb(115, 9, 253);
     border-bottom: 10px solid rgb(255, 0, 221);
-    /* border-left: 10px solid rgb(124, 7, 134);
-    border-right: 10px solid rgb(157, 72, 179); */
     animation: spiner 2s linear infinite;
     opacity: 1;
 }
-/* .spiner::before{
+.spiner::before{
     content:"";
     height: 20rem;
     width: 20rem;
@@ -31,7 +29,7 @@
     border-left: 10px solid rgb(142, 4, 255);
     left: -10px;
     top: -10px;
-} */
+}
 .ptext{
     animation: loading 2s linear infinite;
     font-size: 2rem;

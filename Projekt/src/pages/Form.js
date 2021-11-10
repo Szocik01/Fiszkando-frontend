@@ -1,8 +1,9 @@
 import styles from "./Form.module.css";
-import { useDispatch } from "react-redux";
 import stylesButton from '../components/formComponents/buttonShow.module.css';
+import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import Input from '../components/formComponents/Input';
+import InputChexBox from '../components/formComponents/InputChexbox';
 import Spiner from "../components/formComponents/Spinner";
 import ButtonShow from '../components/formComponents/buttonShow';
 import { Authoindenty } from '../storage/redux-index'
@@ -11,8 +12,12 @@ const Form = () =>{
     const [inputsInfo, setinputsInfo] = useState({mailL: '', passwordL: '', loginR: '', mail: '',passwordR: '', check_passwordR: ''});
     const [formValid1, setFormValid1] = useState(false);// do poprawy później
     const [formValid2, setFormValid2] = useState(false);// do poprawy później
+    const [status400, setStatus400] = useState(false); //statusy od serwera
+    const [status403, setStatus403] = useState(false); //statusy od serwera
+    const [status404, setStatus404] = useState(false); //statusy od serwera
+    const [status500, setStatus500] = useState(false); //statusy od serwera
     const [repetPassword, setRepetPassword] = useState(false); //sprawdzenie haseł, czy są takie same
-    const [buttonShow, setButtonShow] = useState({passwordL: false, passwordR: false, check_passwordR: false});// do poprawy później
+    const [buttonShow, setButtonShow] = useState({passwordL: false, passwordR: false, check_passwordR: false});
     const [loadingSpiner, setLoadingSpiner] = useState(false);
     const [validatorInputs, setValidatorInputs] = useState({
         mailL: false, 
@@ -138,27 +143,20 @@ const Form = () =>{
                     rememberToken: tokken.auth.token.rememberMeToken,
                     expire: tokken.auth.token.expire
                 }));
-               
-                
                 // document.cookie = `token=${tokken.auth.token.token}`;
-            }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            else if(res.status===400){
+                setStatus400(false);
+                setStatus404(false);
+                
+            }else if(res.status===400){
                 console.log('Hasła są różne');
+                setStatus400(true);
             }else if(res.status===404){
                 console.log('Nie znaleziono uzytkownika z podanym adresem mailowym');
+                setStatus404(true);
             }else{
+                setStatus500(true);
                 console.log('Cos sie odjebalo chuj wie co');
             }
-            // return res.json();
         }catch(error){
             console.log(error);
         }
@@ -191,11 +189,15 @@ const Form = () =>{
             if(res.status===201){
                 console.log('Utworzono nowego uzytkownika');
                 console.log(res);
+                setStatus403(false);
             }else if(res.status===400){
+                setStatus500(true);
                 console.log('Niepopprawne dane wyslane z frontendu');
             }else if(res.status===403){
                 console.log('Email juz istnieje');
+                setStatus403(true);
             }else{
+                setStatus500(true);
                 console.log('Chuj wie co sie odjebalo w mongodb ale nie udalo sie utworzyc usera');
             }
         }catch(error){
@@ -214,49 +216,56 @@ const Form = () =>{
                         <button type="button" id="loginMove" className={validatorInputs.loginMove ? `${styles.toggle_btn} ${styles.toggle_btnColor1}` : `${styles.toggle_btn} `} onClick={formTechnikHandler}>Login</button>
                     </div>
                     <div className={styles.navCenter}>
-                        <button type="button" id="loginMove" className={validatorInputs.loginMove ? styles.toggle_btn : `${styles.toggle_btn} ${styles.toggle_btnColor1}`} onClick={formTechnikHandler}>Register</button></div>
+                        <button type="button" id="loginMove" className={validatorInputs.loginMove ? styles.toggle_btn : `${styles.toggle_btn} ${styles.toggle_btnColor1}`} onClick={formTechnikHandler}>Register</button>
+                    </div>
                 </div>
                 <div className={styles.main}>
                    <form id={validatorInputs.loginMove ? styles.login : styles.loginOff} className={styles.input_grup} onSubmit={loginSubmitHandler}>
-                       <div className={styles.inputAndButton}>
-                        {buttonShow.passwordL ? <ButtonShow 
+                        <Input 
+                                type="email" 
+                            id="mailL" 
+                            onChange={formTechnikHandler}
+                            >E-mail
+                        </Input>
+                        {validatorInputs.mailL ? <p className={styles.paragraf}>Proszę wpisać poprawny adres</p> : ''}
+                        {status404 ? <p className={styles.paragraf}>Nie znaleźono użytkownika z takim E-mailem!</p> : ''}
+                        <div className={styles.inputAndButton}>
+                            {buttonShow.passwordL ? <ButtonShow 
                                 type="button" 
                                 id="buttonPasswordL" 
                                 onClick={formTechnikHandler} 
                                 className={stylesButton.button}>
                                 {validatorInputs.buttonPasswordL ? 'Hide' : 'Show'}
                             </ButtonShow> : ''}
-                            <Input 
-                                type="email" 
-                                id="mailL" 
-                                onChange={formTechnikHandler}
-                                >E-mail
+                            <Input  
+                                type={validatorInputs.buttonPasswordL ? 'text' : 'password'} 
+                                id="passwordL" 
+                                onChange={formTechnikHandler}>Hasło
                             </Input>
-                       </div>
-                        {validatorInputs.mailL ? <p className={styles.paragraf}>Proszę wpisać poprawny adres</p> : ''}
-                        <Input  
-                            type={validatorInputs.buttonPasswordL ? 'text' : 'password'} 
-                            id="passwordL" 
-                            onChange={formTechnikHandler}>Hasło
-                        </Input>
+                        </div>
                         {validatorInputs.passwordL ? <p className={styles.paragraf}>Długość Hasła musi miec minimum 8 znaków!</p> : ''}
+                        {status400 ? <p className={styles.paragraf}>Nie poprawne hasło!</p> : ''}
                         <div className={styles.checbox_input}>
-                            <input 
+                            <InputChexBox 
                                 type="checkbox" 
                                 className={styles.chech_box} 
                                 id="rememberPassword" 
-                                onChange={formTechnikHandler}
-                            />
-                            <span>Remember Password</span>
+                                onChange={formTechnikHandler}>Remember Password
+                            </InputChexBox>
                         </div>
-                        <button 
-                            disabled={!formValid1} 
-                            type="submit" 
-                            id="buttonSubmit"
-                            className={styles.submit_btn} 
-                            onChange={formTechnikHandler}>Submit
-                        </button>
+                        <div className={styles.stopka}>
+                            {status500 ? <p className={`${styles.paragraf} ${styles.paragrafadd}`}>Coś poszło nie tak, przaepraszamy za niedogodności, proszę spróbować później.</p>: ''}
+                            <ButtonShow 
+                                disabled={!formValid1} 
+                                type="submit" 
+                                id="buttonSubmit"
+                                className={styles.submit_btn} 
+                                onChange={formTechnikHandler}>Submit
+                            </ButtonShow>
+                        </div>
                    </form>
+                </div>
+                <div className={`${styles.main} ${styles.mainSeccend}`}>
                    <form id={validatorInputs.loginMove ? styles.register : styles.registerOff} className={styles.input_grup} onSubmit={registerSubmitHandler}>
                         <Input 
                             type="text" 
@@ -269,6 +278,7 @@ const Form = () =>{
                             onChange={formTechnikHandler}>E-Mail
                         </Input>
                         {validatorInputs.mail ? <p className={styles.paragraf}>Proszę wpisać poprawny adres</p> : ''}
+                        {status403 ? <p className={styles.paragraf}>Taki E-mail już istnieje!</p> : ''}
                         <div className={styles.inputAndButton}>
                             {buttonShow.passwordR ? <ButtonShow 
                                 type="button" 
@@ -298,21 +308,23 @@ const Form = () =>{
                         </div>
                         {repetPassword ? <p className={styles.paragraf}>Hasła są niepoprawne</p> : ''}
                         <div className={styles.checbox_input}>
-                            <input 
-                            type="checkbox" 
-                            className={styles.chech_box} 
-                            id="changePassword" 
-                            onChange={formTechnikHandler}
-                            />
-                            <span>I agree to the terms</span>
+                            <InputChexBox 
+                                type="checkbox" 
+                                className={styles.chech_box} 
+                                id="changePassword" 
+                                onChange={formTechnikHandler}>I agree to the terms
+                            </InputChexBox>
                         </div>
-                        <button 
-                            disabled={!formValid2} 
-                            type="submit" 
-                            id="buttonRegister" 
-                            className={styles.submit_btn} 
-                            onChange={formTechnikHandler}>Register
-                        </button>
+                        <div className={`${styles.stopka} ${styles.stopka1}`}>
+                            {status500 ? <p className={`${styles.paragraf} ${styles.paragrafadd}`}>Coś poszło nie tak, przaepraszamy za niedogodności, proszę spróbować później.</p>: ''}
+                            <ButtonShow 
+                                disabled={!formValid2} 
+                                type="submit" 
+                                id="buttonRegister" 
+                                className={styles.submit_btn} 
+                                onChange={formTechnikHandler}>Register
+                            </ButtonShow>
+                        </div>
                    </form>
                 </div>
             </div>
