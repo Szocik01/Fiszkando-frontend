@@ -24,7 +24,7 @@
     overflow: hidden;
     z-index: 10;
     border-radius: 1rem;
-    box-shadow: 16px 8px 19px -7px rgba(190, 41, 251, 1);
+    box-shadow: 3px 4px 40px -5px rgba(216, 183, 232, 1);
 }
 .nav{
     position: relative;
@@ -111,7 +111,7 @@ button:disabled{
     position: absolute;
 }
 .stopka1{
-    height: 14.5vh;
+    height: 13.5vh;
 }
 span{
     color: #777;
@@ -162,7 +162,7 @@ span{
     .container{
         width: 22rem;
         height: 38rem;
-        box-shadow: 16px 8px 19px -7px rgba(190, 41, 251, 1);
+        box-shadow: 3px 4px 40px -5px rgba(216, 183, 232, 1);
     }
     .nav{
         margin: auto;

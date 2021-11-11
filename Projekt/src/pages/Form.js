@@ -9,13 +9,10 @@ import ButtonShow from '../components/formComponents/buttonShow';
 import { Authoindenty } from '../storage/redux-index'
 
 const Form = () =>{
-    const [inputsInfo, setinputsInfo] = useState({mailL: '', passwordL: '', loginR: '', mail: '',passwordR: '', check_passwordR: ''});
+    const [inputsInfo, setinputsInfo] = useState({mailL: "", passwordL: "", loginR: "", mail: "",passwordR: "", check_passwordR: ""});
     const [formValid1, setFormValid1] = useState(false);// do poprawy później
     const [formValid2, setFormValid2] = useState(false);// do poprawy później
-    const [status400, setStatus400] = useState(false); //statusy od serwera
-    const [status403, setStatus403] = useState(false); //statusy od serwera
-    const [status404, setStatus404] = useState(false); //statusy od serwera
-    const [status500, setStatus500] = useState(false); //statusy od serwera
+    const [status, setStatus] = useState(false); //statusy od serwera
     const [repetPassword, setRepetPassword] = useState(false); //sprawdzenie haseł, czy są takie same
     const [buttonShow, setButtonShow] = useState({passwordL: false, passwordR: false, check_passwordR: false});
     const [loadingSpiner, setLoadingSpiner] = useState(false);
@@ -34,7 +31,6 @@ const Form = () =>{
         loginMove: true
     });
     const dispatch = useDispatch();
-
     const formTechnikHandler = event =>{
         for(const key in validatorInputs){
             if(key===event.target.id){
@@ -83,6 +79,7 @@ const Form = () =>{
                     });
                 }
                 setinputsInfo((prevState)=>{//powoduje wypisanie znaków
+                    // console.log(key);
                     return {...prevState, [key]: event.target.value};
                 });
             }
@@ -133,35 +130,31 @@ const Form = () =>{
                     "Content-Type": "application/json"
                 }
             });
-            const tokken = await res.json();
+            setStatus(res.status);
+            const token = await res.json();
             if(res.status===200){
-                console.log('Dane są poprawne!');
-                console.log(tokken);
-                dispatch(Authoindenty.IndetificationShow({
-                    uid: tokken.auth.UID,
-                    token: tokken.auth.token.token,
-                    rememberToken: tokken.auth.token.rememberMeToken,
-                    expire: tokken.auth.token.expire
-                }));
-                // document.cookie = `token=${tokken.auth.token.token}`;
-                setStatus400(false);
-                setStatus404(false);
+                const dateToken = new Date(token.auth.token.expire);
                 
-            }else if(res.status===400){
-                console.log('Hasła są różne');
-                setStatus400(true);
-            }else if(res.status===404){
-                console.log('Nie znaleziono uzytkownika z podanym adresem mailowym');
-                setStatus404(true);
-            }else{
-                setStatus500(true);
-                console.log('Cos sie odjebalo chuj wie co');
+                console.log('Dane są poprawne!');
+                console.log(token);
+                dispatch(Authoindenty.IndetificationShow({
+                    uid: token.auth.UID,
+                    token: token.auth.token.token,
+                    rememberToken: token.auth.token.rememberMeToken,
+                    expire: token.auth.token.expire
+                }));
+                document.cookie = `uid=${token.auth.UID};`;
+                document.cookie = `token=${token.auth.token.token}; expires=${dateToken}`;
+                if(token.auth.rememberMeToken.token){
+                    const dateTokenRemember = new Date(token.auth.rememberMeToken.expire);
+                    document.cookie = `rememberToken=${token.auth.rememberMeToken.token}; expires=${dateTokenRemember}`;
+                }
+                
             }
         }catch(error){
             console.log(error);
         }
         setLoadingSpiner(false);
-
     };
     const registerSubmitHandler = async (event) =>{
         event.preventDefault();
@@ -186,19 +179,10 @@ const Form = () =>{
                     "Content-Type": "application/json"
                 }
             });
-            if(res.status===201){
+            setStatus(res.status);
+            if(status===201){
                 console.log('Utworzono nowego uzytkownika');
                 console.log(res);
-                setStatus403(false);
-            }else if(res.status===400){
-                setStatus500(true);
-                console.log('Niepopprawne dane wyslane z frontendu');
-            }else if(res.status===403){
-                console.log('Email juz istnieje');
-                setStatus403(true);
-            }else{
-                setStatus500(true);
-                console.log('Chuj wie co sie odjebalo w mongodb ale nie udalo sie utworzyc usera');
             }
         }catch(error){
             console.log(error);
@@ -222,29 +206,31 @@ const Form = () =>{
                 <div className={styles.main}>
                    <form id={validatorInputs.loginMove ? styles.login : styles.loginOff} className={styles.input_grup} onSubmit={loginSubmitHandler}>
                         <Input 
-                                type="email" 
+                            type="email" 
                             id="mailL" 
+                            value={inputsInfo.mailL} 
                             onChange={formTechnikHandler}
                             >E-mail
                         </Input>
                         {validatorInputs.mailL ? <p className={styles.paragraf}>Proszę wpisać poprawny adres</p> : ''}
-                        {status404 ? <p className={styles.paragraf}>Nie znaleźono użytkownika z takim E-mailem!</p> : ''}
+                        {status === 404 && <p className={styles.paragraf}>Nie znaleźono użytkownika z takim E-mailem!</p>}
                         <div className={styles.inputAndButton}>
                             {buttonShow.passwordL ? <ButtonShow 
                                 type="button" 
                                 id="buttonPasswordL" 
-                                onClick={formTechnikHandler} 
+                                onClick={formTechnikHandler}
                                 className={stylesButton.button}>
                                 {validatorInputs.buttonPasswordL ? 'Hide' : 'Show'}
                             </ButtonShow> : ''}
                             <Input  
                                 type={validatorInputs.buttonPasswordL ? 'text' : 'password'} 
-                                id="passwordL" 
+                                id="passwordL"
+                                value={inputsInfo.passwordL} 
                                 onChange={formTechnikHandler}>Hasło
                             </Input>
                         </div>
                         {validatorInputs.passwordL ? <p className={styles.paragraf}>Długość Hasła musi miec minimum 8 znaków!</p> : ''}
-                        {status400 ? <p className={styles.paragraf}>Nie poprawne hasło!</p> : ''}
+                        {status === 400 && <p className={styles.paragraf}>Nie poprawne hasło!</p>}
                         <div className={styles.checbox_input}>
                             <InputChexBox 
                                 type="checkbox" 
@@ -254,7 +240,7 @@ const Form = () =>{
                             </InputChexBox>
                         </div>
                         <div className={styles.stopka}>
-                            {status500 ? <p className={`${styles.paragraf} ${styles.paragrafadd}`}>Coś poszło nie tak, przaepraszamy za niedogodności, proszę spróbować później.</p>: ''}
+                            {status===500 && <p className={`${styles.paragraf} ${styles.paragrafadd}`}>Coś poszło nie tak, przaepraszamy za niedogodności, proszę spróbować później.</p>}
                             <ButtonShow 
                                 disabled={!formValid1} 
                                 type="submit" 
@@ -268,17 +254,19 @@ const Form = () =>{
                 <div className={`${styles.main} ${styles.mainSeccend}`}>
                    <form id={validatorInputs.loginMove ? styles.register : styles.registerOff} className={styles.input_grup} onSubmit={registerSubmitHandler}>
                         <Input 
-                            type="text" 
+                            type="text"
+                            value={inputsInfo.loginR} 
                             id="loginR" 
                             onChange={formTechnikHandler}>Login
                         </Input>
                         <Input 
-                            type="email" 
+                            type="email"
+                            value={inputsInfo.mail}  
                             id="mail" 
                             onChange={formTechnikHandler}>E-Mail
                         </Input>
                         {validatorInputs.mail ? <p className={styles.paragraf}>Proszę wpisać poprawny adres</p> : ''}
-                        {status403 ? <p className={styles.paragraf}>Taki E-mail już istnieje!</p> : ''}
+                        {status===403 && <p className={styles.paragraf}>Taki E-mail już istnieje!</p>}
                         <div className={styles.inputAndButton}>
                             {buttonShow.passwordR ? <ButtonShow 
                                 type="button" 
@@ -288,7 +276,8 @@ const Form = () =>{
                             </ButtonShow> : ''}
                             <Input 
                                 type={validatorInputs.buttonPasswordR ? 'text' : 'password'} 
-                                id="passwordR" 
+                                id="passwordR"
+                                value={inputsInfo.passwordR}  
                                 onChange={formTechnikHandler}>Password
                             </Input>
                         </div>
@@ -302,7 +291,8 @@ const Form = () =>{
                             </ButtonShow> : ''}
                             <Input 
                                 type={validatorInputs.buttoncheck_passwordR ? 'text' : 'password'} 
-                                id="check_passwordR" 
+                                id="check_passwordR"
+                                value={inputsInfo.check_passwordR}  
                                 onChange={formTechnikHandler}>Repeat password
                             </Input>
                         </div>
@@ -316,7 +306,7 @@ const Form = () =>{
                             </InputChexBox>
                         </div>
                         <div className={`${styles.stopka} ${styles.stopka1}`}>
-                            {status500 ? <p className={`${styles.paragraf} ${styles.paragrafadd}`}>Coś poszło nie tak, przaepraszamy za niedogodności, proszę spróbować później.</p>: ''}
+                            {status===500 && <p className={`${styles.paragraf} ${styles.paragrafadd}`}>Coś poszło nie tak, przaepraszamy za niedogodności, proszę spróbować później.</p>}
                             <ButtonShow 
                                 disabled={!formValid2} 
                                 type="submit" 

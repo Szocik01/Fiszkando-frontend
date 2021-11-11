@@ -10,16 +10,15 @@ const Input = props =>{
         setInputValide(true);
     };
     const onBlurHandler = () =>{
-        if(value.current.value.trim() === ''){
+        if(value.current.value.trim()==='' || value.current.inputValide){
             setMoving(false);
             setInputValide(false);
-            return;
         }
     };
     return (
         <div className={styles.input_container}>
             <label htmlFor={props.id} className={`${moving ? styles.labelTranstionOff : styles.labelTranstionOn} ${inputValide ? '' : styles.labelValid}`}>{props.children}</label>
-            <input type={props.type} id={props.id} onChange={props.onChange} className={inputValide ? styles.input : styles.inputValide} onFocus={focusHandler} onBlur={onBlurHandler} ref={value}/>
+            <input type={props.type} id={props.id} value={props.value} onChange={props.onChange} className={inputValide ? styles.input : styles.inputValide} onFocus={focusHandler} onBlur={onBlurHandler} ref={value}/>
         </div>
     );
 };
