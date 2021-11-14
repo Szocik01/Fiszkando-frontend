@@ -7,7 +7,7 @@ export default function Contacts()
     const dispatch=useDispatch();
 
     useEffect(()=>{
-        dispatch(positionActions.pagePositionChange(5*3.4));
+        dispatch(positionActions.pagePositionChange(4*3.4));
     },[dispatch])
 
     return null;

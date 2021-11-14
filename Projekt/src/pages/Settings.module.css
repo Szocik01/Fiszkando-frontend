@@ -1,0 +1,42 @@
+:root
+{
+    --hamburger-background-color-light: rgb(132, 101, 255);
+    --hamburger-font-color:white;
+}
+
+.siteContainer
+{
+    height: calc(100vh - 3rem);
+    padding: 0.5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+@media screen and (min-width: 426px)
+{
+    .siteContainer
+    {
+        height: calc(100vh - 5rem);
+        margin-left: 4rem;
+        padding: 0.8rem;
+    }
+}
+
+@media screen and (min-width:769px)
+{
+    .siteContainer
+    {
+        display: flex;
+        flex-direction: row-reverse;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+}
+
+@media screen and (min-width:1601px)
+{
+    .siteContainer
+    {
+        padding: 1rem 4rem;
+    }
+}

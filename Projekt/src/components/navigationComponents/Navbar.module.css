@@ -5,6 +5,7 @@
     --button-background-color:white;
     --button-shadow:rgb(73, 47, 173);
     --font-color:rgb(44, 24, 126);
+    --hamburger-font-color:white;
 }
 
 .navbar
@@ -14,8 +15,10 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     height: 3rem;
 }
+
 
 .logo
 {
@@ -25,19 +28,15 @@
     text-decoration: none;
 }
 
-.loginButtons
-{
-    margin-left: auto;
-    width: 9rem;
-    display: flex;
-    justify-content: space-evenly;
-}
-
 .authButton
 {
+    position: absolute;
+    right: 0;
+    z-index: 5;
+    margin-right: 0.3rem;
     text-decoration: none;
     height: 1.8rem;
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--font-color);
     background-color: var(--button-background-color);
     width:  3.8rem;
@@ -47,6 +46,38 @@
     border-radius: 6px;
     box-shadow: var(--button-shadow) 0px 0px 6px 2px;
     transition: 0.3s all ease-out;
+}
+
+.hamburgerContainer
+{
+    position: absolute;
+    left: 0;
+    margin-left: 0.3rem;
+}
+
+.hamburger
+{
+    width: 2rem;
+    height: 1.6rem;
+    border-top: 4px solid var(--hamburger-font-color);
+    position: relative;
+    z-index: 3;
+}
+
+.hamburger::before, .hamburger::after
+{
+    content:"";
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    border-bottom: var(--hamburger-font-color) 4px solid;
+    transform: translateY(0.45rem);
+}
+
+.hamburger::after
+{
+    transform: translateY(1.1rem);
 }
 
 .authButton:hover
@@ -71,11 +102,16 @@
 
     .logo
     {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
 
     .navbar
     {
         height: 5rem;
+    }
+
+    .hamburgerContainer
+    {
+        display: none;
     }
 }

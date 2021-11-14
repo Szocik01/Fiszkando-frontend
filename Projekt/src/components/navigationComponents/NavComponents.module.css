@@ -1,0 +1,28 @@
+:root
+{
+    --backdrop-color:rgba(0, 0, 0, 0.616);
+}
+
+.backdrop
+{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 50;
+    background-color: rgba(0, 0, 0, 0.616);
+    display: none;
+    transition: ease-out 0.2s opacity ;
+}
+
+.display
+{
+    display: block;
+    opacity: 0;
+}
+
+.show
+{
+    opacity: 1;
+}
