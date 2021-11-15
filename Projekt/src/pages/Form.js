@@ -7,6 +7,7 @@ import InputChexBox from '../components/formComponents/InputChexbox';
 import Spiner from "../components/formComponents/Spinner";
 import ButtonShow from '../components/formComponents/buttonShow';
 import { Authoindenty } from '../storage/redux-index'
+import { Link } from "react-router-dom";
 
 const Form = () =>{
     const [inputsInfo, setinputsInfo] = useState({mailL: "", passwordL: "", loginR: "", mail: "",passwordR: "", check_passwordR: ""});
@@ -190,6 +191,7 @@ const Form = () =>{
         setLoadingSpiner(false);
         
     };
+
     return (
         <div className={styles.image}>
             {loadingSpiner ? <Spiner>{validatorInputs.loginMove ? "Loading..." : "Register..."}</Spiner>: ''}
@@ -240,7 +242,9 @@ const Form = () =>{
                             </InputChexBox>
                         </div>
                         <div className={styles.link}>
-                            <a href="#">Change Password</a>
+                            <Link to="/retrieve_password">
+                            Retrieve Password
+                            </Link>
                         </div>
                         <div className={styles.stopka}>
                             {status===500 && <p className={`${styles.paragraf} ${styles.paragrafadd}`}>Coś poszło nie tak, przaepraszamy za niedogodności, proszę spróbować później.</p>}
