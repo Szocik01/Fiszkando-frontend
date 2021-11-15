@@ -1,23 +1,18 @@
 import { NavLink } from "react-router-dom";
 import style from "./Navbar.module.css";
 
-export default function Navbar() {
-
+export default function Navbar(props) {
   return (
     <nav className={style.navbar}>
+      <div className={style.hamburgerContainer} onClick={props.onUnfolding}>
+        <div className={style.hamburger}></div>
+      </div>
       <NavLink className={style.logo} to="/">
         Logo
       </NavLink>
-      <div
-        className={style.loginButtons}
-      >
-        <NavLink className={style.authButton} to="/authentication">
-          Login
-        </NavLink>
-        <NavLink className={style.authButton} to="/authentication?=register">
-          Register
-        </NavLink>
-      </div>
+      <NavLink className={style.authButton} to="/authentication">
+        Auth
+      </NavLink>
     </nav>
   );
 }

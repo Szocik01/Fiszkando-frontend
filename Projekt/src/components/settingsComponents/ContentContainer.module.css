@@ -1,0 +1,89 @@
+:root
+{
+    --content-container-shadow:rgb(196, 196, 196);    
+}
+
+.container
+{
+    padding: 0.5rem;
+    margin-top: 0.6rem;
+    width: 100%;
+    min-height: 30rem;
+    border-radius: 10px;
+    box-shadow: var(--content-container-shadow) 1px 2px 8px 1px ;
+}
+
+.hamburgerContainer
+{
+    width: 6.8rem;
+    height: 2.6rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: var(--hamburger-background-color-light);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.hamburger
+{
+    width: 2rem;
+    height: 1.6rem;
+    border-top: 4px solid var(--hamburger-font-color);
+    position: relative;
+    z-index: 3;
+}
+
+.hamburger::before, .hamburger::after
+{
+    content:"";
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    border-bottom: var(--hamburger-font-color) 4px solid;
+    transform: translateY(0.45rem);
+}
+
+.hamburger::after
+{
+    transform: translateY(1.1rem);
+}
+
+.textContainer
+{
+    color: var(--hamburger-font-color);
+    font-weight: 700;
+}
+
+@media screen and (min-width:769px)
+{
+    .hamburgerContainer
+    {
+        display: none;
+    }
+
+    .container
+    {
+        margin-top: 0;
+        padding: 0.8rem;
+        width: calc(100% - 13rem);
+    }
+}
+
+@media screen and (min-width: 1025px)
+{
+    .container
+    {
+        width: calc(100% - 17rem);
+    }
+}
+
+@media screen and (min-width:1601px)
+{
+    .container
+    {
+        width: calc(100% - 21rem);
+    }
+}

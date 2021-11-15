@@ -5,17 +5,21 @@
 }
 
 .sidebarContainer {
-  height: calc(100vh - 3rem);
+  height: 100vh;
   width: 2.5rem;
   position: absolute;
+  z-index: 1000;
   left: 0;
+  top: 0;
   overflow: hidden;
   background-color: var(--sidebar-color-light);
-  transition: all 0.2s ease-out;
+  transform: translateX(-100%);
+  transition: width 0.3s ease-out , transform 0.15s ease-in 0.1s;
 }
 
 .sidebarUnfolded {
   width: 11rem;
+  transform: translateX(0%);
 }
 
 .sidebarLinkList {
@@ -46,7 +50,7 @@
   margin-bottom: 2px;
 }
 
-.linkTextContainer {
+.textContainer {
   margin-left: 0.7rem;
   font-weight: 700;
   color: var(--icon-color);
@@ -71,7 +75,7 @@
   left: 0;
   width: 100%;
   padding: 0 0.3rem;
-  margin-top: 0.6rem;
+  margin-top: 4rem;
 }
 
 .taggerElement {
@@ -85,8 +89,10 @@
 @media screen and (min-width: 426px) {
   .sidebarContainer 
   {
+    padding-top: 1rem;
     width: 4rem;
-    height: calc(100vh - 5rem);
+    transform: none;
+    transition: width 0.2s ease-out;
   }
 
   .sidebarUnfolded
@@ -100,7 +106,7 @@
     margin-left: 1rem;
   }
 
-  .linkTextContainer
+  .textContainer
   {
     margin-left: 1.2rem;
     font-size: 1rem;
