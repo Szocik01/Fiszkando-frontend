@@ -239,6 +239,9 @@ const Form = () =>{
                                 onChange={formTechnikHandler}>Remember Password
                             </InputChexBox>
                         </div>
+                        <div className={styles.link}>
+                            <a href="#">Change Password</a>
+                        </div>
                         <div className={styles.stopka}>
                             {status===500 && <p className={`${styles.paragraf} ${styles.paragrafadd}`}>Coś poszło nie tak, przaepraszamy za niedogodności, proszę spróbować później.</p>}
                             <ButtonShow 
