@@ -17,7 +17,6 @@
     .siteContainer
     {
         height: calc(100vh - 5rem);
-        margin-left: 4rem;
         padding: 0.8rem;
     }
 }
@@ -26,6 +25,7 @@
 {
     .siteContainer
     {
+        margin-left: 4rem;
         display: flex;
         flex-direction: row-reverse;
         flex-wrap: nowrap;

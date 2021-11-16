@@ -91,8 +91,6 @@
   {
     padding-top: 1rem;
     width: 4rem;
-    transform: none;
-    transition: width 0.2s ease-out;
   }
 
   .sidebarUnfolded
@@ -115,5 +113,14 @@
   .taggerDiv
   {
     padding: 0 0.6rem;
+  }
+}
+
+@media screen and (min-width:769px)
+{
+  .sidebarContainer
+  {
+    transform: none;
+    transition: width 0.2s ease-out;
   }
 }

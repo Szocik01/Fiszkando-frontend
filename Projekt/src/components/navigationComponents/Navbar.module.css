@@ -88,14 +88,11 @@
 
 @media screen and (min-width: 426px)
 {
-    .loginButtons
-    {
-        width: 15rem;
-    }
 
     .authButton
     {
-        width:6rem;
+        margin-right: 0.8rem;
+        width:5.5rem;
         height: 2rem;
         font-size: 1.1rem;
     }
@@ -110,6 +107,13 @@
         height: 5rem;
     }
 
+    .hamburgerContainer
+    {
+        margin-left: 0.8rem;
+    }
+}
+
+@media screen and (min-width:769px) {
     .hamburgerContainer
     {
         display: none;
