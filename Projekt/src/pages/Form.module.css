@@ -6,7 +6,7 @@
 .image{
     width: 100%;
     height: calc(100vh - 3rem);
-    /* background-image: url('../image/banner.jpg'); */
+    background-image: url('../image/banner.jpg');
     background-size: cover;
     background-attachment: fixed;
     display: flex;
