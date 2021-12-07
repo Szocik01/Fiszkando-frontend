@@ -16,7 +16,7 @@ function App() {
         <Route path="/contact" element={<Contact />}/>
         <Route path="/settings/*" element={<Settings/>}/>
         <Route path="/authentication" element={<Form />}/>
-        <Route path="/forgot_password" element={<FormResetPassword />}/>
+        <Route path="/authorize/reset/:uid/:token" element={<FormResetPassword />}/>
       </Routes>
     </div>
   );

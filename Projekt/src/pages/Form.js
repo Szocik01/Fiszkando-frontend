@@ -146,7 +146,7 @@ const Form = () =>{
                 }));
                 document.cookie = `uid=${token.auth.UID};`;
                 document.cookie = `token=${token.auth.token.token}; expires=${dateToken}`;
-                if(token.auth.rememberMeToken.token){
+                if(token.auth.rememberMeToken){
                     const dateTokenRemember = new Date(token.auth.rememberMeToken.expire);
                     document.cookie = `rememberToken=${token.auth.rememberMeToken.token}; expires=${dateTokenRemember}`;
                 }

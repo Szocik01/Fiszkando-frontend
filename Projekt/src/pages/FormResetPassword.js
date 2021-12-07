@@ -3,8 +3,10 @@ import Input from '../components/formComponents/Input';
 import ButtonShow from '../components/formComponents/buttonShow';
 import Spiner from '../components/formComponents/Spinner';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 const FormResetPassword = () =>{
+    const params = useParams();
     const [inputInfo, setInputInfo] = useState({password: '', repeat_password: ''});
     const [validInput, setValidInput] = useState(false);
     const [validPassword, setValidPassword] = useState(false);
@@ -43,11 +45,13 @@ const FormResetPassword = () =>{
 
     const submitHandler = async (event) =>{
         event.preventDefault();
-
-        const enteredId = 1;
+        if(!params.uid || !params.token){
+            console.log('uid lub token nie prawidłowy');
+        }
+        const enteredId = params.uid;
         const enteredPassword= inputInfo.password;
-        const enteredpasswordToken= 1;
-        // console.log(enteredId, enteredPassword, enteredpasswordToken);
+        const enteredpasswordToken= params.token;
+        console.log('id',enteredId, 'password',enteredPassword, 'token',enteredpasswordToken);
         try{
             setLoadingSpiner(true);
             const res = await fetch('http://localhost:8080/authorize/new-password',
@@ -63,7 +67,7 @@ const FormResetPassword = () =>{
                 }
             });
             setStatus(res.status);
-            if(res.status===200){
+            if(res.status===202){
                 console.log(res.status);
                 console.log("Hasło Zmienione");
             }
