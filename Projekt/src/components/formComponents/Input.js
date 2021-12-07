@@ -15,10 +15,25 @@ const Input = props =>{
             setInputValide(false);
         }
     };
+    const classInput = `${styles.input} ${props.className}`;
+    const classLabel = `${styles.label} ${props.className}`;
     return (
         <div className={styles.input_container}>
-            <label htmlFor={props.id} className={`${moving ? styles.labelTranstionOff : styles.labelTranstionOn} ${inputValide ? '' : styles.labelValid}`}>{props.children}</label>
-            <input type={props.type} id={props.id} value={props.value} onChange={props.onChange} className={inputValide ? styles.input : styles.inputValide} onFocus={focusHandler} onBlur={onBlurHandler} ref={value}/>
+            <label 
+                htmlFor={props.id} 
+                className={`${moving ? styles.labelTranstionOff : styles.labelTranstionOn} ${inputValide ? classLabel : styles.labelValid}`}
+                >{props.children}
+            </label>
+            <input 
+                type={props.type} 
+                id={props.id} 
+                value={props.value} 
+                onChange={props.onChange} 
+                className={`${inputValide ? classInput : styles.inputValide}`} 
+                onFocus={focusHandler} 
+                onBlur={onBlurHandler} 
+                ref={value}
+            />
         </div>
     );
 };

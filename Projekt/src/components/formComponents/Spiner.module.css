@@ -10,8 +10,8 @@
     opacity: 0.9;
 }
 .spiner{
-    height: 20rem;
-    width: 20rem;
+    height: 10rem;
+    width: 10rem;
     position: absolute;
     border-radius: 100%;
     border-top: 10px solid rgb(115, 9, 253);
@@ -21,8 +21,8 @@
 }
 .spiner::before{
     content:"";
-    height: 20rem;
-    width: 20rem;
+    height: 10rem;
+    width: 10rem;
     position: absolute;
     border-radius: 100%;
     border-right: 10px solid rgb(209, 3, 158);
@@ -32,7 +32,7 @@
 }
 .ptext{
     animation: loading 2s linear infinite;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-family: sans-serif;
 }
 @keyframes spiner{
@@ -47,5 +47,20 @@
         color: rgb(138, 4, 228);
     }100%{
         color: rgb(255, 0, 221);
+    }
+}
+@media (min-width: 768px){
+    .spiner{
+        height: 20rem;
+        width: 20rem;
+
+    }
+    .spiner::before{
+        height: 20rem;
+        width: 20rem;
+
+    }
+    .ptext{
+        font-size: 2rem;
     }
 }

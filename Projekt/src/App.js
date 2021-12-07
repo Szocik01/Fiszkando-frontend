@@ -5,6 +5,7 @@ import Settings from "./pages/Settings";
 import Main from "./pages/Main";
 import Contact from "./pages/Contact";
 import FormRetrievePassword from "./pages/FormRetrievePassword";
+import FormResetPassword from "./pages/FormResetPassword";
 function App() {
   return (
     <div>
@@ -15,6 +16,7 @@ function App() {
         <Route path="/contact" element={<Contact />}/>
         <Route path="/settings/*" element={<Settings/>}/>
         <Route path="/authentication" element={<Form />}/>
+        <Route path="/forgot_password" element={<FormResetPassword />}/>
       </Routes>
     </div>
   );

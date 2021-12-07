@@ -23,8 +23,11 @@
     border-right: 0;
     border-bottom: 1px solid red;
 }
+.label{
+    color: #999;
+}
 .labelValid{
-color: red;
+    color: red;
 }
 .labelTranstionOn{
     transition: .3s;
