@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate  } from 'react-router-dom';
 import Circe from '../components/formComponents/Circle';
 import stylesCirce from '../components/formComponents/Circle.module.css';
+import { useCallback } from 'react';
 
 const FormResetPassword = () =>{
     const history = useNavigate ();
@@ -34,10 +35,9 @@ const FormResetPassword = () =>{
             }
         }
     }
-    useEffect(() => {
+    const funkcja = useCallback(async() =>{
         const enteredId = params.uid;
         const enteredpasswordToken = params.token;
-        (async function() {
             try {
                 const response = await fetch('http://localhost:8080/authorize/check-token',
                 {
@@ -59,8 +59,11 @@ const FormResetPassword = () =>{
             } catch (e) {
                 console.error(e);
             }
-        })();
-    }, []);
+    },[history, params.uid, params.token]);
+
+    useEffect(() => {
+        funkcja();
+    }, [funkcja]);
 
     useEffect(()=>{
         if(inputInfo.password.length <= 8 || inputInfo.repeat_password.length <= 8 ){ // walidacja na inpucie 8 znaków
@@ -73,7 +76,6 @@ const FormResetPassword = () =>{
         }if(inputInfo.password===inputInfo.repeat_password){ // hasła muszą być takie same
             setValidPassword(false);
         }
-        return () => {};
     },[inputInfo]);
 
     const submitHandler = async (event) =>{

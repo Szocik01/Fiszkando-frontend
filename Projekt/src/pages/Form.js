@@ -10,6 +10,7 @@ import { Authoindenty } from '../storage/redux-index'
 import { Link } from "react-router-dom";
 import Circe from '../components/formComponents/Circle';
 import stylesCirce from '../components/formComponents/Circle.module.css';
+import { Fragment } from "react";
 
 const Form = () =>{
     const [inputsInfo, setinputsInfo] = useState({mailL: "", passwordL: "", loginR: "", mail: "",passwordR: "", check_passwordR: ""});
@@ -195,8 +196,9 @@ const Form = () =>{
     };
 
     return (
+        <Fragment>
+        {loadingSpiner ? <Spiner>{validatorInputs.loginMove ? "Loading..." : "Register..."}</Spiner>: ''}
         <div className={styles.image}>
-            {loadingSpiner ? <Spiner>{validatorInputs.loginMove ? "Loading..." : "Register..."}</Spiner>: ''}
             <Circe />
             <Circe className={stylesCirce.circe1}/>
             <Circe className={stylesCirce.circe2}/>
@@ -338,6 +340,7 @@ const Form = () =>{
                 </div>
             </div>
         </div>
+        </Fragment>
     );
 }
 export default Form;

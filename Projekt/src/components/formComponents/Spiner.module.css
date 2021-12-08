@@ -1,5 +1,5 @@
 .container{
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     position: absolute;
     display: flex;
@@ -8,6 +8,8 @@
     z-index: 100;
     background-color: #ccc;
     opacity: 0.9;
+    left: 0;
+    top: 0;
 }
 .spiner{
     height: 10rem;

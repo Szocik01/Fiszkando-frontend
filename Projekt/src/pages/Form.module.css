@@ -4,7 +4,7 @@
     padding: 0%;
 }
 .image{
-    width: 100%;
+    width: 100vw;
     height: calc(100vh - 3rem);
     /* background-image: url('../image/banner.jpg'); */
     background-size: cover;
@@ -15,6 +15,7 @@
     /* background-color: #ccc; */
     position: relative;
     overflow: hidden;
+    z-index: 1;
 }
 .container{
     width: 16.5rem;
