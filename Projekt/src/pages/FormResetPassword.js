@@ -3,10 +3,14 @@ import Input from '../components/formComponents/Input';
 import ButtonShow from '../components/formComponents/buttonShow';
 import Spiner from '../components/formComponents/Spinner';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate  } from 'react-router-dom';
+import Circe from '../components/formComponents/Circle';
+import stylesCirce from '../components/formComponents/Circle.module.css';
 
 const FormResetPassword = () =>{
+    const history = useNavigate ();
     const params = useParams();
+    // const [iswork, setIsWork] = useState(false);
     const [inputInfo, setInputInfo] = useState({password: '', repeat_password: ''});
     const [validInput, setValidInput] = useState(false);
     const [validPassword, setValidPassword] = useState(false);
@@ -30,6 +34,34 @@ const FormResetPassword = () =>{
             }
         }
     }
+    useEffect(() => {
+        const enteredId = params.uid;
+        const enteredpasswordToken = params.token;
+        (async function() {
+            try {
+                const response = await fetch('http://localhost:8080/authorize/check-token',
+                {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        _id: enteredId,
+                        token: enteredpasswordToken
+                    }),
+                    headers : {
+                        "Content-Type": "application/json"
+                    }
+                });
+                if(response.status===200){
+                    console.log('poprawne tokeny');
+                }else{
+                    console.log('nieporapwne Tokeny');
+                    history(`/notification?mode=${response.status}`);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+    }, []);
+
     useEffect(()=>{
         if(inputInfo.password.length <= 8 || inputInfo.repeat_password.length <= 8 ){ // walidacja na inpucie 8 znaków
             setValidButton(false);
@@ -41,17 +73,20 @@ const FormResetPassword = () =>{
         }if(inputInfo.password===inputInfo.repeat_password){ // hasła muszą być takie same
             setValidPassword(false);
         }
+        return () => {};
     },[inputInfo]);
 
     const submitHandler = async (event) =>{
         event.preventDefault();
-        if(!params.uid || !params.token){
-            console.log('uid lub token nie prawidłowy');
-        }
+
         const enteredId = params.uid;
         const enteredPassword= inputInfo.password;
         const enteredpasswordToken= params.token;
-        console.log('id',enteredId, 'password',enteredPassword, 'token',enteredpasswordToken);
+
+        if(!params.uid || !params.token){
+            console.log('uid lub token nie prawidłowy');
+        }
+        // console.log('id',enteredId, 'password',enteredPassword, 'token',enteredpasswordToken);
         try{
             setLoadingSpiner(true);
             const res = await fetch('http://localhost:8080/authorize/new-password',
@@ -68,8 +103,8 @@ const FormResetPassword = () =>{
             });
             setStatus(res.status);
             if(res.status===202){
-                console.log(res.status);
                 console.log("Hasło Zmienione");
+                history(`/notification?mode=${res.status}`);
             }
         }catch(error){
             console.log(error);
@@ -80,6 +115,16 @@ const FormResetPassword = () =>{
     return (
         <div className={styles.container}>
             {loadingSpiner ? <Spiner>Loading...</Spiner> : ''}
+            <Circe />
+            <Circe className={stylesCirce.circe1}/>
+            <Circe className={stylesCirce.circe2}/>
+            <Circe className={stylesCirce.circe3}/>
+            <Circe className={stylesCirce.circe4}/>
+            <Circe className={stylesCirce.circe5}/>
+            <Circe className={stylesCirce.circe6}/>
+            <Circe className={stylesCirce.circe7}/>
+            <Circe className={stylesCirce.circe8}/>
+            <Circe className={stylesCirce.circe9}/>
             <div className={styles.container_all}>
                 <div className={styles.paragraf_h1}>
                     <h1>Ustaw nowe hasło</h1>

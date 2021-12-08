@@ -6,6 +6,7 @@ import Main from "./pages/Main";
 import Contact from "./pages/Contact";
 import FormRetrievePassword from "./pages/FormRetrievePassword";
 import FormResetPassword from "./pages/FormResetPassword";
+import Notification from "./pages/Notification";
 function App() {
   return (
     <div>
@@ -17,6 +18,7 @@ function App() {
         <Route path="/settings/*" element={<Settings/>}/>
         <Route path="/authentication" element={<Form />}/>
         <Route path="/authorize/reset/:uid/:token" element={<FormResetPassword />}/>
+        <Route path="/notification" element={<Notification />}/>
       </Routes>
     </div>
   );

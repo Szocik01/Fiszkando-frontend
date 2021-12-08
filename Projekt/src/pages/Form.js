@@ -8,6 +8,8 @@ import Spiner from "../components/formComponents/Spinner";
 import ButtonShow from '../components/formComponents/buttonShow';
 import { Authoindenty } from '../storage/redux-index'
 import { Link } from "react-router-dom";
+import Circe from '../components/formComponents/Circle';
+import stylesCirce from '../components/formComponents/Circle.module.css';
 
 const Form = () =>{
     const [inputsInfo, setinputsInfo] = useState({mailL: "", passwordL: "", loginR: "", mail: "",passwordR: "", check_passwordR: ""});
@@ -195,6 +197,16 @@ const Form = () =>{
     return (
         <div className={styles.image}>
             {loadingSpiner ? <Spiner>{validatorInputs.loginMove ? "Loading..." : "Register..."}</Spiner>: ''}
+            <Circe />
+            <Circe className={stylesCirce.circe1}/>
+            <Circe className={stylesCirce.circe2}/>
+            <Circe className={stylesCirce.circe3}/>
+            <Circe className={stylesCirce.circe4}/>
+            <Circe className={stylesCirce.circe5}/>
+            <Circe className={stylesCirce.circe6}/>
+            <Circe className={stylesCirce.circe7}/>
+            <Circe className={stylesCirce.circe8}/>
+            <Circe className={stylesCirce.circe9}/>
             <div className={styles.container}>
                 <div className={styles.nav}>
                     <div id={validatorInputs.loginMove ? styles.btnMoveOff : styles.btnMoveOn} className={styles.btn}></div>
@@ -242,8 +254,8 @@ const Form = () =>{
                             </InputChexBox>
                         </div>
                         <div className={styles.link}>
-                            <Link to="/retrieve_password">
-                            Retrieve Password
+                            <Link to="/retrieve_password" className={styles.link}>
+                                Retrieve Password
                             </Link>
                         </div>
                         <div className={styles.stopka}>

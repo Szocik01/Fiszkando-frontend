@@ -1,70 +1,65 @@
 .container{
     position: relative;
+    overflow: hidden;
     width: 100%;
     height: calc(100vh - 3rem);
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;  
-    overflow: hidden;
+    z-index: 100;
+    /* background-color: #ccc; */
 }
-.container_all{
+.container_box{
     width: 90vw;
+    height: 30rem;
     background-color: #fff;
     box-shadow: 3px 4px 40px -5px rgb(146, 140, 140);
     border-radius: 1rem;
     border: 2px rgb(73, 47, 173) solid;
 }
-.container_input{
+.box_paragraf{
+    padding: 0.3rem;
     width: 100%;
-    height: 15rem;
+    height: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    z-index: 10;
+    text-align: center;
 }
-form{
-    width: 90%;
-}
-.divForm{
-    margin: 2rem 0;
+.box_button{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .submit_btn{
+    font-size: 20px;
     width: 100%;
     padding: 0.7rem;
     cursor: pointer;
-    display: block;
-    margin: 0;
+    margin: 0 1rem;
     background: linear-gradient(to right, #7810ff, #d606ff);
-    border: 0;
-    outline: none;
     border-radius: 2rem;
     color: white;
+    text-align: center;
+    text-decoration: none;
 }
-.paragraf_h1{
-    height: 5rem;
-    color: rgb(73, 47, 173);
-    padding: 0.3rem;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-}
-.paragraf{
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
-    font-size: 0.7rem;
-    color: red;
-}
-.labelInput{
-    color: rgb(73, 47, 173);
-    border-color: rgb(73, 47, 173);
+h1{
+    font-family: sans-serif;
 }
 @media (min-width: 768px){
     .container{
         height: calc(100vh - 5rem);
     }
-    .container_all{
+    .box_button{
+        width: 100%;
+        justify-content: flex-end;
+    }
+    .container_box{
+        width: 50%;
+    }
+    .submit_btn{
         width: 50%;
     }
 }
