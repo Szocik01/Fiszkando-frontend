@@ -5,17 +5,18 @@ import ContentContainer from "../components/settingsComponents/ContentContainer"
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { positionActions } from "../storage/redux-index";
-import { Route,Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import PasswordChange from "../components/settingsComponents/Subpages/PasswordChange";
 import AddQuestion from "../components/settingsComponents/Subpages/AddQuestion";
+import ManageCourses from "../components/settingsComponents/Subpages/ManageCourses";
 
 export default function Settings() {
   const [isMenuActive, setIsMenuActive] = useState(false);
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
-    useEffect(()=>{
-        dispatch(positionActions.pagePositionChange(3*3.4));
-    },[dispatch]);
+  useEffect(() => {
+    dispatch(positionActions.pagePositionChange(3 * 3.4));
+  }, [dispatch]);
 
   function toggleMenuHandler() {
     setIsMenuActive((prevState) => {
@@ -25,12 +26,15 @@ export default function Settings() {
 
   return (
     <div className={style.siteContainer}>
-      <SettingsNavigation isMenuActive={isMenuActive} onToggleMenu={toggleMenuHandler}/>
+      <SettingsNavigation
+        isMenuActive={isMenuActive}
+        onToggleMenu={toggleMenuHandler}
+      />
       <ContentContainer onToggleMenu={toggleMenuHandler}>
         <Routes>
-          <Route path="change_password" element={<PasswordChange/>}/>
-          <Route path="add_question" element={<AddQuestion/>}/>
-          <Route path="manage_courses"></Route>
+          <Route path="change_password" element={<PasswordChange />} />
+          <Route path="add_question" element={<AddQuestion />} />
+          <Route path="manage_courses" element={<ManageCourses />}></Route>
         </Routes>
       </ContentContainer>
     </div>
