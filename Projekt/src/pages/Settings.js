@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { positionActions } from "../storage/redux-index";
 import { Route,Routes } from "react-router-dom";
 import PasswordChange from "../components/settingsComponents/Subpages/PasswordChange";
+import AddQuestion from "../components/settingsComponents/Subpages/AddQuestion";
 
 export default function Settings() {
   const [isMenuActive, setIsMenuActive] = useState(false);
@@ -27,7 +28,9 @@ export default function Settings() {
       <SettingsNavigation isMenuActive={isMenuActive} onToggleMenu={toggleMenuHandler}/>
       <ContentContainer onToggleMenu={toggleMenuHandler}>
         <Routes>
-          <Route path="change_password" element={<PasswordChange/>}></Route>
+          <Route path="change_password" element={<PasswordChange/>}/>
+          <Route path="add_question" element={<AddQuestion/>}/>
+          <Route path="manage_courses"></Route>
         </Routes>
       </ContentContainer>
     </div>

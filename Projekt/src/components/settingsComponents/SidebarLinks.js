@@ -27,6 +27,11 @@ export default function SidebarLinks() {
       <NavLink
         className={(navData) => {
           return `${style.link} ${navData.isActive ? style.active : ""}`;
+        }} to="/settings/manage_courses"
+      >Zarządzaj Kursami</NavLink>
+      <NavLink
+        className={(navData) => {
+          return `${style.link} ${navData.isActive ? style.active : ""}`;
         }} to="/settings/change_permissions"
       >Zmień Uprawnienia</NavLink>
     </div>

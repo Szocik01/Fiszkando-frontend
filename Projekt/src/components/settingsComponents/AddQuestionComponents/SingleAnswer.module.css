@@ -1,0 +1,25 @@
+.answerContainer
+{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+    /*animation: questionAppear 0.3s ease-out forwards;*/
+}
+
+.imagePreview
+{
+    border: black 1px solid;
+    min-width: 8rem;
+    max-width: 9rem;
+    min-height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image
+{
+    max-width: 100%;
+}
+
+
