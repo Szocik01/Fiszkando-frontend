@@ -1,3 +1,4 @@
+import Backdrop from "../UI/Backdrop";
 import style from "./ContentContainer.module.css";
 
 export default function ContentContainer(props) {

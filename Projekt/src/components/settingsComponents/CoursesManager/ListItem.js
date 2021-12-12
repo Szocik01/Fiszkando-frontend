@@ -2,7 +2,7 @@ import styles from "./ListItem.module.css";
 
 const ListItem = (props) => {
   return (
-    <li key={props.key} className={styles.item}>
+    <li className={styles.item}>
       <div className={styles.title}>{props.name}</div>
       <div className={styles.price}>{`${props.price} PLN`}</div>
       <div className={styles.schoolName}>{props.school.name}</div>

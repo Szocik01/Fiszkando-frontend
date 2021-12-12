@@ -10,6 +10,19 @@
   border-radius: 10px;
   box-shadow: var(--content-container-shadow) 1px 2px 8px 1px;
   position: relative;
+  height: 50%;
+  overflow-y: auto;
+}
+
+.container::-webkit-scrollbar {
+  width: 0.5rem;
+  border-radius: 5px;
+  margin-left: 1rem;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #eee;
+  border-radius: 0.5rem;
 }
 
 .hamburgerContainer {
@@ -61,7 +74,6 @@
     margin-top: 0;
     padding: 0.8rem;
     width: calc(100% - 13rem);
-    height: fit-content;
   }
 }
 
