@@ -3,6 +3,21 @@ import { useState, useEffect } from "react";
 import styles from "./AddCourse.module.css";
 
 const AddCourse = (props) => {
+  const [schools, setSchools] = useState([]);
+  const getSchools = async () => {
+    const SCHOOLS = [];
+    try {
+      const res = await fetch("http://localhost:8080/get-all-schools");
+      const parsed = await res.json();
+      parsed.forEach((s) => SCHOOLS.push(s));
+      setSchools(SCHOOLS);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    getSchools();
+  }, []);
   return (
     <div className={`${styles.container} ${props.isMoved && styles.move}`}>
       <button onClick={props.moveHandler} className={styles["return-btn"]}>
@@ -19,13 +34,17 @@ const AddCourse = (props) => {
         </svg>
       </button>
       <h1>Dodaj Kurs</h1>
-      <form>
-        <input />
-        {/* <select>
+      <form className={styles.form}>
+        <input className={styles.input} />
+        <select className={styles.select}>
           {schools.map((s) => (
-            <option value={s._id}>{s.name}</option>
+            <option value={s._id} key={s._id}>
+              {s.name}
+            </option>
           ))}
-        </select> */}
+        </select>
+        <input type="number" className={styles.input} />
+        <button className={styles["confirm-btn"]}>DODAJ</button>
       </form>
     </div>
   );
