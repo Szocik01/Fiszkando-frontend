@@ -1,13 +1,22 @@
 import styles from "./ListItem.module.css";
 
 const ListItem = (props) => {
+  const modifyInitialHandler = () => {
+    props.saveHandler({
+      name: props.name,
+      price: props.price,
+      school: props.school,
+      _id: props.id,
+    });
+    props.moveHandler();
+  };
   return (
     <li className={styles.item}>
       <div className={styles.title}>{props.name}</div>
       <div className={styles.price}>{`${props.price} PLN`}</div>
       <div className={styles.schoolName}>{props.school.name}</div>
       <div className={styles.actions}>
-        <button className={styles.modifyBtn}>
+        <button className={styles.modifyBtn} onClick={modifyInitialHandler}>
           Modyfikuj{" "}
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -46,6 +46,10 @@
   transform: translateX(110%);
 }
 
+.moveToLeft {
+  transform: translateX(-110%);
+}
+
 @keyframes btnClick {
   0% {
     transform: scale(0.95);

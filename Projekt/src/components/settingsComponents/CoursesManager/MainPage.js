@@ -26,7 +26,11 @@ const MainPage = (props) => {
   }, []);
 
   return (
-    <div className={`${styles.container} ${props.isMoved && styles.move}`}>
+    <div
+      className={`${styles.container} ${props.isMoved && styles.move} ${
+        props.isMovedToLeft && styles.moveToLeft
+      }`}
+    >
       <SearchBar></SearchBar>
       <div className={styles.wraper}>
         <ul className={styles["list-container"]}>
@@ -38,6 +42,8 @@ const MainPage = (props) => {
                 school={c.school}
                 price={c.price}
                 id={c._id}
+                moveHandler={props.leftMoveHandler}
+                saveHandler={props.saveHandler}
               />
             );
           })}

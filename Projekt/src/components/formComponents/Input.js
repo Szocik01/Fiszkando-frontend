@@ -17,16 +17,8 @@ const Input = (props) => {
   };
   const classInput = `${styles.input} ${props.className}`;
   const classLabel = `${styles.label} ${props.className}`;
-  const onChangeHandler = (eve) => {
-    if (props.addCourse) {
-      const obj = {};
-      obj[props.id] = value.current.value;
-      return props.onChange(obj);
-    }
-    props.onChange(eve);
-  };
   return (
-    <div className={`${styles.input_container} ${props.containerStyles}`}>
+    <div className={styles.input_container}>
       <label
         htmlFor={props.id}
         className={`${
@@ -39,10 +31,8 @@ const Input = (props) => {
         type={props.type}
         id={props.id}
         value={props.value}
-        onChange={onChangeHandler}
-        className={`${inputValide ? classInput : styles.inputValide} ${
-          props.inputStyles
-        }`}
+        onChange={props.onChange}
+        className={`${inputValide ? classInput : styles.inputValide}`}
         onFocus={focusHandler}
         onBlur={onBlurHandler}
         ref={value}

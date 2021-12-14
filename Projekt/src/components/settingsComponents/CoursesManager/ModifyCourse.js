@@ -1,15 +1,14 @@
-import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
+import styles from "./ModifyCourse.module.css";
 import Input from "./Input";
 
-import styles from "./AddCourse.module.css";
-
-const AddCourse = (props) => {
+const ModifyCourse = (props) => {
   const [schools, setSchools] = useState([]);
-  const select = useRef();
   const auth = useSelector((state) => state.autoIndentification);
   const finalData = {};
+  console.log(props.data);
   const getSchools = async () => {
     const SCHOOLS = [];
     try {
@@ -27,64 +26,53 @@ const AddCourse = (props) => {
     }
     console.log(finalData);
   };
-
-  const submitHandler = async (eve) => {
-    eve.preventDefault();
-    const reqBody = {
-      name: finalData.name,
-      price: +finalData.price,
-      schoolId: select.current.value,
-    };
-    const res = await fetch("http://localhost:8080/add-course", {
-      method: "POST",
-      body: JSON.stringify(reqBody),
-      headers: {
-        uid: auth.uid,
-        token: auth.token,
-        remeberMe: auth.remeberMe,
-        "Content-Type": "application/json",
-      },
-    });
-    console.log(res);
-  };
-
   useEffect(() => {
     getSchools();
   }, []);
   return (
     <div className={`${styles.container} ${props.isMoved && styles.move}`}>
       <button onClick={props.moveHandler} className={styles["return-btn"]}>
-        Powrót
         <svg
           xmlns="http://www.w3.org/2000/svg"
+          enable-background="new 0 0 24 24"
           height="2rem"
           viewBox="0 0 24 24"
           width="2rem"
           fill="white"
         >
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+          <rect fill="none" height="24" width="24" />
+          <path d="M9,19l1.41-1.41L5.83,13H22V11H5.83l4.59-4.59L9,5l-7,7L9,19z" />
         </svg>
+        Powrót
       </button>
-      <h1>Dodaj Kurs</h1>
-      <form className={styles.form} onSubmit={submitHandler}>
-        <Input id="name" save={showValue}>
+      <h1>Modyfikuj Kurs</h1>
+      <form className={styles.form}>
+        <Input id="name" save={showValue} value={props.data.name}>
           Nazwa kursu
         </Input>
-        <select className={styles.select} ref={select}>
+        <select className={styles.select}>
           {schools.map((s) => (
-            <option value={s._id} key={s._id}>
+            <option
+              value={s._id}
+              key={s._id}
+              selected={s._id === props.data.school._id}
+            >
               {s.name}
             </option>
           ))}
         </select>
-        <Input type="number" id="price" save={showValue}>
+        <Input
+          type="number"
+          id="price"
+          save={showValue}
+          value={props.data.price}
+        >
           Cena
         </Input>
-        <button className={styles["confirm-btn"]}>DODAJ</button>
+        <button className={styles["confirm-btn"]}>ZAPISZ</button>
       </form>
     </div>
   );
 };
 
-export default AddCourse;
+export default ModifyCourse;
