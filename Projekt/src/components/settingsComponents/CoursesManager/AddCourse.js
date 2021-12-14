@@ -1,9 +1,15 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+
+import Input from "../../formComponents/Input";
 
 import styles from "./AddCourse.module.css";
 
 const AddCourse = (props) => {
   const [schools, setSchools] = useState([]);
+  const auth = useSelector((state) => state.autoIndentification);
+  console.log(auth);
+  const finalData = {};
   const getSchools = async () => {
     const SCHOOLS = [];
     try {
@@ -18,6 +24,13 @@ const AddCourse = (props) => {
   useEffect(() => {
     getSchools();
   }, []);
+
+  const showValue = (val) => {
+    for (const i in val) {
+      finalData[i] = val[i];
+    }
+    console.log(finalData);
+  };
   return (
     <div className={`${styles.container} ${props.isMoved && styles.move}`}>
       <button onClick={props.moveHandler} className={styles["return-btn"]}>
@@ -35,7 +48,15 @@ const AddCourse = (props) => {
       </button>
       <h1>Dodaj Kurs</h1>
       <form className={styles.form}>
-        <input className={styles.input} />
+        <Input
+          id="name"
+          onChange={showValue}
+          inputStyles={styles.input}
+          containerStyles={styles["litle-container"]}
+          addCourse={true}
+        >
+          Nazwa kursu
+        </Input>
         <select className={styles.select}>
           {schools.map((s) => (
             <option value={s._id} key={s._id}>
@@ -43,7 +64,16 @@ const AddCourse = (props) => {
             </option>
           ))}
         </select>
-        <input type="number" className={styles.input} />
+        <Input
+          type="number"
+          id="price"
+          onChange={showValue}
+          inputStyles={styles.input}
+          containerStyles={styles["litle-container"]}
+          addCourse={true}
+        >
+          Cena
+        </Input>
         <button className={styles["confirm-btn"]}>DODAJ</button>
       </form>
     </div>

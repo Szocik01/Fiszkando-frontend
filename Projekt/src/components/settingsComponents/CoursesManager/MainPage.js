@@ -37,6 +37,7 @@ const MainPage = (props) => {
                 name={c.name}
                 school={c.school}
                 price={c.price}
+                id={c._id}
               />
             );
           })}
