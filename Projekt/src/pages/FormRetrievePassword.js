@@ -41,7 +41,7 @@ const FormRetrievePassword = () =>{
                 }
             });
             if(res.status===200){
-                history(`/notification?mode=${res.status}`);
+                return history(`/notification?mode=${res.status}`);
             }
         }catch(error){
             console.log(error);

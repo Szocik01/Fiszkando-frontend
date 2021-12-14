@@ -7,12 +7,16 @@ import InputChexBox from '../components/formComponents/InputChexbox';
 import Spiner from "../components/formComponents/Spinner";
 import ButtonShow from '../components/formComponents/buttonShow';
 import { Authoindenty } from '../storage/redux-index'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Circe from '../components/formComponents/Circle';
 import stylesCirce from '../components/formComponents/Circle.module.css';
 import { Fragment } from "react";
+import { useSelector } from "react-redux";
 
 const Form = () =>{
+    const auth = useSelector((state) => state.autoIndentification);   
+    console.log(auth);
+    const history = useNavigate();
     const [inputsInfo, setinputsInfo] = useState({mailL: "", passwordL: "", loginR: "", mail: "",passwordR: "", check_passwordR: ""});
     const [formValid1, setFormValid1] = useState(false);// do poprawy później
     const [formValid2, setFormValid2] = useState(false);// do poprawy później
@@ -153,8 +157,8 @@ const Form = () =>{
                     const dateTokenRemember = new Date(token.auth.rememberMeToken.expire);
                     document.cookie = `rememberToken=${token.auth.rememberMeToken.token}; expires=${dateTokenRemember}`;
                 }
-                
             }
+
         }catch(error){
             console.log(error);
         }
@@ -187,6 +191,7 @@ const Form = () =>{
             if(status===201){
                 console.log('Utworzono nowego uzytkownika');
                 console.log(res);
+                return history(`/`);
             }
         }catch(error){
             console.log(error);

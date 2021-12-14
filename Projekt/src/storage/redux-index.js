@@ -34,8 +34,7 @@ const AuthIdentificationInfo = createSlice({
 });
 
 
-
-const store = configureStore({ reducer: {sidebarPosition: sidebarPositionSlice.reducer, autoIndentification: AuthIdentificationInfo.reducer}});
+const store = configureStore({ reducer: {sidebarPosition: sidebarPositionSlice.reducer, autoIndentification: AuthIdentificationInfo.reducer, }});
 
 export default store;
 export const positionActions=sidebarPositionSlice.actions;

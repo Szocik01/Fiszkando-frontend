@@ -11,7 +11,6 @@ import { useCallback } from 'react';
 const FormResetPassword = () =>{
     const history = useNavigate ();
     const params = useParams();
-    // const [iswork, setIsWork] = useState(false);
     const [inputInfo, setInputInfo] = useState({password: '', repeat_password: ''});
     const [validInput, setValidInput] = useState(false);
     const [validPassword, setValidPassword] = useState(false);
@@ -106,7 +105,7 @@ const FormResetPassword = () =>{
             setStatus(res.status);
             if(res.status===202){
                 console.log("Hasło Zmienione");
-                history(`/notification?mode=${res.status}`);
+                return history(`/notification?mode=${res.status}`);
             }
         }catch(error){
             console.log(error);
