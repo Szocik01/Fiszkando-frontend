@@ -9,9 +9,9 @@ import FormResetPassword from "./pages/FormResetPassword";
 import Notification from "./pages/Notification";
 import { useEffect} from 'react';
 import {Authoindenty} from './storage/redux-index'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-function App() {
+function App() { 
   const dispatch = useDispatch();
   useEffect(()=>{
     const Array_of_Cookies = document.cookie.split(';');
@@ -25,17 +25,20 @@ function App() {
     }
     for(const key of Final_Cookie_Array){
       for(const key_of_Cookies in key){
+        // console.log(key_of_Cookies);
         if(key_of_Cookies==='token' || key_of_Cookies==='uid' || key_of_Cookies==='rememberToken'){
           Saved_Cookie_Object[key_of_Cookies]=key[key_of_Cookies]
+          // console.log(Saved_Cookie_Object[key_of_Cookies]);
         }
       }
     }
     dispatch(Authoindenty.IndetificationShow({
+      rememberToken: Saved_Cookie_Object.rememberToken,
       uid: Saved_Cookie_Object.uid,
-      token: Saved_Cookie_Object.token,
-      rememberToken: Saved_Cookie_Object.rememberMeToken,
-      }));
+      token: Saved_Cookie_Object.token
+    }));
   },[]);
+
 
   return (
     <div>

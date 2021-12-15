@@ -1,3 +1,7 @@
+:root {
+    --rotate-time: 15s;
+}
+
 .circe_main{
     height: 50rem;
     width: 50rem;
@@ -63,38 +67,85 @@
     top: 20rem;
     left: 25%;
     display: block;
+    animation: circleOne var(--rotate-time) linear infinite;
 }
 @media (min-width: 768px){
     .circe_main{
         display: block;
+        animation: circleTwo var(--rotate-time) linear infinite;
     }
     .circe1{
         display: block;
+        animation: circleOne var(--rotate-time) linear infinite;
     }
     .circe2{
         display: block;
+        animation: circleThree var(--rotate-time) linear infinite;
     }
     .circe3{
         display: block;
+        animation: circleOne var(--rotate-time) linear infinite;
     }
     .circe4{
         display: block;
+        animation: circleTwo var(--rotate-time) linear infinite;
     }
     .circe5{
         display: block;
+        animation: circleThree var(--rotate-time) linear infinite;
     }
     .circe6{
         display: block;
+        animation: circleOne var(--rotate-time) linear infinite;
     }
     .circe7{
         display: block;
+        animation: circleTwo var(--rotate-time) linear infinite;
     }
     .circe8{
         display: block;
+        animation: circleTwo var(--rotate-time) linear infinite;
     }
 }
 @media (min-width: 430px){
     .circe9{
         display: none;
+    }
+}
+@keyframes circleOne{
+    0%{
+      transform:rotate(0deg)
+                translate(-30px)
+                rotate(0deg);
+    
+    }
+    100%{
+      transform:rotate(360deg)
+                translate(-30px)
+                rotate(-360deg);
+    }
+}
+@keyframes circleTwo{
+    0%{
+      transform:rotate(0deg)
+                translate(30px)
+                rotate(0deg);
+    
+    }
+    100%{
+      transform:rotate(360deg)
+                translate(30px)
+                rotate(-360deg);
+    }
+}
+@keyframes circleThree{
+    0%{
+        transform: translateX(0%);    
+    }
+    50%{
+        transform: translateX(100%);
+    }
+    100%{
+        transform: translateX(0%);
     }
 }

@@ -12,9 +12,10 @@ import Circe from '../components/formComponents/Circle';
 import stylesCirce from '../components/formComponents/Circle.module.css';
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
+import InformationBox from "../components/UI/InformationBox";
 
 const Form = () =>{
-    const auth = useSelector((state) => state.autoIndentification);   
+    const auth = useSelector((state) => state.autoIndentification);
     console.log(auth);
     const history = useNavigate();
     const [inputsInfo, setinputsInfo] = useState({mailL: "", passwordL: "", loginR: "", mail: "",passwordR: "", check_passwordR: ""});
@@ -158,6 +159,7 @@ const Form = () =>{
                     document.cookie = `rememberToken=${token.auth.rememberMeToken.token}; expires=${dateTokenRemember}`;
                 }
             }
+            console.log(auth);
 
         }catch(error){
             console.log(error);
@@ -204,6 +206,7 @@ const Form = () =>{
         <Fragment>
         {loadingSpiner ? <Spiner>{validatorInputs.loginMove ? "Loading..." : "Register..."}</Spiner>: ''}
         <div className={styles.image}>
+            <InformationBox isError="true">Witamy z powrotem!</InformationBox>
             <Circe />
             <Circe className={stylesCirce.circe1}/>
             <Circe className={stylesCirce.circe2}/>
