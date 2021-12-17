@@ -1,6 +1,6 @@
 import Input from '../components/formComponents/Input';
 import styles from './FormRetrievePassword.module.css';
-import ButtonShow from '../components/formComponents/buttonShow';
+import ButtonShow from '../components/formComponents/ButtonShow';
 import Spiner from "../components/formComponents/Spinner";
 import Circe from '../components/formComponents/Circle';
 import stylesCirce from '../components/formComponents/Circle.module.css';

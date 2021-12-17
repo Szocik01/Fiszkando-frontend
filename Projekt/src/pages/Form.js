@@ -1,18 +1,17 @@
 import styles from "./Form.module.css";
-import stylesButton from '../components/formComponents/buttonShow.module.css';
+import stylesButton from '../components/formComponents/ButtonShow.module.css';
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import Input from '../components/formComponents/Input';
 import InputChexBox from '../components/formComponents/InputChexbox';
 import Spiner from "../components/formComponents/Spinner";
-import ButtonShow from '../components/formComponents/buttonShow';
+import ButtonShow from '../components/formComponents/ButtonShow';
 import { Authoindenty } from '../storage/redux-index'
 import { Link, useNavigate } from "react-router-dom";
 import Circe from '../components/formComponents/Circle';
 import stylesCirce from '../components/formComponents/Circle.module.css';
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
-import InformationBox from "../components/UI/InformationBox";
 
 const Form = () =>{
     const auth = useSelector((state) => state.autoIndentification);
@@ -206,7 +205,6 @@ const Form = () =>{
         <Fragment>
         {loadingSpiner ? <Spiner>{validatorInputs.loginMove ? "Loading..." : "Register..."}</Spiner>: ''}
         <div className={styles.image}>
-            <InformationBox isError="true">Witamy z powrotem!</InformationBox>
             <Circe />
             <Circe className={stylesCirce.circe1}/>
             <Circe className={stylesCirce.circe2}/>

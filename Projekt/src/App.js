@@ -9,7 +9,8 @@ import FormResetPassword from "./pages/FormResetPassword";
 import Notification from "./pages/Notification";
 import { useEffect} from 'react';
 import {Authoindenty} from './storage/redux-index'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import TestStrona from "./pages/TestStrona";
 
 function App() { 
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ function App() {
       <NavComponents />
       <Routes>
         <Route path="/" element={<Main />}/>
+        <Route path="/TestStrona" element={<TestStrona />}/>
         <Route path="/retrieve_password" element={<FormRetrievePassword />}/>
         <Route path="/contact" element={<Contact />}/>
         <Route path="/settings/*" element={<Settings />}/>
