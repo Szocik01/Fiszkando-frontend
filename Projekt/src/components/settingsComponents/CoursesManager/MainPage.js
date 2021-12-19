@@ -28,6 +28,10 @@ const MainPage = (props) => {
                   id={c._id}
                   moveHandler={props.leftMoveHandler}
                   saveHandler={props.saveHandler}
+                  filterHandler={props.filterHandler}
+                  lastItem={props.courses[
+                    props.courses.length - 1
+                  ]._id.toString()}
                 />
               );
             })}

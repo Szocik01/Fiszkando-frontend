@@ -20,6 +20,7 @@ const Input = (props) => {
   };
 
   useEffect(() => {
+    setIsSelected(false);
     if (props.value) {
       setInputValue(props.value);
     } else {
@@ -37,7 +38,7 @@ const Input = (props) => {
         className={`${styles.label} ${
           (inputValue || isSelected) && styles["label--focused"]
         }`}
-        for={props.id}
+        htmlFor={props.id}
       >
         {props.children}
       </label>

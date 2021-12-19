@@ -23,7 +23,7 @@ const ManageCourses = (props) => {
     school: { _id: "", name: "" },
   });
 
-  const [isSpinner, setIsSpinner] = useState(false);
+  const [isSpinner, setIsSpinner] = useState(true);
   const [isError, setIsError] = useState(false);
 
   const fetchAllCourses = async () => {
@@ -70,6 +70,19 @@ const ManageCourses = (props) => {
     setCoursesList(arr);
   };
 
+  const refreshHandler = (course) => {
+    const arr = initialCourses;
+    arr.push(course);
+    setInitialCourses(arr);
+    setCoursesList(arr);
+  };
+
+  const filterHandler = (id) => {
+    const arr = initialCourses.filter((c) => c._id.toString() !== id);
+    setInitialCourses(arr);
+    setCoursesList(arr);
+  };
+
   useEffect(() => {
     fetchAllCourses();
     getSchools();
@@ -94,11 +107,13 @@ const ManageCourses = (props) => {
             courses={coursesList}
             filter={saveFilter}
             initialCourses={initialCourses}
+            filterHandler={filterHandler}
           />
           <AddCourse
             isMoved={movedMainPage}
             moveHandler={movePage}
             schools={schools}
+            refresh={refreshHandler}
           />
           <ModifyCourse
             isMoved={moveMainPageToLeft}

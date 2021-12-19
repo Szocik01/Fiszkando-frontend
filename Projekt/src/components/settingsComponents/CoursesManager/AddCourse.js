@@ -1,40 +1,76 @@
-import { useRef } from "react";
-import { useSelector } from "react-redux";
+import { useRef, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import Input from "./Input";
+import LoadingSpinner from "../../UI/LoadingSpinner";
+import informationBoxManager from "../../../storage/information-box";
 
 import styles from "./AddCourse.module.css";
 
 const AddCourse = (props) => {
+  const [loading, setLoading] = useState(false);
+  const [reset, setReset] = useState(false);
   const select = useRef();
   const auth = useSelector((state) => state.autoIndentification);
   const finalData = {};
+  const dispatch = useDispatch();
 
   const showValue = (val) => {
     for (const i in val) {
       finalData[i] = val[i];
     }
-    console.log(finalData);
   };
 
   const submitHandler = async (eve) => {
+    setLoading(true);
     eve.preventDefault();
     const reqBody = {
       name: finalData.name,
       price: +finalData.price,
       schoolId: select.current.value,
     };
-    const res = await fetch("http://localhost:8080/add-course", {
-      method: "POST",
-      body: JSON.stringify(reqBody),
-      headers: {
-        uid: auth.uid,
-        token: auth.token,
-        remeberMe: auth.remeberMe,
-        "Content-Type": "application/json",
-      },
-    });
-    console.log(res);
+    console.log(reqBody);
+    try {
+      const res = await fetch("http://localhost:8080/add-course", {
+        method: "POST",
+        body: JSON.stringify(reqBody),
+        headers: {
+          uid: auth.uid,
+          token: auth.token,
+          remeberMe: auth.remeberMe,
+          "Content-Type": "application/json",
+        },
+      });
+      setLoading(false);
+      dispatch(informationBoxManager.actions.toggleVisibility());
+      if (res.status === 201) {
+        const parsedResponse = await res.json();
+        props.refresh(parsedResponse.course);
+        dispatch(
+          informationBoxManager.actions.setBox({ message: "Dodano kurs!" })
+        );
+        setReset(true);
+        setReset(false);
+        props.moveHandler();
+      } else {
+        dispatch(
+          informationBoxManager.actions.setBox({
+            message: "Nie udało sie dodać kursu!",
+            isError: true,
+          })
+        );
+      }
+    } catch (err) {
+      setLoading(false);
+      dispatch(informationBoxManager.actions.toggleVisibility());
+      dispatch(
+        informationBoxManager.actions.setBox({
+          message: "Nie udało sie dodać kursu!",
+          isError: true,
+        })
+      );
+      console.log(err);
+    }
   };
 
   return (
@@ -54,7 +90,7 @@ const AddCourse = (props) => {
       </button>
       <h1 className={styles.h1}>Dodaj Kurs</h1>
       <form className={styles.form} onSubmit={submitHandler}>
-        <Input id="name" save={showValue}>
+        <Input id="name" save={showValue} value={reset && ""}>
           Nazwa kursu
         </Input>
         <select className={styles.select} ref={select}>
@@ -64,10 +100,15 @@ const AddCourse = (props) => {
             </option>
           ))}
         </select>
-        <Input type="number" id="price" save={showValue}>
+        <Input type="number" id="price" save={showValue} value={reset && ""}>
           Cena
         </Input>
-        <button className={styles["confirm-btn"]}>DODAJ</button>
+        <div
+          className={`${styles["btn-container"]} ${loading && styles.scale}`}
+        >
+          {loading && <LoadingSpinner />}
+          {!loading && <button className={styles["confirm-btn"]}>DODAJ</button>}
+        </div>
       </form>
     </div>
   );

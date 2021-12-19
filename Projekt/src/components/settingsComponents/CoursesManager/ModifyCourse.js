@@ -7,13 +7,11 @@ import Input from "./Input";
 const ModifyCourse = (props) => {
   const auth = useSelector((state) => state.autoIndentification);
   const finalData = {};
-  console.log(props.data);
 
   const showValue = (val) => {
     for (const i in val) {
       finalData[i] = val[i];
     }
-    console.log(finalData);
   };
 
   return (
