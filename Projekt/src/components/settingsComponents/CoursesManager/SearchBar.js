@@ -18,6 +18,20 @@ const SearchBar = (props) => {
     }
   };
 
+  const changeHandler = () => {
+    const val = input.current.value.toLowerCase();
+    const newArr = [];
+    props.courses.forEach((element) => {
+      if (element.name.toLowerCase().search(val) > -1) {
+        newArr.push(element);
+      }
+    });
+    if (!val) {
+      return props.filter(props.initialCourses);
+    }
+    props.filter(newArr);
+  };
+
   return (
     <div className={`${styles.container}`}>
       <input
@@ -25,6 +39,7 @@ const SearchBar = (props) => {
         className={`${styles.input} ${showInput && styles.show}`}
         ref={input}
         onBlur={blurInputHandler}
+        onChange={changeHandler}
       />
       <button
         className={`${styles.questionMark} ${showInput && styles.setAnimation}`}

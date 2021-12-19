@@ -9,15 +9,26 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  margin-top: 4rem;
-  width: 100%;
+
+  width: calc(100% - 0.5rem);
 }
 
 .wraper {
   display: flex;
   flex-wrap: wrap;
-  min-height: 100%;
+  height: calc(100% - 4rem);
   position: relative;
+  overflow-y: auto;
+  margin-top: 4rem;
+}
+
+.wraper::-webkit-scrollbar {
+  border-radius: 0.5rem;
+  background-color: #eee;
+}
+.wraper::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem;
+  background-color: rgb(132, 101, 255);
 }
 
 .addBtn {
@@ -26,15 +37,12 @@
   border: 2px solid rgb(8, 70, 8);
   background-color: rgb(26, 173, 33);
   position: sticky;
-  left: auto;
-  bottom: 0;
+  bottom: 1rem;
   z-index: 99;
   justify-self: flex-end;
   align-self: flex-end;
   margin-left: auto;
-  margin-top: auto;
   margin-right: 1rem;
-  margin-bottom: 1rem;
   box-shadow: 1px 1px 10px 2px rgb(221, 213, 213);
 }
 

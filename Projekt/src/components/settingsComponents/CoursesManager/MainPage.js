@@ -1,53 +1,41 @@
 import SearchBar from "../CoursesManager/SearchBar";
 import ListItem from "../CoursesManager/ListItem";
 import styles from "./MainPage.module.css";
-
-import { useState, useEffect } from "react";
+import NotFound from "../../UI/NotFound";
 
 const MainPage = (props) => {
-  const [list, setList] = useState([]);
-  const fetchAllCourses = async () => {
-    const COURSES = [];
-    try {
-      const coursesNotParsed = await fetch(
-        "http://localhost:8080/get-all-courses"
-      );
-      const parsedCourses = await coursesNotParsed.json();
-      parsedCourses.forEach((c) => {
-        COURSES.push(c);
-      });
-      setList(COURSES);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  useEffect(() => {
-    fetchAllCourses();
-  }, []);
-
   return (
     <div
       className={`${styles.container} ${props.isMoved && styles.move} ${
         props.isMovedToLeft && styles.moveToLeft
       }`}
     >
-      <SearchBar></SearchBar>
+      <SearchBar
+        filter={props.filter}
+        courses={props.courses}
+        initialCourses={props.initialCourses}
+      />
       <div className={styles.wraper}>
-        <ul className={styles["list-container"]}>
-          {list.map((c) => {
-            return (
-              <ListItem
-                key={c._id}
-                name={c.name}
-                school={c.school}
-                price={c.price}
-                id={c._id}
-                moveHandler={props.leftMoveHandler}
-                saveHandler={props.saveHandler}
-              />
-            );
-          })}
-        </ul>
+        {props.courses.length > 0 && (
+          <ul className={styles["list-container"]}>
+            {props.courses.map((c) => {
+              return (
+                <ListItem
+                  key={c._id}
+                  name={c.name}
+                  school={c.school}
+                  price={c.price}
+                  id={c._id}
+                  moveHandler={props.leftMoveHandler}
+                  saveHandler={props.saveHandler}
+                />
+              );
+            })}
+          </ul>
+        )}
+        {props.courses.length === 0 && (
+          <NotFound>Nie znaleziono żadnych kursów.</NotFound>
+        )}
         <button className={styles.addBtn} onClick={props.moveHandler}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

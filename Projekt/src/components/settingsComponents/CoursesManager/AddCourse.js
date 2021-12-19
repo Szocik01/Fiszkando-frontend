@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useSelector } from "react-redux";
 
 import Input from "./Input";
@@ -6,21 +6,10 @@ import Input from "./Input";
 import styles from "./AddCourse.module.css";
 
 const AddCourse = (props) => {
-  const [schools, setSchools] = useState([]);
   const select = useRef();
   const auth = useSelector((state) => state.autoIndentification);
   const finalData = {};
-  const getSchools = async () => {
-    const SCHOOLS = [];
-    try {
-      const res = await fetch("http://localhost:8080/get-all-schools");
-      const parsed = await res.json();
-      parsed.forEach((s) => SCHOOLS.push(s));
-      setSchools(SCHOOLS);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
   const showValue = (val) => {
     for (const i in val) {
       finalData[i] = val[i];
@@ -48,9 +37,6 @@ const AddCourse = (props) => {
     console.log(res);
   };
 
-  useEffect(() => {
-    getSchools();
-  }, []);
   return (
     <div className={`${styles.container} ${props.isMoved && styles.move}`}>
       <button onClick={props.moveHandler} className={styles["return-btn"]}>
@@ -66,13 +52,13 @@ const AddCourse = (props) => {
           <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
         </svg>
       </button>
-      <h1>Dodaj Kurs</h1>
+      <h1 className={styles.h1}>Dodaj Kurs</h1>
       <form className={styles.form} onSubmit={submitHandler}>
         <Input id="name" save={showValue}>
           Nazwa kursu
         </Input>
         <select className={styles.select} ref={select}>
-          {schools.map((s) => (
+          {props.schools.map((s) => (
             <option value={s._id} key={s._id}>
               {s.name}
             </option>

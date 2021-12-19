@@ -12,7 +12,7 @@
 }
 
 .input {
-  width: 90%;
+  width: 100%;
   border: none;
   border-bottom: 1px solid var(--border-color);
   padding: 0.5rem;
@@ -23,18 +23,24 @@
 .label {
   font-size: 1.5rem;
   align-self: flex-start;
-  transform: translateX(2.5rem) translateY(2.25rem);
+  transform: translateX(0.5rem) translateY(2.25rem);
   color: var(--background-color);
   transition: all 0.2s ease-in-out;
+  cursor: text;
 }
 
 .input:focus {
   outline: none;
 }
-
 .label--focused {
   transform: scale(0.9);
 }
 .error {
   color: red;
+}
+
+@media (min-width: 768px) {
+  .container:first-child {
+    grid-column: span 2;
+  }
 }
