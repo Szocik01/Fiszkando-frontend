@@ -1,16 +1,68 @@
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { informationBoxManagerActions } from "../../../storage/information-box";
+import LoadingSpinner from "../../UI/LoadingSpinner";
+import { useState } from "react";
 
 import styles from "./ModifyCourse.module.css";
 import Input from "./Input";
 
 const ModifyCourse = (props) => {
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const auth = useSelector((state) => state.autoIndentification);
   const finalData = {};
 
   const showValue = (val) => {
     for (const i in val) {
       finalData[i] = val[i];
+    }
+  };
+
+  const saveHandler = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+    finalData.courseId = props.data._id;
+    try {
+      const res = await fetch("http://localhost:8080/modify-course", {
+        method: "POST",
+        body: JSON.stringify(finalData),
+        headers: {
+          uid: auth.uid,
+          token: auth.token,
+          remeberMe: auth.remeberMe,
+          "Content-Type": "application/json",
+        },
+      });
+      const parsedRes = await res.json();
+      setLoading(false);
+      dispatch(informationBoxManagerActions.toggleVisibility());
+      if (res.status === 202) {
+        props.updateHandler(parsedRes.course);
+        dispatch(
+          informationBoxManagerActions.setBox({
+            message: "Zmodyfikowano kurs.",
+          })
+        );
+        props.moveHandler();
+      } else {
+        dispatch(
+          informationBoxManagerActions.setBox({
+            message: "Nie udało sie zmodyfikować kursu.",
+            isError: true,
+          })
+        );
+      }
+      console.log(parsedRes);
+    } catch (err) {
+      setLoading(false);
+      dispatch(informationBoxManagerActions.toggleVisibility());
+      dispatch(
+        informationBoxManagerActions.setBox({
+          message: "Nie udało sie zmodyfikować kursu.",
+          isError: true,
+        })
+      );
+      console.log(err);
     }
   };
 
@@ -31,7 +83,7 @@ const ModifyCourse = (props) => {
         Powrót
       </button>
       <h1 className={styles.h1}>Modyfikuj Kurs</h1>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={saveHandler}>
         <Input id="name" save={showValue} value={props.data.name}>
           Nazwa kursu
         </Input>
@@ -54,7 +106,8 @@ const ModifyCourse = (props) => {
         >
           Cena
         </Input>
-        <button className={styles["confirm-btn"]}>ZAPISZ</button>
+        {loading && <LoadingSpinner />}
+        {!loading && <button className={styles["confirm-btn"]}>ZAPISZ</button>}
       </form>
     </div>
   );

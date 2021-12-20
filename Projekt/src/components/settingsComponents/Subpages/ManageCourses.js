@@ -37,6 +37,7 @@ const ManageCourses = (props) => {
       parsedCourses.forEach((c) => {
         COURSES.push(c);
       });
+      console.log(COURSES);
       setCoursesList(COURSES);
       setInitialCourses(COURSES);
       setIsSpinner(false);
@@ -91,7 +92,14 @@ const ManageCourses = (props) => {
   const movePage = () => setMovedMainPage((l) => !l);
   const moveToLeft = () => setMoveMainPageToLeft((l) => !l);
   const saveHandler = (obj) => setModifyCourseData(obj);
-
+  const updateHandler = (obj) => {
+    console.log(obj);
+    const arr = initialCourses;
+    const index = arr.findIndex((c) => c._id.toString() === obj._id.toString());
+    arr[index] = obj;
+    setInitialCourses(arr);
+    setCoursesList(arr);
+  };
   return (
     <>
       {isSpinner && <LoadingSpinner />}
@@ -120,6 +128,7 @@ const ManageCourses = (props) => {
             moveHandler={moveToLeft}
             data={modifyCourseData}
             schools={schools}
+            updateHandler={updateHandler}
           />
         </div>
       )}
