@@ -22,7 +22,7 @@ const CourseCard = (props) =>{
                     <p>{props.title}</p>
                 </div>
                 <div className={styles.info}>
-                    <p>{props.info}</p>
+                    <p>{props.nameschool}</p>
                 </div>
             </div>
         </div>
