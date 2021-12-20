@@ -11,11 +11,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Circe from '../components/formComponents/Circle';
 import stylesCirce from '../components/formComponents/Circle.module.css';
 import { Fragment } from "react";
-import { useSelector } from "react-redux";
 
 const Form = () =>{
-    const auth = useSelector((state) => state.autoIndentification);
-    console.log(auth);
     const history = useNavigate();
     const [inputsInfo, setinputsInfo] = useState({mailL: "", passwordL: "", loginR: "", mail: "",passwordR: "", check_passwordR: ""});
     const [formValid1, setFormValid1] = useState(false);// do poprawy później
@@ -113,7 +110,7 @@ const Form = () =>{
             setRepetPassword(false);
         }
   
-    },[inputsInfo]);
+    },[]);
 
     const buttonSecend = `${stylesButton.button} ${stylesButton.buttonSecend}`;
     const buttonThird = `${stylesButton.button} ${stylesButton.buttonThird}`;
@@ -158,8 +155,6 @@ const Form = () =>{
                     document.cookie = `rememberToken=${token.auth.rememberMeToken.token}; expires=${dateTokenRemember}`;
                 }
             }
-            console.log(auth);
-
         }catch(error){
             console.log(error);
         }
