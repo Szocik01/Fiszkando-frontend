@@ -110,7 +110,7 @@ const Form = () =>{
             setRepetPassword(false);
         }
   
-    },[]);
+    },[inputsInfo]);
 
     const buttonSecend = `${stylesButton.button} ${stylesButton.buttonSecend}`;
     const buttonThird = `${stylesButton.button} ${stylesButton.buttonThird}`;
