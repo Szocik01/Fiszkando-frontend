@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Input from "../components/formComponents/Input";
 import InputChexBox from "../components/formComponents/InputChexbox";
 import Spiner from "../components/formComponents/Spinner";
-import ButtonShow from "../components/formComponents/ButtonShow";
+import ButtonShow from '../components/formComponents/ButtonShow';
 import { Authoindenty } from "../storage/redux-index";
 import { Link, useNavigate } from "react-router-dom";
 import Circe from "../components/formComponents/Circle";
@@ -82,39 +82,11 @@ const Form = () => {
             });
           }
         }
-<<<<<<< HEAD
-  
-    },[inputsInfo]);
-
-    const buttonSecend = `${stylesButton.button} ${stylesButton.buttonSecend}`;
-    const buttonThird = `${stylesButton.button} ${stylesButton.buttonThird}`;
-
-    const loginSubmitHandler = async (event) =>{
-        event.preventDefault();
-        const enteredMail = inputsInfo.mailL;
-        const enteredPassword = inputsInfo.passwordL;
-        const rememberPassword = validatorInputs.rememberPassword;
-        console.log(enteredMail, enteredPassword, rememberPassword);
-        try{
-            setLoadingSpiner(true);
-            const res = await fetch('http://localhost:8080/login',
-            {
-                method: 'POST',
-                body: JSON.stringify({
-                    email: enteredMail,
-                    password: enteredPassword,
-                    rememberMe: rememberPassword
-                }),
-                headers : {
-                    "Content-Type": "application/json"
-                }
-=======
         if (key === "mailL" || key === "mail") {
           //validacja znaku "@"
           if (event.target.value.includes("@")) {
             setValidatorInputs((prevState) => {
               return { ...prevState, [key]: false };
->>>>>>> 4ae223529a6279feb43372bffd2677769621370e
             });
           } else {
             setValidatorInputs((prevState) => {
