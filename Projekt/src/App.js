@@ -11,7 +11,8 @@ import { useEffect} from 'react';
 import {Authoindenty} from './storage/redux-index'
 import { useDispatch } from "react-redux";
 import TestStrona from "./pages/TestStrona";
-import QuestionsOne from "./pages/QuestionsOne";
+import AllCourse from "./pages/AllCourse";
+import SingleCoustions from './pages/SingleCoustions'
 
 function App() { 
   const dispatch = useDispatch();
@@ -47,7 +48,8 @@ function App() {
       <NavComponents />
       <Routes>
         <Route path="/" element={<Main />}/>
-        <Route path="/questions" element={<QuestionsOne />}/>
+        <Route path="/singleCoustions" element={<SingleCoustions />}/>
+        <Route path="/questions" element={<AllCourse />}/>
         <Route path="/TestStrona" element={<TestStrona />}/>
         <Route path="/retrieve_password" element={<FormRetrievePassword />}/>
         <Route path="/contact" element={<Contact />}/>

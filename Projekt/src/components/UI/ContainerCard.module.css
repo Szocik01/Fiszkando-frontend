@@ -1,0 +1,23 @@
+.main{
+    width: 100%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.image{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.image > img{
+    width: 50%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}

@@ -1,0 +1,36 @@
+.container{
+    width: 100vw;
+    height: calc(100vh - 5rem);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    margin-left: auto;
+}
+.main{
+    width: 60vw;
+    border: 2px solid black;
+}
+.managerContainer{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.5rem;
+}
+.titleContainer{
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+.couestionsContener{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+.couestionsContener > p{
+    font-size: 1.5rem;
+}

@@ -1,9 +1,9 @@
-import styles from './QuestionsOne.module.css';
+import styles from './AllCourse.module.css';
 import CourseCard from '../components/UI/CourseCard'
 import zdjeice from '../image/banner.jpg'
 import { useCallback, useEffect, useState } from 'react';
 
-const QuestionsOne = () =>{
+const AllCourse = () =>{
     const [course, setCourse] = useState([]);
     const sendQuestion = useCallback(async () =>{
         try{
@@ -45,4 +45,4 @@ const QuestionsOne = () =>{
     );
 };
 
-export default QuestionsOne;
+export default AllCourse;
