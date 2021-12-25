@@ -1,0 +1,82 @@
+:root
+{
+    --gradient-color-left:#7810ff;
+    --gradient-color-right:#d606ff;
+    --confirm-button-text-color:white;
+}
+
+
+.selectContainer
+{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    /* border: green 2px solid;  */
+    transition: 0.4s ease-in-out transform;
+    transform: translateX(0%);
+    flex: none;
+}
+
+.singleContainer
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.singleContainer label
+{
+    color: var(--background-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.singleContainer select
+{
+    width: 90%;
+    height: 2rem;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--background-color);
+    font-size: 1.5rem;
+}
+
+.selectContainer.hide
+{
+    transform: translateX(210%);
+}
+
+.confirmStaticClass
+{
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+}
+
+.confirmButton
+{
+    padding: 0.7rem;
+    cursor: pointer;
+    background: linear-gradient(to right, var(--gradient-color-left), var(--gradient-color-right));
+    border: 0;
+    border-radius: 2rem;
+    color: var(--confirm-button-text-color);
+}
+
+.confirmStaticClass:active
+{
+  animation: btnClick 0.5s ease-in-out forwards;
+}
+
+@keyframes btnClick {
+    0% {
+      transform: scale(0.95);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }

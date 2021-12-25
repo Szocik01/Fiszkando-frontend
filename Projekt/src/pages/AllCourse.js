@@ -2,9 +2,18 @@ import styles from './AllCourse.module.css';
 import CourseCard from '../components/UI/CourseCard'
 import zdjeice from '../image/banner.jpg'
 import { useCallback, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import {positionActions} from "../storage/redux-index";
 
 const AllCourse = () =>{
     const [course, setCourse] = useState([]);
+
+    const dispatch=useDispatch();
+    // ten useEffect pod spodem jest od Wiktora żeby sidebar dobrze działał. Najlepiej nie ruszać XD
+    useEffect(() => {
+        dispatch(positionActions.pagePositionChange(0));
+      }, [dispatch]);
+
     const sendQuestion = useCallback(async () =>{
         try{
             const res = await fetch('http://localhost:8080/get-all-courses');

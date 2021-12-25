@@ -1,48 +1,8 @@
-.selectContainer
+.formContainer
 {
+    width: 100%;
+    margin:0;  
+    /* border: yellow 2px solid; */
     display: flex;
-    flex-direction: column;
-}
-
-.selectContainer select
-{
-    width: 14rem;
-}
-
-.questionDataContainer
-{
-    margin-top: 1.2rem;
-    display: flex;
-    flex-direction: column;
-}
-
-.questionDataContainer input
-{
-    width: 14rem;
-}
-
-.newAnswerButton
-{
-    cursor: pointer;
-    width: 17rem;
-    text-align: center;
-    margin-top: 1rem;
-    padding: 3px;
-    border: black 1px solid;
-}
-
-.imagePreview
-{
-    border: black 1px solid;
-    min-width: 8rem;
-    max-width: 9rem;
-    min-height: 6rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.image
-{
-    max-width: 100%;
+    height: 100%;
 }

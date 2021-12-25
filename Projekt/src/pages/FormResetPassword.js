@@ -1,6 +1,6 @@
 import styles from './FormResetPassword.module.css';
 import Input from '../components/formComponents/Input';
-import ButtonShow from '../components/formComponents/ButtonShow';
+import ButtonShow from "../components/formComponents/buttonShow";
 import Spiner from '../components/formComponents/Spinner';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate  } from 'react-router-dom';

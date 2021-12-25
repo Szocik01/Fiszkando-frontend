@@ -6,11 +6,12 @@
   padding: 0.5rem;
   margin-top: 0.6rem;
   width: 100%;
-  min-height: calc(100%);
+  min-height: calc(100% - 3.2rem);
   border-radius: 10px;
   box-shadow: var(--content-container-shadow) 1px 2px 8px 1px;
   position: relative;
   height: 50%;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
@@ -28,7 +29,6 @@
 .hamburgerContainer {
   width: 6.8rem;
   height: 2.6rem;
-  margin-bottom: 0.8rem;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -71,15 +71,16 @@
   }
 
   .container {
+    min-height: calc(100%);
     margin-top: 0;
-    padding: 0.8rem;
+    padding: 1rem;
     width: calc(100% - 13rem);
   }
 }
 
 @media screen and (min-width: 1025px) {
   .container {
-    width: calc(100% - 17rem);
+    width: calc(100% - 16rem);
   }
 }
 

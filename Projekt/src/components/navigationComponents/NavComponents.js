@@ -24,26 +24,20 @@ export default function NavComponents() {
 
     if (isUnfolded === true) {
       timerShowClass = setTimeout(() => {
-        console.log("Powinno sie pojawic tło")
         backdropRef.current.style.opacity=1;
       }, 10);
-      console.log(timerShowClass);
     } else {
       backdropRef.current.style.opacity=0;
       timerHideClass = setTimeout(() => {
-        backdropRef.current.style.display="none"
-        console.log("tło powinno znikać");
+        backdropRef.current.style.display="none";
       }, 210);
-      console.log(timerHideClass);
     }
 
     return () => {
       if (isUnfolded === false) {
         clearTimeout(timerHideClass);
-        console.log(timerHideClass, "Funkcja czyszcząca hide");
       } else {
         clearTimeout(timerShowClass);
-        console.log(timerShowClass, "Funkcja czyszcząca show");
       }
     };
   }, [isUnfolded]);

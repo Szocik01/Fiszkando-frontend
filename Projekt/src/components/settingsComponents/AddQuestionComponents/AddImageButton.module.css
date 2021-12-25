@@ -1,0 +1,29 @@
+:root
+{
+    --circle-background-color:rgb(201, 201, 201);
+    --circle-active-background-color:rgb(170, 170, 170);
+}
+
+.circle
+{
+    width: 3.5rem;
+    height: 3.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--circle-background-color);
+    border-radius: 50%;
+    transition: ease-out 0.1s background-color;
+}
+
+div:active>.circle
+{
+    background-color: var(--circle-active-background-color) ;
+}
+
+.circle svg
+{
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
