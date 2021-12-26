@@ -20,20 +20,20 @@ const SingleCoustions = () =>{
                     <ContainerCard 
                         title="A - Tak"
                         image={logo}
-                        foto="false"
+                        foto="true"
                     />
                     <ContainerCard 
-                        title="A - Nie"
+                        title="B - Nie"
+                        image={logo}
+                        foto="true"
+                    />
+                    <ContainerCard 
+                        title="C - Tak na 100%"
                         image={logo}
                         foto="false"
                     />
                     <ContainerCard 
-                        title="A - Tak na 100%"
-                        image={logo}
-                        foto="false"
-                    />
-                    <ContainerCard 
-                        title="A - Chuj to wiiiiiii"
+                        title="D - Chuj to wiiiiiii"
                         image={logo}
                         foto="false"
                     />
