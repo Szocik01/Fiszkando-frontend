@@ -10,6 +10,7 @@ import AddQuestion from "../components/settingsComponents/Subpages/AddQuestion";
 import ManageCourses from "../components/settingsComponents/Subpages/ManageCourses";
 import InformationBox from "../components/UI/InformationBox";
 import Confirmation from "../components/UI/Confirmation";
+import SchoolsManager from "../components/settingsComponents/Subpages/SchoolsManager";
 
 export default function Settings() {
   const [isMenuActive, setIsMenuActive] = useState(false);
@@ -48,6 +49,7 @@ export default function Settings() {
             <Route path="change_password" element={<PasswordChange />} />
             <Route path="add_question" element={<AddQuestion />} />
             <Route path="manage_courses" element={<ManageCourses />}></Route>
+            <Route path="manage_schools" element={<SchoolsManager />}></Route>
           </Routes>
         </ContentContainer>
       </div>

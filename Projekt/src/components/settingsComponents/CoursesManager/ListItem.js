@@ -2,7 +2,7 @@ import styles from "./ListItem.module.css";
 import { useDispatch } from "react-redux";
 import { confirmationActions } from "../../../storage/confirmation";
 import { informationBoxManagerActions } from "../../../storage/information-box";
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 
 const ListItem = (props) => {
   const lastItem = useRef();
@@ -17,11 +17,11 @@ const ListItem = (props) => {
     props.moveHandler();
   };
 
-  const lastItemScrollHandler = () => {
-    if (props.lastItem === props.id) {
-      lastItem.current.scrollIntoView();
-    }
-  };
+  // const lastItemScrollHandler = () => {
+  //   if (props.lastItem === props.id) {
+  //     lastItem.current.scrollIntoView();
+  //   }
+  // };
 
   const removeItem = async (obj, auth) => {
     const res = await fetch("http://localhost:8080/delete-course", {
@@ -34,8 +34,8 @@ const ListItem = (props) => {
         "Content-Type": "application/json",
       },
     });
-    props.filterHandler(obj.id);
     if (res.status === 200) {
+      props.filterHandler(obj.id);
       dispatch(
         informationBoxManagerActions.setBox({
           message: "Pomyślnie usunieto kurs.",
@@ -79,7 +79,7 @@ const ListItem = (props) => {
           </svg>
         </button>
         <button className={styles.deleteBtn} onClick={deleteHandler}>
-          Usuń{" "}
+          Usuń
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"

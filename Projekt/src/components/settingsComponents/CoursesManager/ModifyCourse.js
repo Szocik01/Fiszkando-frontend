@@ -1,13 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { informationBoxManagerActions } from "../../../storage/information-box";
 import LoadingSpinner from "../../UI/LoadingSpinner";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import styles from "./ModifyCourse.module.css";
 import Input from "./Input";
 
 const ModifyCourse = (props) => {
   const [loading, setLoading] = useState(false);
+  const select = useRef();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.autoIndentification);
   const finalData = {};
@@ -22,6 +23,7 @@ const ModifyCourse = (props) => {
     setLoading(true);
     e.preventDefault();
     finalData.courseId = props.data._id;
+    finalData.schoolId = select.current.value;
     try {
       const res = await fetch("http://localhost:8080/modify-course", {
         method: "POST",
@@ -82,22 +84,27 @@ const ModifyCourse = (props) => {
         </svg>
         Powrót
       </button>
-      <h1 className={styles.h1}>Modyfikuj Kurs</h1>
+
       <form className={styles.form} onSubmit={saveHandler}>
+        <h1 className={styles.h1}>Modyfikuj Kurs</h1>
         <Input id="name" save={showValue} value={props.data.name}>
           Nazwa kursu
         </Input>
-        <select className={styles.select}>
-          {props.schools.map((s) => (
-            <option
-              value={s._id}
-              key={s._id}
-              defaultChecked={s._id === props.data.school._id}
-            >
-              {s.name}
-            </option>
-          ))}
-        </select>
+        <div className={`${styles.submitContainer}`}>
+          <label className={styles.label}>Uczelnia</label>
+          <select className={styles.select} ref={select}>
+            {props.schools.map((s) => (
+              <option
+                value={s._id}
+                key={s._id}
+                className={styles["select-options"]}
+                defaultChecked={s._id === props.data.school._id}
+              >
+                {s.name}
+              </option>
+            ))}
+          </select>
+        </div>
         <Input
           type="number"
           id="price"

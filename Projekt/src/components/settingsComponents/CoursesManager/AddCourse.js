@@ -88,28 +88,41 @@ const AddCourse = (props) => {
           <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
         </svg>
       </button>
-      <h1 className={styles.h1}>Dodaj Kurs</h1>
-      <form className={styles.form} onSubmit={submitHandler}>
-        <Input id="name" save={showValue} value={reset && ""}>
-          Nazwa kursu
-        </Input>
-        <select className={styles.select} ref={select}>
-          {props.schools.map((s) => (
-            <option value={s._id} key={s._id}>
-              {s.name}
-            </option>
-          ))}
-        </select>
-        <Input type="number" id="price" save={showValue} value={reset && ""}>
-          Cena
-        </Input>
-        <div
-          className={`${styles["btn-container"]} ${loading && styles.scale}`}
-        >
-          {loading && <LoadingSpinner />}
-          {!loading && <button className={styles["confirm-btn"]}>DODAJ</button>}
-        </div>
-      </form>
+
+      <div className={styles.form}>
+        <form onSubmit={submitHandler}>
+          <h1 className={styles.h1}>Dodaj Kurs</h1>
+          <Input id="name" save={showValue} value={reset && ""}>
+            Nazwa kursu
+          </Input>
+
+          <div className={`${styles.submitContainer}`}>
+            <label className={styles.label}>Uczelnia</label>
+            <select className={styles.select} ref={select}>
+              {props.schools.map((s) => (
+                <option
+                  value={s._id}
+                  key={s._id}
+                  className={styles["select-options"]}
+                >
+                  {s.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <Input type="number" id="price" save={showValue} value={reset && ""}>
+            Cena
+          </Input>
+          <div
+            className={`${styles["btn-container"]} ${loading && styles.scale}`}
+          >
+            {loading && <LoadingSpinner />}
+            {!loading && (
+              <button className={styles["confirm-btn"]}>DODAJ</button>
+            )}
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

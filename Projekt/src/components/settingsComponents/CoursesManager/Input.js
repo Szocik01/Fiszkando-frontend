@@ -45,7 +45,9 @@ const Input = (props) => {
       <input
         value={inputValue}
         onChange={saveHandler}
-        className={`${styles.input} ${styles.expanded}`}
+        className={`${styles.input} ${styles.expanded} ${
+          (inputValue || isSelected) && styles["input--focus"]
+        }`}
         type={props.type || "text"}
         id={props.id}
       />
