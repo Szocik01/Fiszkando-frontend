@@ -12,6 +12,7 @@ const SchoolsManager = () => {
   const [schoolsList, setSchoolsList] = useState([]);
   const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [leftMove, setLeftMove] = useState(false);
 
   const initialLoadHandler = async () => {
     const SCHOOLS = [];
@@ -19,8 +20,9 @@ const SchoolsManager = () => {
     try {
       const res = await fetch("http://localhost:8080/get-all-schools");
       const parsedRes = await res.json();
-      parsedRes.forEach((s) => SCHOOLS.push(s));
       setLoading(false);
+      parsedRes.forEach((s) => SCHOOLS.push(s));
+
       if (res.status === 200) {
         setInitialSchools(SCHOOLS);
         setSchoolsList(SCHOOLS);
@@ -40,9 +42,11 @@ const SchoolsManager = () => {
     setSchoolsList(SCHOOLS);
   };
 
+  const toggleLeftMove = () => setLeftMove((p) => !p);
+
   useEffect(() => {
     initialLoadHandler();
-  });
+  }, []);
   return (
     <div className={styles.container}>
       {loading && <LoadingSpinner />}
@@ -51,9 +55,17 @@ const SchoolsManager = () => {
         <MainPage
           schoolsList={schoolsList}
           initialSchoolsList={initialSchools}
+          isLeftMoved={leftMove}
+          leftMoveHandler={toggleLeftMove}
         />
       )}
-      {!isError && !loading && <AddSchool updateHandler={updateHandler} />}
+      {!isError && !loading && (
+        <AddSchool
+          updateHandler={updateHandler}
+          isMoved={leftMove}
+          moveHandler={toggleLeftMove}
+        />
+      )}
     </div>
   );
 };

@@ -5,14 +5,16 @@ import SearchBar from "../CoursesManager/SearchBar";
 
 const MainPage = (props) => {
   return (
-    <div className={styles.container}>
+    <div
+      className={`${styles.container} ${props.isLeftMoved && styles.leftMove}`}
+    >
       <SearchBar />
       <ul className={styles["list-container"]}>
         {props.schoolsList.map((s) => (
           <ListItem name={s.name} id={s._id} key={s._id} />
         ))}
       </ul>
-      <button className={styles.addBtn} onClick={props.moveHandler}>
+      <button className={styles.addBtn} onClick={props.leftMoveHandler}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           enableBackground="new 0 0 24 24"
