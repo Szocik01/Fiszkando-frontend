@@ -11,14 +11,31 @@ const SingleCoustions = () =>{
                 </div>
                 <div className={styles.titleContainer}>
                     <ContainerCard 
-                        title="Masło"
+                        title="Czy masło zda Studia?"
                         image={logo}
                         foto="true"
                     />
                 </div>
                 <div className={styles.couestionsContener}>
                     <ContainerCard 
-                        title="Masło"
+                        title="A - Tak"
+                        image={logo}
+                        foto="true"
+                    />
+                    <ContainerCard 
+                        title="B - Nie"
+                        image={logo}
+                        foto="true"
+                    />
+                    <ContainerCard 
+                        title="C - Tak na 100%"
+                        image={logo}
+                        foto="false"
+                    />
+                    <ContainerCard 
+                        title="D - Chuj to wiiiiiii"
+                        image={logo}
+                        foto="false"
                     />
                 </div>
             </div>
