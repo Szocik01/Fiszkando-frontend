@@ -21,13 +21,22 @@ const sidebarPositionSlice = createSlice({
 
 const AuthIdentificationInfo = createSlice({
   name: "autoIndentification",
-  initialState: { uid: "", token: "", expire: "", rememberToken: "" },
+  initialState: {
+    uid: "",
+    token: "",
+    rememberToken: "",
+    isHeadAdmin: false,
+    permissions: [],
+  },
   reducers: {
     IndetificationShow(state, action) {
       state.uid = action.payload.uid;
       state.token = action.payload.token;
-      state.expire = action.payload.expire;
       state.rememberToken = action.payload.rememberToken;
+      if (action.payload.permissions) {
+        state.isHeadAdmin = action.payload.permissions.isHeadAdmin;
+        state.permissions = action.payload.permissions.permissionsArray;
+      }
     },
   },
 });

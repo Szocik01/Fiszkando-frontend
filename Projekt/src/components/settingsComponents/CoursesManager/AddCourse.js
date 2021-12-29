@@ -15,6 +15,8 @@ const AddCourse = (props) => {
   const finalData = {};
   const dispatch = useDispatch();
 
+  console.log(auth);
+
   const showValue = (val) => {
     for (const i in val) {
       finalData[i] = val[i];

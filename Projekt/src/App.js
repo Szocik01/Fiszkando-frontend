@@ -7,16 +7,21 @@ import Contact from "./pages/Contact";
 import FormRetrievePassword from "./pages/FormRetrievePassword";
 import FormResetPassword from "./pages/FormResetPassword";
 import Notification from "./pages/Notification";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Authoindenty } from "./storage/redux-index";
 import { useDispatch } from "react-redux";
 import TestStrona from "./pages/TestStrona";
 import AllCourse from "./pages/AllCourse";
 import SingleCoustions from "./pages/SingleCoustions";
+import LoadingSpinner from "./components/UI/LoadingSpinner";
+import { useState } from "react";
+import styles from "./App.module.css";
 
 function App() {
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  useEffect(() => {
+
+  const getCookies = () => {
     const Array_of_Cookies = document.cookie.split(";");
     const Final_Cookie_Array = [];
     const Saved_Cookie_Object = {};
@@ -39,33 +44,72 @@ function App() {
         }
       }
     }
-    dispatch(
-      Authoindenty.IndetificationShow({
-        rememberToken: Saved_Cookie_Object.rememberToken,
-        uid: Saved_Cookie_Object.uid,
-        token: Saved_Cookie_Object.token,
-      })
-    );
+    return Saved_Cookie_Object;
+  };
+
+  const checkInitialCookies = async (authCookies) => {
+    try {
+      const res = await fetch("http://localhost:8080/login-checker", {
+        method: "POST",
+        body: JSON.stringify({
+          uid: authCookies.uid,
+          token: authCookies.token,
+          rememberToken: authCookies.rememberToken,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const parsedRes = await res.json();
+      if (res.status === 200) {
+        dispatch(
+          Authoindenty.IndetificationShow({
+            rememberToken: authCookies.rememberToken,
+            uid: authCookies.uid,
+            token: parsedRes.newToken
+              ? parsedRes.newToken.token
+              : authCookies.token,
+            permissions: parsedRes.permissions,
+          })
+        );
+      }
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    const authCookies = getCookies();
+    checkInitialCookies(authCookies);
   });
 
   return (
     <div>
       <NavComponents />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/singleCoustions" element={<SingleCoustions />} />
-        <Route path="/questions" element={<AllCourse />} />
-        <Route path="/TestStrona" element={<TestStrona />} />
-        <Route path="/retrieve_password" element={<FormRetrievePassword />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/settings/*" element={<Settings />} />
-        <Route path="/authentication" element={<Form />} />
-        <Route
-          path="/authorize/reset/:uid/:token"
-          element={<FormResetPassword />}
-        />
-        <Route path="/notification" element={<Notification />} />
-      </Routes>
+      {loading && (
+        <div className={styles["loading-container"]}>
+          <LoadingSpinner />
+        </div>
+      )}
+      {!loading && (
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/singleCoustions" element={<SingleCoustions />} />
+          <Route path="/questions" element={<AllCourse />} />
+          <Route path="/TestStrona" element={<TestStrona />} />
+          <Route path="/retrieve_password" element={<FormRetrievePassword />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/settings/*" element={<Settings />} />
+          <Route path="/authentication" element={<Form />} />
+          <Route
+            path="/authorize/reset/:uid/:token"
+            element={<FormResetPassword />}
+          />
+          <Route path="/notification" element={<Notification />} />
+        </Routes>
+      )}
     </div>
   );
 }
