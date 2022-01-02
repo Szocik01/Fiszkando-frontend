@@ -118,13 +118,13 @@ export default function QuestionForm(props)
 
      for (let i = 0; i < props.trueQuestionsAmount; i++) {
         trueAnswerElementArray.push(
-      <SingleAnswer key={`${i}`} id={i} shouldReset={shouldReset} setShouldReset={setShouldReset} answerObjects={correctAnswers} imagesArray={imagesArray} currentCourse={props.course} uniqueClass={"correct"} />
+      <SingleAnswer key={`${i}`} id={i} isModify={false} shouldReset={shouldReset} setShouldReset={setShouldReset} answerObjects={correctAnswers} imagesArray={imagesArray} currentCourse={props.course} uniqueClass={"correct"} />
     );
     }
 
     for (let i = 0; i < props.falseQuestionsAmount; i++) {
         falseAnswerElementArray.push(
-      <SingleAnswer key={`${i}`} id={i} shouldReset={shouldReset} setShouldReset={setShouldReset} answerObjects={wrongAnswers} imagesArray={imagesArray} currentCourse={props.course}  uniqueClass={"wrong"} />
+      <SingleAnswer key={`${i}`} id={i} isModify={false} shouldReset={shouldReset} setShouldReset={setShouldReset} answerObjects={wrongAnswers} imagesArray={imagesArray} currentCourse={props.course}  uniqueClass={"wrong"} />
     );
     }
 
@@ -168,7 +168,7 @@ export default function QuestionForm(props)
         </button>
         <div className={style.inputsContainer}>
           <h4>Dodaj treść pytania</h4>
-          <SingleAnswer id={0} shouldReset={shouldReset} setShouldReset={setShouldReset} answerObjects={questionObject} imagesArray={imagesArray} currentCourse={props.course} uniqueClass={"question"}/>
+          <SingleAnswer id={0} shouldReset={shouldReset} isModify={false} setShouldReset={setShouldReset} answerObjects={questionObject} imagesArray={imagesArray} currentCourse={props.course} uniqueClass={"question"}/>
         </div>
       <div className={style.inputsContainer}>
         <h4>Poprawne odpowiedzi</h4>

@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import PasswordChange from "../components/settingsComponents/Subpages/PasswordChange";
 import AddQuestion from "../components/settingsComponents/Subpages/AddQuestion";
 import ManageCourses from "../components/settingsComponents/Subpages/ManageCourses";
+import ModifyQuestion from "../components/settingsComponents/Subpages/ModifyQuestion";
 import InformationBox from "../components/UI/InformationBox";
 import Confirmation from "../components/UI/Confirmation";
 
@@ -47,6 +48,7 @@ export default function Settings() {
           <Routes>
             <Route path="change_password" element={<PasswordChange />} />
             <Route path="add_question" element={<AddQuestion />} />
+            <Route path="modify_question" element={<ModifyQuestion/>}/>
             <Route path="manage_courses" element={<ManageCourses />}></Route>
           </Routes>
         </ContentContainer>

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import style from "./AddQuestion.module.css";
 import { Fragment, useEffect, useState} from "react";
 import Spiner from "../../formComponents/Spinner";
+import { useLocation } from "react-router-dom";
 
 export default function AddQuestion() {
   const [isSpinnerActive, setIsSpinnerActive]=useState(false);
@@ -17,23 +18,41 @@ export default function AddQuestion() {
   const [isQuestionVisible,setIsQuestionVisible]=useState(false);
   const [successMessage,setSuccessMessage]=useState("");
 
+  const location=useLocation();
+
   const dispatch=useDispatch();
 
-  useEffect(() => {
-    if (university.trim() === "" || course.trim() === "") {
-      setShowQuestionForm(false);
-    }
-    else
+  useEffect(()=>{
+    if(location.search)
     {
+      const params= new URLSearchParams(location.search);
+      setCourse(params.get("courseId"));
       setShowQuestionForm(true);
+      setTimeout(() => {
+        setIsQuestionVisible(true);
+      }, 20);
     }
-  }, [university, course]);
+  },[location])
+
+  useEffect(() => {
+    if(location.search.trim() === "")
+    {
+      if (university.trim() === "" || course.trim() === "") {
+        setShowQuestionForm(false);
+      }
+      else
+      {
+        setShowQuestionForm(true);
+      }
+    }
+  }, [university, course, location]);
 
   useEffect(()=>{
     if(httpError)
     {
       dispatch(informationBoxManagerActions.setBox({message:httpError,isError:true}));
       dispatch(informationBoxManagerActions.toggleVisibility());
+      setHttpError("");
     }
   },[httpError,dispatch]);
 

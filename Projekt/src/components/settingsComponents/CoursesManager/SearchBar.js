@@ -22,8 +22,17 @@ const SearchBar = (props) => {
     const val = input.current.value.toLowerCase();
     const newArr = [];
     props.courses.forEach((element) => {
-      if (element.name.toLowerCase().search(val) > -1) {
-        newArr.push(element);
+      if(element.name)
+      {
+        if (element.name.toLowerCase().search(val) > -1) {
+          newArr.push(element);
+        }
+      }
+      else if(element.question)
+      {
+        if (element.question.value.toLowerCase().search(val) > -1) {
+          newArr.push(element);
+        }
       }
     });
     if (!val) {
@@ -42,6 +51,7 @@ const SearchBar = (props) => {
         onChange={changeHandler}
       />
       <button
+      type="button"
         className={`${styles.questionMark} ${showInput && styles.setAnimation}`}
         onClick={buttonClickHandler}
       >

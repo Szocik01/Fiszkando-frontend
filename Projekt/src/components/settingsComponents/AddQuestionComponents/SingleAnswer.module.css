@@ -16,6 +16,7 @@
     box-shadow: var(--content-container-shadow) 1px 2px 8px 1px;
     border-radius: 10px;
     width: 100%;
+    position: relative;
 }
 
 .answerContainer.question
@@ -75,6 +76,7 @@
 
 .image
 {
+    border-radius: 8px;
     max-width: 100%;
 }
 
@@ -83,7 +85,8 @@
     color: var(--image-name-text-color);
 }
 
-.deleteImage
+.deleteImage,
+.deleteAnswerButton
 {
     position: absolute;
     z-index: 3;
@@ -91,12 +94,17 @@
     right: 0;
     height: 1.5rem;
     width: 1.5rem;
-    margin-top: 3px;
-    margin-right: 3px;
+    margin-top: 4px;
+    margin-right: 4px;
     display: flex;
     align-items: center;
     background-color: var(--delete-image-background-color);
     border-radius: 3px;
+}
+
+.deleteAnswerButton
+{
+    border: none;
 }
 
 @media screen and (min-width: 550px) {
