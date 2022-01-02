@@ -29,10 +29,10 @@ li {
 }
   
 .title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: bold;
     width: 60%;
-    color: var(--font-color)
+    color: var(--font-title-color)
 }
 
 .title.question
