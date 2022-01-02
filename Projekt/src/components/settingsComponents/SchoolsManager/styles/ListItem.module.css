@@ -1,53 +1,35 @@
 :root {
-  --font-title-color: rgb(94, 94, 252);
-  --price-font-color: rgb(0, 148, 32);
+  --font-name-color: rgb(133, 40, 255);
 }
 
-li {
-  list-style: none;
-}
-
-.item {
+.container {
   width: 100%;
   border: 1px solid #eee;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  box-shadow: 2px 2px 5px #eee;
+  border-radius: 1rem;
   display: flex;
+  justify-content: center;
+  align-content: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  width: 60%;
-  color: var(--font-title-color);
-}
-
-.schoolName {
-  font-weight: bold;
-  width: 50%;
-  font-size: 1.1rem;
-}
-
-.price {
-  justify-self: flex-end;
-  width: calc(40% - 1rem);
-  margin-top: 0.5rem;
-  text-align: end;
-  font-size: 1.25rem;
-  color: var(--price-font-color);
+  box-shadow: 2px 2px 5px #eee;
 }
 
 .actions {
+  width: fit-content;
+  padding: 1rem;
   display: flex;
-  gap: 0.5rem;
-  justify-content: flex-end;
-  align-items: flex-end;
+  gap: 1rem;
   margin-left: auto;
-  margin-top: 2rem;
   flex-wrap: wrap;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--font-name-color);
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding: 1.5rem;
 }
 
 .deleteBtn,
@@ -81,10 +63,6 @@ li {
 .modifyBtn {
   border-color: rgb(4, 4, 168);
   background-color: rgb(94, 94, 252);
-}
-
-svg {
-  cursor: pointer;
 }
 
 @keyframes btnClick {

@@ -7,33 +7,51 @@ export default function SidebarLinks() {
       <NavLink
         className={(navData) => {
           return `${style.link} ${navData.isActive ? style.active : ""}`;
-        }} to="/settings/change_password"
-      >Zmiana Hasła</NavLink>
+        }}
+        to="/settings/change_password"
+      >
+        Zmiana Hasła
+      </NavLink>
       <NavLink
         className={(navData) => {
           return `${style.link} ${navData.isActive ? style.active : ""}`;
-        }} to="/settings/add_test"
-      >Dodaj Test</NavLink>
+        }}
+        to="/settings/manage_schools"
+      >
+        Zarządzaj Uczelniami
+      </NavLink>
       <NavLink
         className={(navData) => {
           return `${style.link} ${navData.isActive ? style.active : ""}`;
-        }} to="/settings/add_question"
-      >Dodaj Pytanie</NavLink>
+        }}
+        to="/settings/add_question"
+      >
+        Dodaj Pytanie
+      </NavLink>
       <NavLink
         className={(navData) => {
           return `${style.link} ${navData.isActive ? style.active : ""}`;
-        }} to="/settings/modify_question"
-      >Modyfikuj Pytanie</NavLink>
+        }}
+        to="/settings/modify_question"
+      >
+        Modyfikuj Pytanie
+      </NavLink>
       <NavLink
         className={(navData) => {
           return `${style.link} ${navData.isActive ? style.active : ""}`;
-        }} to="/settings/manage_courses"
-      >Zarządzaj Kursami</NavLink>
+        }}
+        to="/settings/manage_courses"
+      >
+        Zarządzaj Kursami
+      </NavLink>
       <NavLink
         className={(navData) => {
           return `${style.link} ${navData.isActive ? style.active : ""}`;
-        }} to="/settings/change_permissions"
-      >Zmień Uprawnienia</NavLink>
+        }}
+        to="/settings/change_permissions"
+      >
+        Zmień Uprawnienia
+      </NavLink>
     </div>
   );
 }

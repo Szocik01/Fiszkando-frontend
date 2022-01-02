@@ -2,155 +2,164 @@ import style from "./QuestionForm.module.css";
 import SingleAnswer from "./SingleAnswer";
 import NewAnswerButton from "./NewAnswerButton";
 import { useSelector } from "react-redux";
-import { useCallback, useEffect, useMemo, useState} from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
-export default function QuestionForm(props)
-{
-    const [shouldReset,setShouldReset]=useState(false);
+export default function QuestionForm(props) {
+  const [shouldReset, setShouldReset] = useState(false);
 
-    const correctAnswers=useMemo(()=>{ return []},[]);
-    const wrongAnswers=useMemo(()=>{ return []},[]);
-    const imagesArray=useMemo(()=>{ return []},[]);
-    const questionObject=useMemo(()=>{return []},[]);
+  const correctAnswers = useMemo(() => {
+    return [];
+  }, []);
+  const wrongAnswers = useMemo(() => {
+    return [];
+  }, []);
+  const imagesArray = useMemo(() => {
+    return [];
+  }, []);
+  const questionObject = useMemo(() => {
+    return [];
+  }, []);
 
-    const {setTrueQuestionsAmount,setFlaseQuestionsAmount,course}=props;
+  const { setTrueQuestionsAmount, setFlaseQuestionsAmount, course } = props;
 
-    const logindata=useSelector((state)=>{ return state.autoIndentification});
-    const uid=logindata.uid;
-    const token=logindata.token;
+  const logindata = useSelector((state) => {
+    return state.autoIndentification;
+  });
+  const uid = logindata.uid;
+  const token = logindata.token;
 
-    function addAnotherAnswerHandler(event) {
-        if (event.currentTarget.id === "true") {
-          props.setTrueQuestionsAmount((prevValue) => {
-            return prevValue + 1;
-          });
-        } else {
-          props.setFlaseQuestionsAmount((prevValue) => {
-            return prevValue + 1;
-          });
-        }
-    }
-
-    function hideForm()
-    {
-      props.setIsQuestionVisible(false);
-    }
-
-    function questionSubmitHandler()
-    {
-      props.setHttpError("");
-      let isCorrectFlag=true;
-      const formData= new FormData();
-      let mainType="text";
-      if(!course)
-      {
-        props.setHttpError("Aby dodać pytanie najwierw należy wybrać kurs.");
-        isCorrectFlag=false;
-        return;    
-      }
-      formData.append("courseId",`${course}`);
-      if(questionObject[0].value.trim()==="")
-      {
-        props.setHttpError("Proszę dodać treść pytania.");
-        isCorrectFlag=false;
-        return;
-      }
-      formData.append("question",JSON.stringify(questionObject[0]));
-      console.log(formData.getAll("question"));
-      correctAnswers.forEach((item)=>{
-        console.log(item);
-        if(item.value.trim()==="" && !item.imageName)
-        {
-            props.setHttpError("Prosze uzupełnić odpowiedzi.");
-            isCorrectFlag=false;
-        }
+  function addAnotherAnswerHandler(event) {
+    if (event.currentTarget.id === "true") {
+      props.setTrueQuestionsAmount((prevValue) => {
+        return prevValue + 1;
       });
-      wrongAnswers.forEach((item)=>{
-        console.log(item);
-        if(item.value.trim()==="" && !item.imageName)
-        {
-            props.setHttpError("Prosze uzupełnić odpowiedzi.");
-            isCorrectFlag=false;        
-        }
-      })
-        formData.append("correctAnswears",JSON.stringify(correctAnswers));  
-        formData.append("falseAnswears",JSON.stringify(wrongAnswers));
-        if(imagesArray.length>0)
-        {
-          mainType="mixed";
-          imagesArray.forEach((item)=>{
-            formData.append("images",item);
-          });
-        }
-        formData.append("questionType",mainType);
-        for( const [key,value] of formData)
-        {
-          console.log(key,value);
-        }
-        console.log(formData.getAll("images"));
-        if(isCorrectFlag)
-        {
-          fetch("http://localhost:8080/add-question",{
-          method:"POST",
-          headers:{
-            "uid": uid,
-            "token": token},
-          body: formData
-          }).then((response)=>{
-            if(!response.ok)
-            {
-              console.log(response.status);
-              throw new Error("Nieoczekiwany błąd serwera.");
-            }
-            return response.json();
-          }).then((data)=>{
-            console.log(data);
-            props.setSuccessMessage("Pomyślnie dodano pytanie");
-            setShouldReset(true);
-          }).catch((error)=>{
-            props.setHttpError(error.message);
-          });
-       }
+    } else {
+      props.setFlaseQuestionsAmount((prevValue) => {
+        return prevValue + 1;
+      });
     }
+  }
 
-    const trueAnswerElementArray = [];
-    const falseAnswerElementArray = [];
+  function hideForm() {
+    props.setIsQuestionVisible(false);
+  }
+
+  function questionSubmitHandler() {
+    props.setHttpError("");
+    let isCorrectFlag = true;
+    const formData = new FormData();
+    let mainType = "text";
+    if (!course) {
+      props.setHttpError("Aby dodać pytanie najwierw należy wybrać kurs.");
+      isCorrectFlag = false;
+      return;
+    }
+    formData.append("courseId", `${course}`);
+    if (questionObject[0].value.trim() === "") {
+      props.setHttpError("Proszę dodać treść pytania.");
+      isCorrectFlag = false;
+      return;
+    }
+    formData.append("question", JSON.stringify(questionObject[0]));
+    console.log(formData.getAll("question"));
+    correctAnswers.forEach((item) => {
+      console.log(item);
+      if (item.value.trim() === "" && !item.imageName) {
+        props.setHttpError("Prosze uzupełnić odpowiedzi.");
+        isCorrectFlag = false;
+      }
+    });
+    wrongAnswers.forEach((item) => {
+      console.log(item);
+      if (item.value.trim() === "" && !item.imageName) {
+        props.setHttpError("Prosze uzupełnić odpowiedzi.");
+        isCorrectFlag = false;
+      }
+    });
+    formData.append("correctAnswears", JSON.stringify(correctAnswers));
+    formData.append("falseAnswears", JSON.stringify(wrongAnswers));
+    if (imagesArray.length > 0) {
+      mainType = "mixed";
+      imagesArray.forEach((item) => {
+        formData.append("images", item);
+      });
+    }
+    formData.append("questionType", mainType);
+    for (const [key, value] of formData) {
+      console.log(key, value);
+    }
+    console.log(formData.getAll("images"));
+    if (isCorrectFlag) {
+      fetch("http://localhost:8080/add-question", {
+        method: "POST",
+        headers: {
+          uid: uid,
+          token: token,
+        },
+        body: formData,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            console.log(response.status);
+            throw new Error("Nieoczekiwany błąd serwera.");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          props.setSuccessMessage("Pomyślnie dodano pytanie");
+          setShouldReset(true);
+        })
+        .catch((error) => {
+          props.setHttpError(error.message);
+        });
+    }
+  }
+
+  const trueAnswerElementArray = [];
+  const falseAnswerElementArray = [];
 
      for (let i = 0; i < props.trueQuestionsAmount; i++) {
         trueAnswerElementArray.push(
       <SingleAnswer key={`${i}`} id={i} isModify={false} shouldReset={shouldReset} setShouldReset={setShouldReset} answerObjects={correctAnswers} imagesArray={imagesArray} currentCourse={props.course} uniqueClass={"correct"} />
     );
-    }
+  }
 
     for (let i = 0; i < props.falseQuestionsAmount; i++) {
         falseAnswerElementArray.push(
       <SingleAnswer key={`${i}`} id={i} isModify={false} shouldReset={shouldReset} setShouldReset={setShouldReset} answerObjects={wrongAnswers} imagesArray={imagesArray} currentCourse={props.course}  uniqueClass={"wrong"} />
     );
-    }
+  }
 
-    const removeArraysData = useCallback(()=>{
-      correctAnswers.splice(0,correctAnswers.length);
-      correctAnswers.push({type:"",value:""});
-      wrongAnswers.splice(0,wrongAnswers.length);
-      wrongAnswers.push({type:"",value:""});
-      questionObject.splice(0,questionObject.length);
-      questionObject.push({type:"",value:""});
-      imagesArray.splice(0,imagesArray.length);
-      setTrueQuestionsAmount(1);
-      setFlaseQuestionsAmount(1);
-    },[correctAnswers,wrongAnswers,questionObject,imagesArray]);
+  const removeArraysData = useCallback(() => {
+    correctAnswers.splice(0, correctAnswers.length);
+    correctAnswers.push({ type: "", value: "" });
+    wrongAnswers.splice(0, wrongAnswers.length);
+    wrongAnswers.push({ type: "", value: "" });
+    questionObject.splice(0, questionObject.length);
+    questionObject.push({ type: "", value: "" });
+    imagesArray.splice(0, imagesArray.length);
+    setTrueQuestionsAmount(1);
+    setFlaseQuestionsAmount(1);
+  }, [
+    correctAnswers,
+    wrongAnswers,
+    questionObject,
+    imagesArray,
+    setTrueQuestionsAmount,
+    setFlaseQuestionsAmount,
+  ]);
 
-    useEffect(()=>{
+  useEffect(() => {
+    removeArraysData();
+    console.log(correctAnswers, wrongAnswers, imagesArray);
+  }, [course, removeArraysData]);
+
+  useEffect(() => {
+    if (shouldReset) {
       removeArraysData();
-      console.log(correctAnswers,wrongAnswers,imagesArray);
-    },[course,removeArraysData]);
-
-    useEffect(()=>{
-      if(shouldReset)
-      {
-        removeArraysData();
-      }
-    },[shouldReset,removeArraysData])
+    }
+  }, [shouldReset, removeArraysData]);
 
     return (
       <div className={`${style.questionDataContainer} ${props.isQuestionVisible?`${style.visible}`:""}`}>
@@ -173,14 +182,26 @@ export default function QuestionForm(props)
       <div className={style.inputsContainer}>
         <h4>Poprawne odpowiedzi</h4>
         {trueAnswerElementArray}
-        <NewAnswerButton id="true" addAnotherAnswerHandler={addAnotherAnswerHandler}/>
+        <NewAnswerButton
+          id="true"
+          addAnotherAnswerHandler={addAnotherAnswerHandler}
+        />
       </div>
       <div className={style.inputsContainer}>
         <h4>Błędne odpowiedzi</h4>
-      {falseAnswerElementArray}
-      <NewAnswerButton id="false" addAnotherAnswerHandler={addAnotherAnswerHandler}/>
+        {falseAnswerElementArray}
+        <NewAnswerButton
+          id="false"
+          addAnotherAnswerHandler={addAnotherAnswerHandler}
+        />
       </div>
-      <button type="button" onClick={questionSubmitHandler} className={style.submitButton}>Potwierdź</button>
+      <button
+        type="button"
+        onClick={questionSubmitHandler}
+        className={style.submitButton}
+      >
+        Potwierdź
+      </button>
     </div>
   );
 }

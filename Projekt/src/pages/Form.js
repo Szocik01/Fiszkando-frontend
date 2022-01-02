@@ -196,17 +196,17 @@ const Form = () => {
       });
       setStatus(res.status);
       const token = await res.json();
+      console.log(token);
       if (res.status === 200) {
         const dateToken = new Date(token.auth.token.expire);
 
         console.log("Dane są poprawne!");
-        console.log(token);
         dispatch(
           Authoindenty.IndetificationShow({
             uid: token.auth.UID,
             token: token.auth.token.token,
             rememberToken: token.auth.token.rememberMeToken,
-            expire: token.auth.token.expire,
+            permissions: token.permissions,
           })
         );
         document.cookie = `uid=${token.auth.UID};`;

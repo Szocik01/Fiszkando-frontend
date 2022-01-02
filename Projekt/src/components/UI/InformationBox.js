@@ -1,5 +1,5 @@
 import styles from "./InformationBox.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import informationBoxManager from "../../storage/information-box";
 
@@ -10,7 +10,7 @@ const InformationBox = (props) => {
     setShow(false);
   };
 
-  useEffect(() => {
+  const manageHandler = useCallback(() => {
     if (!props.show) {
       return;
     }
@@ -19,7 +19,11 @@ const InformationBox = (props) => {
       setShow(false);
       dispatch(informationBoxManager.actions.toggleVisibility());
     }, 5000);
-  }, [props.show]);
+  }, [props.show, dispatch]);
+
+  useEffect(() => {
+    manageHandler();
+  }, [props.show, manageHandler]);
   return (
     <div>
       {show ? (

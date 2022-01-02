@@ -1,15 +1,15 @@
-import { useRef, useState, useEffect, useCallback} from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import style from "./SingleAnswer.module.css";
 import AddImageButton from "../../UI/AddImageButton";
 
 export default function SingleAnswer(props) {
   const [imageUrl, setImageUrl] = useState(null);
   const [isTooBig, setIsTooBig] = useState(false);
-  const [isWrongExtention,setIsWrongExtention] = useState(false);
-  const [emptyTextInput,setEmptyTextInput] = useState(true);
-  const [wasInputTouched,setWasInputTouched] =useState(false);
-  const [imageName,setImageName]=useState("");
-  const SingleAnswerRef=useRef();
+  const [isWrongExtention, setIsWrongExtention] = useState(false);
+  const [emptyTextInput, setEmptyTextInput] = useState(true);
+  const [wasInputTouched, setWasInputTouched] = useState(false);
+  const [imageName, setImageName] = useState("");
+  const SingleAnswerRef = useRef();
 
   const {shouldReset,setShouldReset,currentCourse,isModify,id,hasDataBeenFetched,currentQuestion,setAnswersAmount,answersAmount}=props;
 
@@ -73,8 +73,7 @@ export default function SingleAnswer(props) {
         console.log(props.answerObjects,"Czy usunęło imageName");
         return;
       }
-      if (event.target.files[0].size > 600000) 
-      {
+      if (event.target.files[0].size > 600000) {
         setIsTooBig(true);
         setIsWrongExtention(false);
         setImageUrl(null);
@@ -115,8 +114,7 @@ export default function SingleAnswer(props) {
     setIsWrongExtention(false);
     setIsTooBig(false);
     setWasInputTouched(true);
-    if(event.target.value.trim()==="")
-    {
+    if (event.target.value.trim() === "") {
       setEmptyTextInput(true);
     }
     else
@@ -141,14 +139,13 @@ export default function SingleAnswer(props) {
 
   },[SingleAnswerRef,isModify]);
 
-  useEffect(()=>{
+  useEffect(() => {
     removeInputsData();
     console.log(currentCourse,currentQuestion,"powinno sie resetować");
   },[removeInputsData,currentCourse,currentQuestion]);
 
-  useEffect(()=>{
-    if(shouldReset)
-    {
+  useEffect(() => {
+    if (shouldReset) {
       removeInputsData();
       setShouldReset(false);
     }
@@ -178,9 +175,27 @@ export default function SingleAnswer(props) {
       <input type="text" onBlur={textInputValidationHandler}/>
       <div className={`${style.container} ${props.uniqueClass==="question" && style.questionImageAndErrorContainer}`}>
         <div className={style.imagePreviewContainer}>
-          {imageUrl && <div className={style.deleteImage} onClick={deleteImage}><svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 0 24 24" width="24px" fill="white"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z"/></svg></div>}
+          {imageUrl && (
+            <div className={style.deleteImage} onClick={deleteImage}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="22px"
+                viewBox="0 0 24 24"
+                width="24px"
+                fill="white"
+              >
+                <path d="M0 0h24v24H0V0z" fill="none" />
+                <path d="M16 9v10H8V9h8m-1.5-6h-5l-1 1H5v2h14V4h-3.5l-1-1zM18 7H6v12c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7z" />
+              </svg>
+            </div>
+          )}
           <label>
-            <input type="file" style={{"display":"none"}} accept=".jpg,.jpeg,.png" onChange={photoPreviewHandler} />
+            <input
+              type="file"
+              style={{ display: "none" }}
+              accept=".jpg,.jpeg,.png"
+              onChange={photoPreviewHandler}
+            />
             <div className={style.imagePreview}>
             {!imageUrl ? (
               <AddImageButton/>
@@ -193,9 +208,20 @@ export default function SingleAnswer(props) {
         <div className={style.errorsContainer}>
           {isTooBig && <p>Obraz nie powinien przekraczać 600kb.</p>}
           {isWrongExtention && <p>Plik posiada niewłaściwe rozszerzenie.</p>}
-          {props.uniqueClass==="question"?(wasInputTouched && !isTooBig && !isWrongExtention && emptyTextInput)&&<p>Prosze uzupełnić odpowiedź.</p>
-          :(wasInputTouched && !imageUrl && emptyTextInput && !isTooBig && !isWrongExtention)&&<p>Prosze uzupełnić odpowiedź.</p>}
-          {props.uniqueClass==="question" ? !emptyTextInput && imageUrl && <p className={style.imageNameText}>{imageName}</p> : imageUrl && <p className={style.imageNameText}>{imageName}</p>}
+          {props.uniqueClass === "question"
+            ? wasInputTouched &&
+              !isTooBig &&
+              !isWrongExtention &&
+              emptyTextInput && <p>Prosze uzupełnić odpowiedź.</p>
+            : wasInputTouched &&
+              !imageUrl &&
+              emptyTextInput &&
+              !isTooBig &&
+              !isWrongExtention && <p>Prosze uzupełnić odpowiedź.</p>}
+          {props.uniqueClass === "question"
+            ? !emptyTextInput &&
+              imageUrl && <p className={style.imageNameText}>{imageName}</p>
+            : imageUrl && <p className={style.imageNameText}>{imageName}</p>}
         </div>
       </div>
     </div>
