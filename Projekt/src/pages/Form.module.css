@@ -6,13 +6,11 @@
 .image{
     width: 100vw;
     height: calc(100vh - 3rem);
-    /* background-image: url('../image/banner.jpg'); */
     background-size: cover;
     background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: #ccc; */
     position: relative;
     overflow: hidden;
     z-index: 1;

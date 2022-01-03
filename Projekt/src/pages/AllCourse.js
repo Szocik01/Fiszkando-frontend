@@ -18,16 +18,16 @@ const AllCourse = () =>{
         try{
             const res = await fetch('http://localhost:8080/get-all-courses');
             const parseJSON = await res.json();
-            const loadedMeals = [];
+            const loadedCurse = [];
             for(const key in parseJSON){
-                loadedMeals.push({
+                loadedCurse.push({
                     id: key,
                     name: parseJSON[key].name,
                     _id: parseJSON[key]._id,
                     school: parseJSON[key].school.name
                 });
             }
-            setCourse(loadedMeals);
+            setCourse(loadedCurse);
         }catch(error){
             console.log(error);
         }

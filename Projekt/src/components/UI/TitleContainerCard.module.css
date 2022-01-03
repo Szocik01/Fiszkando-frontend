@@ -33,10 +33,6 @@
     background-size: cover;
     background-position: center;
 }
-.main:hover{
-    transform: scale(1.02);
-    background-color: rgb(106, 197, 250);
-}
 @media (min-width: 768px) {
     .title{
         justify-content: flex-start;
@@ -45,6 +41,6 @@
         width: 50%;
     }
     .title > p{
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
   }
