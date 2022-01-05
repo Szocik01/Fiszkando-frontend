@@ -83,26 +83,13 @@ li {
 }
 
 .deleteBtn:active{
-  animation: btnClick 0.5s ease-in-out;
+  animation: btnClick 0.5s ease-in-out forwards;
 }
 
 .price.question
 {
   margin-top: 0;
   font-size: 1.1rem;
-}
-  
-@keyframes buttonClick
-{
-    0% {
-        transform: scale(0.99);
-      }
-      50% {
-        transform: scale(1.01);
-      }
-      100% {
-        transform: scale(1);
-      }
 }
 
 @media screen and (min-width:376px)
@@ -117,4 +104,17 @@ li {
     font-size: 1.5rem;
   }
   
+}
+
+@keyframes buttonClick
+{
+    0% {
+        transform: scale(0.99);
+      }
+      50% {
+        transform: scale(1.01);
+      }
+      100% {
+        transform: scale(1);
+      }
 }

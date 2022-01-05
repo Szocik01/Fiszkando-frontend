@@ -14,6 +14,7 @@ import { Fragment } from "react";
 
 const Form = () => {
   const history = useNavigate();
+  
   const [inputsInfo, setinputsInfo] = useState({
     mailL: "",
     passwordL: "",
@@ -215,11 +216,13 @@ const Form = () => {
           const dateTokenRemember = new Date(token.auth.rememberMeToken.expire);
           document.cookie = `rememberToken=${token.auth.rememberMeToken.token}; expires=${dateTokenRemember}`;
         }
+        setLoadingSpiner(false);
+        history(`/`,{replace: true})
       }
     } catch (error) {
       console.log(error);
+      setLoadingSpiner(false);
     }
-    setLoadingSpiner(false);
   };
   const registerSubmitHandler = async (event) => {
     event.preventDefault();

@@ -7,9 +7,9 @@ import Contact from "./pages/Contact";
 import FormRetrievePassword from "./pages/FormRetrievePassword";
 import FormResetPassword from "./pages/FormResetPassword";
 import Notification from "./pages/Notification";
-import React, { useEffect } from "react";
+import React, { Fragment, useCallback, useEffect } from "react";
 import { Authoindenty } from "./storage/redux-index";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import TestStrona from "./pages/TestStrona";
 import AllCourse from "./pages/AllCourse";
 import SingleCoustions from "./pages/SingleCoustions";
@@ -21,7 +21,13 @@ function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
-  const getCookies = () => {
+  const logindata = useSelector((state) => {
+    return state.autoIndentification;
+  });
+  const uid = logindata.uid;
+  const token = logindata.token;
+
+  const getCookies = useCallback (() => {
     const Array_of_Cookies = document.cookie.split(";");
     const Final_Cookie_Array = [];
     const Saved_Cookie_Object = {};
@@ -45,9 +51,9 @@ function App() {
       }
     }
     return Saved_Cookie_Object;
-  };
+  },[]);
 
-  const checkInitialCookies = async (authCookies) => {
+  const checkInitialCookies = useCallback (async (authCookies) => {
     try {
       const res = await fetch("http://localhost:8080/login-checker", {
         method: "POST",
@@ -78,12 +84,12 @@ function App() {
       setLoading(false);
       console.log(err);
     }
-  };
+  },[dispatch,Authoindenty]);
 
   useEffect(() => {
     const authCookies = getCookies();
     checkInitialCookies(authCookies);
-  });
+  },[getCookies,checkInitialCookies]);
 
   return (
     <div>
@@ -96,13 +102,15 @@ function App() {
       {!loading && (
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/singleCoustions" element={<SingleCoustions />} />
-          <Route path="/questions" element={<AllCourse />} />
-          <Route path="/TestStrona" element={<TestStrona />} />
+          {uid && token && <Fragment>
+            <Route path="/singleCoustions" element={<SingleCoustions />} />
+            <Route path="/questions" element={<AllCourse />} />
+            <Route path="/TestStrona" element={<TestStrona />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/settings/*" element={<Settings />} />
+          </Fragment>}
           <Route path="/retrieve_password" element={<FormRetrievePassword />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/settings/*" element={<Settings />} />
-          <Route path="/authentication" element={<Form />} />
+          {!(uid && token) && <Route path="/authentication" element={<Form />} />}
           <Route
             path="/authorize/reset/:uid/:token"
             element={<FormResetPassword />}

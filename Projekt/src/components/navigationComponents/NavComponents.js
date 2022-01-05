@@ -2,11 +2,19 @@ import { Fragment, useEffect, useState,useRef } from "react";
 import style from "./NavComponents.module.css";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
+import { useSelector } from "react-redux";
+
 
 export default function NavComponents() {
   const [isUnfolded, setIsUnfolded] = useState(false);
 
   const backdropRef=useRef();
+
+  const logindata = useSelector((state) => {
+    return state.autoIndentification;
+  });
+  const uid = logindata.uid;
+  const token = logindata.token;
 
   function unfoldingHandler() {
     setIsUnfolded((prevState) => {
@@ -45,7 +53,7 @@ export default function NavComponents() {
   return (
     <Fragment>
       <Navbar onUnfolding={unfoldingHandler} />
-      <Sidebar onUnfolding={unfoldingHandler} isUnfolded={isUnfolded} />
+      {uid && token && <Sidebar onUnfolding={unfoldingHandler} isUnfolded={isUnfolded} />}
         <div
           ref={backdropRef}
           className={style.backdrop}

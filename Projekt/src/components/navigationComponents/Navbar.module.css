@@ -45,7 +45,7 @@
     align-items: center;
     border-radius: 6px;
     box-shadow: var(--button-shadow) 0px 0px 6px 2px;
-    transition: 0.3s all ease-out;
+    cursor: pointer;
 }
 
 .hamburgerContainer
@@ -80,9 +80,9 @@
     transform: translateY(1.1rem);
 }
 
-.authButton:hover
+.authButton:active
 {
-    transform: scale(1.1);
+    animation: buttonClick ease-out 0.5s forwards; ;
 }
 
 
@@ -118,4 +118,17 @@
     {
         display: none;
     }
+}
+
+@keyframes buttonClick
+{
+    0% {
+        transform: scale(0.97);
+      }
+      50% {
+        transform: scale(1.03);
+      }
+      100% {
+        transform: scale(1);
+      }
 }
