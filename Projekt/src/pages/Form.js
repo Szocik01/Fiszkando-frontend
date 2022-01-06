@@ -223,6 +223,7 @@ const Form = () => {
       console.log(error);
       setLoadingSpiner(false);
     }
+    setLoadingSpiner(false);
   };
   const registerSubmitHandler = async (event) => {
     event.preventDefault();
