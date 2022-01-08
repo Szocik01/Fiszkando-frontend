@@ -3,16 +3,23 @@ import styles from "./styles/PermissionItem.module.css";
 import { useRef } from "react";
 
 const PermissionItem = (props) => {
-  const auth = props.auth;
   const write = useRef();
   const submitHandler = () => {
     const finalObj = {
       courseId: props._id,
-      uid: auth.uid,
+      uid: props.user._id,
       write: write.current.checked,
     };
-    console.log(finalObj);
     props.submitHandler(finalObj);
+  };
+
+  const updateHandler = () => {
+    const finalObj = {
+      courseId: props._id,
+      uid: props.user._id,
+      write: write.current.checked,
+    };
+    props.updateHandler(finalObj);
   };
   return (
     <li className={`${styles.container}`}>
@@ -23,6 +30,12 @@ const PermissionItem = (props) => {
             Dodaj
           </button>
         )}
+
+        {props.updateBtn && (
+          <button className={styles.modifyBtn} onClick={updateHandler}>
+            Aktualizuj
+          </button>
+        )}
         {props.deleteBtn && (
           <button className={styles.deleteBtn} onClick={submitHandler}>
             Usuń
@@ -31,7 +44,8 @@ const PermissionItem = (props) => {
       </div>
       <form className={styles.form}>
         <label>
-          <input type="checkbox" ref={write} /> Modyfikacja
+          <input type="checkbox" ref={write} defaultChecked={props.isChecked} />{" "}
+          Modyfikacja
         </label>
       </form>
     </li>

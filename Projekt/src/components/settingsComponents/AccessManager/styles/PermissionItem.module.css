@@ -13,6 +13,16 @@
   font-weight: bold;
 }
 
+.info-h1 {
+  margin: auto auto;
+  color: var(--def-color);
+}
+
+.h1 {
+  margin: 1rem;
+  color: var(--def-color);
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;

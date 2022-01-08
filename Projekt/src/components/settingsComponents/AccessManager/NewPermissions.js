@@ -1,10 +1,13 @@
 import styles from "./styles/NewPermissions.module.css";
 
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { informationBoxManagerActions } from "../../../storage/information-box";
 import PermissionItem from "./PermissionItem";
 
 const NewPermissions = (props) => {
   const [coursesList, setCoursesList] = useState([]);
+  const dispatch = useDispatch();
   const auth = props.auth;
 
   const filterHandler = () => {
@@ -32,9 +35,29 @@ const NewPermissions = (props) => {
         },
       });
       const parsRes = await res.json();
-      console.log(parsRes);
+      dispatch(informationBoxManagerActions.toggleVisibility());
+      if (res.ok) {
+        dispatch(
+          informationBoxManagerActions.setBox({
+            message: "Zmieniono uprawnienia.",
+          })
+        );
+        props.reloadHandler(parsRes.permissions);
+      } else {
+        dispatch(
+          informationBoxManagerActions.setBox({
+            message: "Nie udało sie zmienić uprawnień.",
+            isError: true,
+          })
+        );
+      }
     } catch (err) {
-      console.log(err);
+      dispatch(
+        informationBoxManagerActions.setBox({
+          message: "Nie udało sie zmienić uprawnień.",
+          isError: true,
+        })
+      );
     }
   };
 
@@ -48,22 +71,27 @@ const NewPermissions = (props) => {
       {!props.isSelected && (
         <h1 className={styles["info-h1"]}>Nie wybrano użytkownika.</h1>
       )}
-      {props.isSelected && (
+      {props.isSelected && !props.checkedUser.isHeadAdmin && (
         <>
           <h1 className={styles.h1}>Nadaj uprawnienia</h1>
           <ul>
             {coursesList.map((c) => (
               <PermissionItem
+                user={props.checkedUser}
                 name={c.name}
                 addBtn={true}
                 submitHandler={grantAccessHandler}
                 _id={c._id}
-                auth={auth}
                 key={c._id}
               />
             ))}
           </ul>
         </>
+      )}
+      {props.isSelected && props.checkedUser.isHeadAdmin && (
+        <h1 className={styles["info-h1"]}>
+          Użytkownik jest super administratorem.
+        </h1>
       )}
     </div>
   );

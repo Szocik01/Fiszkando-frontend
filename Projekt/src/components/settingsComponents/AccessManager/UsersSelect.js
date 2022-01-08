@@ -16,7 +16,11 @@ const UsersSelect = (props) => {
         ref={select}
       >
         {props.users.map((u) => (
-          <option value={u._id} key={u._id}>
+          <option
+            value={u._id}
+            key={u._id}
+            className={`${u.isHeadAdmin && styles["select--super-admin"]}`}
+          >
             {u.username}
           </option>
         ))}
