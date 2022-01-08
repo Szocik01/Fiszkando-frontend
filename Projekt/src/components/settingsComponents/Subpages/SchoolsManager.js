@@ -6,13 +6,19 @@ import Error from "../../UI/Error";
 import LoadingSpinner from "../../UI/LoadingSpinner";
 
 import styles from "./SchoolsManager.module.css";
+import ModifySchool from "../SchoolsManager/ModifySchool";
 
 const SchoolsManager = () => {
   const [initialSchools, setInitialSchools] = useState([]);
   const [schoolsList, setSchoolsList] = useState([]);
+  const [modifyData, setModifyData] = useState({
+    name: "",
+    _id: "",
+  });
   const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [leftMove, setLeftMove] = useState(false);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [showModify, setShowModify] = useState(false);
 
   const initialLoadHandler = async () => {
     const SCHOOLS = [];
@@ -42,7 +48,25 @@ const SchoolsManager = () => {
     setSchoolsList(SCHOOLS);
   };
 
-  const toggleLeftMove = () => setLeftMove((p) => !p);
+  const filterHandler = (id) => {
+    const arr = initialSchools.filter((c) => c._id.toString() !== id);
+    setInitialSchools(arr);
+    setSchoolsList(arr);
+  };
+
+  const modifyNameHandler = (school) => {
+    const tmp = initialSchools;
+    const ind = tmp.findIndex(
+      (s) => s._id.toString() === school._id.toString()
+    );
+    tmp[ind].name = school.name;
+    setInitialSchools(tmp);
+    setSchoolsList(tmp);
+  };
+
+  const toggleLeftMove = () => setShowAddForm((p) => !p);
+  const toggleModifyView = () => setShowModify((p) => !p);
+  const passModifyData = (data) => setModifyData(data);
 
   useEffect(() => {
     initialLoadHandler();
@@ -55,15 +79,25 @@ const SchoolsManager = () => {
         <MainPage
           schoolsList={schoolsList}
           initialSchoolsList={initialSchools}
-          isLeftMoved={leftMove}
+          showModifyHandler={toggleModifyView}
           leftMoveHandler={toggleLeftMove}
+          passModifyData={passModifyData}
+          filterHandler={filterHandler}
         />
       )}
       {!isError && !loading && (
         <AddSchool
           updateHandler={updateHandler}
-          isMoved={leftMove}
+          isMoved={showAddForm}
           moveHandler={toggleLeftMove}
+        />
+      )}
+      {!isError && !loading && (
+        <ModifySchool
+          updateHandler={modifyNameHandler}
+          isMoved={showModify}
+          moveHandler={toggleModifyView}
+          data={modifyData}
         />
       )}
     </div>

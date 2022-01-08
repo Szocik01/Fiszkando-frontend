@@ -48,7 +48,7 @@ export default function SidebarLinks() {
         className={(navData) => {
           return `${style.link} ${navData.isActive ? style.active : ""}`;
         }}
-        to="/settings/change_permissions"
+        to="/settings/manage_access"
       >
         Zmień Uprawnienia
       </NavLink>

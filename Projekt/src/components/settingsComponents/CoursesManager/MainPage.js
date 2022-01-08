@@ -5,11 +5,7 @@ import NotFound from "../../UI/NotFound";
 
 const MainPage = (props) => {
   return (
-    <div
-      className={`${styles.container} ${props.isMoved && styles.move} ${
-        props.isMovedToLeft && styles.moveToLeft
-      }`}
-    >
+    <div className={`${styles.container}`}>
       <SearchBar
         filter={props.filter}
         courses={props.courses}

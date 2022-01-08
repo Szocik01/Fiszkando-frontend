@@ -27,6 +27,10 @@
   appearance: none;
 }
 
+.input:focus {
+  outline: none;
+}
+
 .label {
   font-size: 1rem;
   align-self: flex-start;

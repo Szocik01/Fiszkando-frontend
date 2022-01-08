@@ -4,7 +4,7 @@
   width: calc(100% - 1rem);
   position: absolute;
   top: 5rem;
-  z-index: 1000;
+  z-index: 1001;
   margin: 0 0 2rem 0;
 }
 .main {

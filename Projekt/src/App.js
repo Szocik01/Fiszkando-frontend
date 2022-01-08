@@ -9,7 +9,7 @@ import FormResetPassword from "./pages/FormResetPassword";
 import Notification from "./pages/Notification";
 import React, { Fragment, useCallback, useEffect } from "react";
 import { Authoindenty } from "./storage/redux-index";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TestStrona from "./pages/TestStrona";
 import AllCourse from "./pages/AllCourse";
 import SingleCoustions from "./pages/SingleCoustions";
@@ -27,7 +27,7 @@ function App() {
   const uid = logindata.uid;
   const token = logindata.token;
 
-  const getCookies = useCallback (() => {
+  const getCookies = useCallback(() => {
     const Array_of_Cookies = document.cookie.split(";");
     const Final_Cookie_Array = [];
     const Saved_Cookie_Object = {};
@@ -51,45 +51,48 @@ function App() {
       }
     }
     return Saved_Cookie_Object;
-  },[]);
+  }, []);
 
-  const checkInitialCookies = useCallback (async (authCookies) => {
-    try {
-      const res = await fetch("http://localhost:8080/login-checker", {
-        method: "POST",
-        body: JSON.stringify({
-          uid: authCookies.uid,
-          token: authCookies.token,
-          rememberToken: authCookies.rememberToken,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const parsedRes = await res.json();
-      if (res.status === 200) {
-        dispatch(
-          Authoindenty.IndetificationShow({
-            rememberToken: authCookies.rememberToken,
+  const checkInitialCookies = useCallback(
+    async (authCookies) => {
+      try {
+        const res = await fetch("http://localhost:8080/login-checker", {
+          method: "POST",
+          body: JSON.stringify({
             uid: authCookies.uid,
-            token: parsedRes.newToken
-              ? parsedRes.newToken.token
-              : authCookies.token,
-            permissions: parsedRes.permissions,
-          })
-        );
+            token: authCookies.token,
+            rememberToken: authCookies.rememberToken,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const parsedRes = await res.json();
+        if (res.status === 200) {
+          dispatch(
+            Authoindenty.IndetificationShow({
+              rememberToken: authCookies.rememberToken,
+              uid: authCookies.uid,
+              token: parsedRes.newToken
+                ? parsedRes.newToken.token
+                : authCookies.token,
+              permissions: parsedRes.permissions,
+            })
+          );
+        }
+        setLoading(false);
+      } catch (err) {
+        setLoading(false);
+        console.log(err);
       }
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-      console.log(err);
-    }
-  },[dispatch,Authoindenty]);
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     const authCookies = getCookies();
     checkInitialCookies(authCookies);
-  },[getCookies,checkInitialCookies]);
+  }, [getCookies, checkInitialCookies]);
 
   return (
     <div>
@@ -102,15 +105,19 @@ function App() {
       {!loading && (
         <Routes>
           <Route path="/" element={<Main />} />
-          {uid && token && <Fragment>
-            <Route path="/singleCoustions" element={<SingleCoustions />} />
-            <Route path="/questions" element={<AllCourse />} />
-            <Route path="/TestStrona" element={<TestStrona />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/settings/*" element={<Settings />} />
-          </Fragment>}
+          {uid && token && (
+            <Fragment>
+              <Route path="/singleCoustions" element={<SingleCoustions />} />
+              <Route path="/questions" element={<AllCourse />} />
+              <Route path="/TestStrona" element={<TestStrona />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/settings/*" element={<Settings />} />
+            </Fragment>
+          )}
           <Route path="/retrieve_password" element={<FormRetrievePassword />} />
-          {!(uid && token) && <Route path="/authentication" element={<Form />} />}
+          {!(uid && token) && (
+            <Route path="/authentication" element={<Form />} />
+          )}
           <Route
             path="/authorize/reset/:uid/:token"
             element={<FormResetPassword />}

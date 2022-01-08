@@ -9,6 +9,7 @@ import Input from "./Input";
 const ModifyCourse = (props) => {
   const [loading, setLoading] = useState(false);
   const select = useRef();
+  const background = useRef();
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.autoIndentification);
   const finalData = {};
@@ -68,8 +69,18 @@ const ModifyCourse = (props) => {
     }
   };
 
+  const closeHandler = (e) => {
+    if (e.target === background.current) {
+      props.moveHandler();
+    }
+  };
+
   return (
-    <div className={`${styles.container} ${props.isMoved && styles.move}`}>
+    <div
+      className={`${styles.container} ${props.isMoved && styles.move}`}
+      ref={background}
+      onClick={closeHandler}
+    >
       <button onClick={props.moveHandler} className={styles["return-btn"]}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -113,8 +124,14 @@ const ModifyCourse = (props) => {
         >
           Cena
         </Input>
-        {loading && <LoadingSpinner />}
-        {!loading && <button className={styles["confirm-btn"]}>ZAPISZ</button>}
+        <div
+          className={`${styles["btn-container"]} ${loading && styles.scale}`}
+        >
+          {loading && <LoadingSpinner />}
+          {!loading && (
+            <button className={styles["confirm-btn"]}>ZAPISZ</button>
+          )}
+        </div>
       </form>
     </div>
   );

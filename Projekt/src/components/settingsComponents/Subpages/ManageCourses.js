@@ -37,7 +37,6 @@ const ManageCourses = (props) => {
       parsedCourses.forEach((c) => {
         COURSES.push(c);
       });
-      console.log(COURSES);
       setCoursesList(COURSES);
       setInitialCourses(COURSES);
       setIsSpinner(false);
@@ -105,12 +104,10 @@ const ManageCourses = (props) => {
       {isSpinner && <LoadingSpinner />}
       {!isSpinner && isError && <Error />}
       {!isSpinner && !isError && (
-        <div className={styles.container}>
+        <div className={`${styles.container}`}>
           <MainPage
-            isMoved={movedMainPage}
             moveHandler={movePage}
             leftMoveHandler={moveToLeft}
-            isMovedToLeft={moveMainPageToLeft}
             saveHandler={saveHandler}
             courses={coursesList}
             filter={saveFilter}

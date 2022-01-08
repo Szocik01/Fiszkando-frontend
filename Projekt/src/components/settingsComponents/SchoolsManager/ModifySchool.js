@@ -1,4 +1,4 @@
-import styles from "./styles/AddSchool.module.css";
+import styles from "./styles/ModifySchool.module.css";
 
 import Input from "../CoursesManager/Input";
 import LoadingSpinner from "../../UI/LoadingSpinner";
@@ -7,20 +7,19 @@ import { informationBoxManagerActions } from "../../../storage/information-box";
 import { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-const AddSchool = (props) => {
+const ModifySchool = (props) => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({});
-  const [reset, setReset] = useState(false);
   const background = useRef();
   const dispatch = useDispatch();
   const auth = useSelector((s) => s.autoIndentification);
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    data.schoolId = props.data._id;
     setLoading(true);
-    setReset(false);
     try {
-      const res = await fetch("http://localhost:8080/add-school", {
+      const res = await fetch("http://localhost:8080/update-school-name", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -33,19 +32,18 @@ const AddSchool = (props) => {
       const parsedRes = await res.json();
 
       dispatch(informationBoxManagerActions.toggleVisibility());
-      if (res.status === 201) {
+      if (res.ok) {
         dispatch(
           informationBoxManagerActions.setBox({
-            message: "Dodano uczelnię.",
+            message: "Zmieniono nazwę uczelni.",
           })
         );
-        setReset(true);
         props.updateHandler(parsedRes.school);
         props.moveHandler();
       } else {
         dispatch(
           informationBoxManagerActions.setBox({
-            message: "Nie udało sie dodać uczelni.",
+            message: "Nie udało sie zmienić nazwy.",
             isError: true,
           })
         );
@@ -74,8 +72,8 @@ const AddSchool = (props) => {
   return (
     <div
       className={`${styles.container} ${props.isMoved && styles.moveIn}`}
-      onClick={closeHandler}
       ref={background}
+      onClick={closeHandler}
     >
       <button onClick={props.moveHandler} className={styles["return-btn"]}>
         Powrót
@@ -91,19 +89,21 @@ const AddSchool = (props) => {
         </svg>
       </button>
       <form className={styles["form-container"]} onSubmit={submitHandler}>
-        <h1 className={styles.h1}>Dodaj uczelnię</h1>
-        <Input id="schoolName" save={saveHandler} value={reset && ""}>
+        <h1 className={styles.h1}>Edytuj nazwe</h1>
+        <Input id="name" save={saveHandler} value={props.data.name}>
           Nazwa uczelni
         </Input>
         <div
           className={`${styles["btn-container"]} ${loading && styles.scale}`}
         >
           {loading && <LoadingSpinner />}
-          {!loading && <button className={styles["confirm-btn"]}>DODAJ</button>}
+          {!loading && (
+            <button className={styles["confirm-btn"]}>ZAPISZ</button>
+          )}
         </div>
       </form>
     </div>
   );
 };
 
-export default AddSchool;
+export default ModifySchool;

@@ -5,13 +5,18 @@ import SearchBar from "../CoursesManager/SearchBar";
 
 const MainPage = (props) => {
   return (
-    <div
-      className={`${styles.container} ${props.isLeftMoved && styles.leftMove}`}
-    >
+    <div className={`${styles.container}`}>
       <SearchBar />
       <ul className={styles["list-container"]}>
         {props.schoolsList.map((s) => (
-          <ListItem name={s.name} id={s._id} key={s._id} />
+          <ListItem
+            name={s.name}
+            id={s._id}
+            key={s._id}
+            moveHandler={props.showModifyHandler}
+            passModifyData={props.passModifyData}
+            filterHandler={props.filterHandler}
+          />
         ))}
       </ul>
       <button className={styles.addBtn} onClick={props.leftMoveHandler}>

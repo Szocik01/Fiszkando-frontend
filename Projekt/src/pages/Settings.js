@@ -12,6 +12,7 @@ import ModifyQuestion from "../components/settingsComponents/Subpages/ModifyQues
 import InformationBox from "../components/UI/InformationBox";
 import Confirmation from "../components/UI/Confirmation";
 import SchoolsManager from "../components/settingsComponents/Subpages/SchoolsManager";
+import AccessManager from "../components/settingsComponents/Subpages/AccessManager";
 
 export default function Settings() {
   const [isMenuActive, setIsMenuActive] = useState(false);
@@ -49,9 +50,10 @@ export default function Settings() {
           <Routes>
             <Route path="change_password" element={<PasswordChange />} />
             <Route path="add_question" element={<AddQuestion />} />
-            <Route path="modify_question" element={<ModifyQuestion/>}/>
-            <Route path="manage_courses" element={<ManageCourses />}></Route>
-            <Route path="manage_schools" element={<SchoolsManager />}></Route>
+            <Route path="modify_question" element={<ModifyQuestion />} />
+            <Route path="manage_courses" element={<ManageCourses />} />
+            <Route path="manage_schools" element={<SchoolsManager />} />
+            <Route path="manage_access" element={<AccessManager />} />
           </Routes>
         </ContentContainer>
       </div>

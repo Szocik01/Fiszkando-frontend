@@ -11,11 +11,10 @@ const AddCourse = (props) => {
   const [loading, setLoading] = useState(false);
   const [reset, setReset] = useState(false);
   const select = useRef();
+  const background = useRef();
   const auth = useSelector((state) => state.autoIndentification);
   const finalData = {};
   const dispatch = useDispatch();
-
-  console.log(auth);
 
   const showValue = (val) => {
     for (const i in val) {
@@ -75,8 +74,18 @@ const AddCourse = (props) => {
     }
   };
 
+  const closeHandler = (e) => {
+    if (e.target === background.current) {
+      props.moveHandler();
+    }
+  };
+
   return (
-    <div className={`${styles.container} ${props.isMoved && styles.move}`}>
+    <div
+      className={`${styles.container} ${props.isMoved && styles.move}`}
+      ref={background}
+      onClick={closeHandler}
+    >
       <button onClick={props.moveHandler} className={styles["return-btn"]}>
         Powrót
         <svg
