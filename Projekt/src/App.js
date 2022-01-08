@@ -14,6 +14,7 @@ import TestStrona from "./pages/TestStrona";
 import AllCourse from "./pages/AllCourse";
 import SingleCoustions from "./pages/SingleCoustions";
 import LoadingSpinner from "./components/UI/LoadingSpinner";
+import PageNotFound from "./pages/PageNotFound";
 import { useState } from "react";
 import styles from "./App.module.css";
 
@@ -123,6 +124,7 @@ function App() {
             element={<FormResetPassword />}
           />
           <Route path="/notification" element={<Notification />} />
+          <Route path="*" element={<PageNotFound/>}/>
         </Routes>
       )}
     </div>

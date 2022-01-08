@@ -1,7 +1,15 @@
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import style from "./SidebarLinks.module.css";
+import { Fragment } from "react";
 
 export default function SidebarLinks() {
+  const logindata = useSelector((state) => {
+    return state.autoIndentification;
+  });
+  const isHeadAdmin = logindata.isHeadAdmin;
+  const permissionsArray = logindata.permissions;
+
   return (
     <div className={style.linksContainer}>
       <NavLink
