@@ -35,17 +35,22 @@ const SingleCoustions = () =>{
         }
         // console.log(parsedResponse);
         const loadedQuestions = [];
+
+
         for(const key in parsedResponse){
             loadedQuestions.push({
                 id: key,
-                question: parsedResponse[key].question.value
+                question: parsedResponse[key].question
             });
         }
+        console.log(parsedResponse);
         setTable(loadedQuestions);
-        console.log(loadedQuestions[0].question)
+        // console.log(loadedQuestions.question)
         // const random = Math.floor(Math.random() * parsedResponse.length);
         
     },[auth.uid, auth.token, auth.remeberMe, courseId]);
+
+
 
     useEffect(()=>{
         sendQuestions();
