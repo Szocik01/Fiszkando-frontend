@@ -7,7 +7,7 @@ const ContainerCard = (props) => {
         <p>{props.title}</p>
       </div>
       <div className={styles.image}>
-        {props.foto === "true" && <img src={props.image} alt="foto" />}
+        {props.foto && <img src={props.image} alt="foto" />}
       </div>
     </div>
   );
