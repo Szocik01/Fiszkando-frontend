@@ -41,12 +41,25 @@ const AuthIdentificationInfo = createSlice({
   },
 });
 
+const AuthoCurseId = createSlice({
+  name: 'autoCurseId',
+  initialState:{
+    id: ""
+  },
+  reducers:{
+    IndetificationCurseId(state, action){
+      state.id = action.payload.id
+    }
+  }
+});
+
 const store = configureStore({
   reducer: {
     sidebarPosition: sidebarPositionSlice.reducer,
     autoIndentification: AuthIdentificationInfo.reducer,
     informationBoxManager: informationBoxManager.reducer,
     confirmation: confirmation.reducer,
+    autoCurseId: AuthoCurseId.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -57,3 +70,4 @@ const store = configureStore({
 export default store;
 export const positionActions = sidebarPositionSlice.actions;
 export const Authoindenty = AuthIdentificationInfo.actions;
+export const AuthCurseId = AuthoCurseId.actions;

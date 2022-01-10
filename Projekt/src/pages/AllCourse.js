@@ -7,13 +7,11 @@ import {positionActions} from "../storage/redux-index";
 
 const AllCourse = () =>{
     const [course, setCourse] = useState([]);
-
     const dispatch=useDispatch();
     // ten useEffect pod spodem jest od Wiktora żeby sidebar dobrze działał. Najlepiej nie ruszać XD
     useEffect(() => {
         dispatch(positionActions.pagePositionChange(0));
       }, [dispatch]);
-
     const sendQuestion = useCallback(async () =>{
         try{
             const res = await fetch('http://localhost:8080/get-all-courses');
@@ -37,6 +35,7 @@ const AllCourse = () =>{
         sendQuestion();
     },[sendQuestion]);
 
+
     const courseList = course.map((course) => (
         <CourseCard
             key={course._id}
@@ -46,7 +45,6 @@ const AllCourse = () =>{
             id={course._id}
         />
     ));
-
     return (
         <div className={styles.container}>
             {courseList}
