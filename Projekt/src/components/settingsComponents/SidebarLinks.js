@@ -81,6 +81,14 @@ export default function SidebarLinks() {
           Zmień Uprawnienia
         </NavLink>
       </Fragment>}
+      <NavLink
+        className={(navData) => {
+          return `${style.link} ${navData.isActive ? style.active : ""}`;
+        }}
+        to="/settings/post_box"
+      >
+        Poczta
+      </NavLink>
     </div>
   );
 }

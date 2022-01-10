@@ -13,6 +13,7 @@ import InformationBox from "../components/UI/InformationBox";
 import Confirmation from "../components/UI/Confirmation";
 import SchoolsManager from "../components/settingsComponents/Subpages/SchoolsManager";
 import AccessManager from "../components/settingsComponents/Subpages/AccessManager";
+import Messages from "../components/settingsComponents/Messages";
 
 export default function Settings() {
   const [isMenuActive, setIsMenuActive] = useState(false);
@@ -70,6 +71,7 @@ export default function Settings() {
         <ContentContainer onToggleMenu={toggleMenuHandler}>
           <Routes>
             <Route path="change_password" element={<PasswordChange />} />
+            <Route path="post_box" element={<Messages />} />
             {(isHeadAdmin || canModify) && <Fragment>
               <Route path="add_question" element={<AddQuestion />} />
               <Route path="modify_question" element={<ModifyQuestion />} />
