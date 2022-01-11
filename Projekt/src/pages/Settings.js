@@ -17,6 +17,8 @@ import Messages from "../components/settingsComponents/Messages";
 
 export default function Settings() {
   const [isMenuActive, setIsMenuActive] = useState(false);
+  const [canModify,setCanModify]=useState(false);
+
   const informationBox = useSelector((s) => s.informationBoxManager);
   const confirmationManager = useSelector((s) => s.confirmation);
 
@@ -27,6 +29,20 @@ export default function Settings() {
   });
   const isHeadAdmin = logindata.isHeadAdmin;
   const permissionsArray = logindata.permissions;
+
+  useEffect(()=>{
+    console.log("Wykonało się");
+    for(const element of permissionsArray)
+    {
+      console.log("ile razy się wykona nie na linkach");
+      if(element.modify.write)
+      {
+        setCanModify(true);
+        break;
+      }
+      setCanModify(false);
+    }
+  },[permissionsArray]);
 
   useEffect(() => {
     dispatch(positionActions.pagePositionChange(3 * 3.4));
@@ -51,17 +67,20 @@ export default function Settings() {
       <div className={style.siteContainer}>
         <SettingsNavigation
           isMenuActive={isMenuActive}
-          onToggleMenu={toggleMenuHandler}
-        />
+          onToggleMenu={toggleMenuHandler}/>
         <ContentContainer onToggleMenu={toggleMenuHandler}>
           <Routes>
             <Route path="change_password" element={<PasswordChange />} />
-            <Route path="add_question" element={<AddQuestion />} />
-            <Route path="modify_question" element={<ModifyQuestion />} />
-            <Route path="manage_courses" element={<ManageCourses />} />
-            <Route path="manage_schools" element={<SchoolsManager />} />
-            <Route path="manage_access" element={<AccessManager />} />
             <Route path="post_box" element={<Messages />} />
+            {(isHeadAdmin || canModify) && <Fragment>
+              <Route path="add_question" element={<AddQuestion />} />
+              <Route path="modify_question" element={<ModifyQuestion />} />
+            </Fragment>}
+            {isHeadAdmin && <Fragment>
+              <Route path="manage_courses" element={<ManageCourses />} />
+              <Route path="manage_schools" element={<SchoolsManager />} />
+              <Route path="manage_access" element={<AccessManager />} />
+            </Fragment>}
           </Routes>
         </ContentContainer>
       </div>

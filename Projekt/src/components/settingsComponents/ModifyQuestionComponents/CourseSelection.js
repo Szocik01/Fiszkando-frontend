@@ -3,10 +3,18 @@ import SearchBar from "../CoursesManager/SearchBar";
 import NotFound from "../../UI/NotFound";
 import ListItem from "./ListItem";
 import style from "./DataSelection.module.css";
+import { useSelector } from "react-redux";
 
 export default function CourseSelection(props) {
   const [currentCourses, setCurrentCourses] = useState([]);
   const [initialCourses, setInitialCourses] = useState([]);
+
+  const logindata = useSelector((state) => {
+    return state.autoIndentification;
+  });
+  const isHeadAdmin = logindata.isHeadAdmin;
+  const permissionsArray = logindata.permissions;
+  console.log(permissionsArray)
 
   const { setHttpError, setIsSpinnerActive } = props;
 
@@ -18,8 +26,27 @@ export default function CourseSelection(props) {
         throw new Error("Nieoczekiwany błąd serwera");
       }
       const data = await response.json();
-      setInitialCourses(data);
-      setCurrentCourses(data);
+      if(isHeadAdmin)
+      {
+        setInitialCourses(data);
+        setCurrentCourses(data);
+      }
+      else if(permissionsArray.length>0)
+      {
+        const filteredCourses=[];
+        for(const perm of permissionsArray)
+        {
+          for(const course of data)
+          {
+            if(perm.courseId===course._id && perm.modify.write)
+            {
+              filteredCourses.push(course);
+            }
+          }
+        }
+        setInitialCourses(filteredCourses);
+        setCurrentCourses(filteredCourses);
+      }
       setIsSpinnerActive(false);
     } catch (error) {
       setHttpError(error.message);

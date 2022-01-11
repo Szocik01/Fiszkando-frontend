@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import { useSelector } from "react-redux";
 import style from "./SelectInputs.module.css";
 
 export default function SelectInputs (props) {
@@ -7,7 +8,13 @@ export default function SelectInputs (props) {
     const [courseList, setCourseList] = useState([]);
     const {setHttpError, setIsSpinnerActive, university}=props;
 
-  const getUniversities = useCallback(async () => {
+    const logindata = useSelector((state) => {
+      return state.autoIndentification;
+    });
+    const isHeadAdmin = logindata.isHeadAdmin;
+    const permissionsArray = logindata.permissions;
+
+    const getUniversities = useCallback(async () => {
     setHttpError("");
     setIsSpinnerActive(true);
     try {
@@ -48,15 +55,42 @@ export default function SelectInputs (props) {
         throw new Error("Wystąpił błąd serwera. Proszę czekać.");
       }
       const data = await response.json();
-      setCourseList(
-        data.map((item) => {
-          return (
-            <option value={item._id} key={item._id}>
-              {item.name}
-            </option>
-          );
-        })
-      );
+      if(isHeadAdmin)
+      {
+        console.log(data)
+        setCourseList(
+          data.map((item) => {
+            return (
+              <option value={item._id} key={item._id}>
+                {item.name}
+              </option>
+            );
+          })
+        );
+      }
+      else if(permissionsArray.length>0)
+      {
+        const filteredCourses=[];
+        for(const perm of permissionsArray)
+        {
+          for(const course of data)
+          {
+            if(perm.courseId===course._id && perm.modify.write)
+            {
+              filteredCourses.push(course);
+            }
+          }
+        }
+        setCourseList(
+          filteredCourses.map((item) => {
+            return (
+              <option value={item._id} key={item._id}>
+                {item.name}
+              </option>
+            );
+          })
+        );
+      }
       setIsSpinnerActive(false);
     } catch (error) {
       setIsSpinnerActive(false);
