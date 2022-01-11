@@ -9,6 +9,10 @@
     transition: 0.2s ease-in-out;
     padding: 1rem;
 }
+.main_check{
+    transform: scale(1.02);
+    background-color: rgb(12, 142, 218);
+}
 .title{
     padding: 0.5rem;
     width: 100%;

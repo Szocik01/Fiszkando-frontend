@@ -1,17 +1,16 @@
 .container{
     width: 100%;
-    display: flex;
-    justify-content: center;
     margin-left: auto;
     flex-wrap: wrap;
     overflow: auto;
     gap: 1rem;
     padding: 0.3rem;
-    height: calc(100vh - 5rem);
+    /* height: calc(100vh - 5rem); */
 }
 .main{
     width: 100%;
     border: 1px solid #ccc;
+    margin: auto auto;
     border-radius: 10px;
     padding: 0.5rem;
     box-shadow: 0px 0px 18px -7px rgba(66, 68, 90, 1);
@@ -60,6 +59,9 @@
 }
 .svg:hover{
     fill: red;
+}
+.green{
+    background-color: green;
 }
 @media (min-width: 768px) {
     .main{

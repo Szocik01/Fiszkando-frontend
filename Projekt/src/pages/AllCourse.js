@@ -4,8 +4,10 @@ import zdjeice from '../image/banner.jpg'
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {positionActions} from "../storage/redux-index";
+import { useSelector } from "react-redux";
 
 const AllCourse = () =>{
+    const courseId = useSelector((state) => state.autoCurseId);
     const [course, setCourse] = useState([]);
     const dispatch=useDispatch();
     // ten useEffect pod spodem jest od Wiktora żeby sidebar dobrze działał. Najlepiej nie ruszać XD
@@ -31,6 +33,14 @@ const AllCourse = () =>{
         }
     },[]);
 
+    const remeberIdCurseHandler = () =>{
+        const now = new Date();
+        let time = now.getTime();
+        time += 3600 * 1000 * 24 * 365 * 1;
+        now.setTime(time);
+        document.cookie = `idCurse=${courseId.id}; expires=${now.toUTCString()}`;
+
+    }
     useEffect(()=>{
         sendQuestion();
     },[sendQuestion]);
@@ -48,6 +58,10 @@ const AllCourse = () =>{
     return (
         <div className={styles.container}>
             {courseList}
+            <div className={styles.remeberCurse}>
+                <input type="checkbox" onChange={remeberIdCurseHandler} />
+                <p>Zaznacz</p>
+            </div>
         </div>
     );
 };

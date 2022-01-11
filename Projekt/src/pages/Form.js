@@ -210,7 +210,7 @@ const Form = () => {
             permissions: token.permissions,
           })
         );
-        document.cookie = `uid=${token.auth.UID};`;
+        document.cookie = `uid=${token.auth.UID}; expires=${dateToken}`;
         document.cookie = `token=${token.auth.token.token}; expires=${dateToken}`;
         if (token.auth.rememberMeToken) {
           const dateTokenRemember = new Date(token.auth.rememberMeToken.expire);

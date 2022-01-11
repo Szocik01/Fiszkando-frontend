@@ -44,7 +44,8 @@ function App() {
         if (
           key_of_Cookies === "token" ||
           key_of_Cookies === "uid" ||
-          key_of_Cookies === "rememberToken"
+          key_of_Cookies === "rememberToken" ||
+          key_of_Cookies === "idCurse"
         ) {
           Saved_Cookie_Object[key_of_Cookies] = key[key_of_Cookies];
           // console.log(Saved_Cookie_Object[key_of_Cookies]);

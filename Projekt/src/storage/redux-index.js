@@ -33,6 +33,7 @@ const AuthIdentificationInfo = createSlice({
       state.uid = action.payload.uid;
       state.token = action.payload.token;
       state.rememberToken = action.payload.rememberToken;
+      state.idCurse = action.payload.idCurse;
       if (action.payload.permissions) {
         state.isHeadAdmin = action.payload.permissions.isHeadAdmin;
         state.permissions = action.payload.permissions.permissionArray;

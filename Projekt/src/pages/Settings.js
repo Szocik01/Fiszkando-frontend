@@ -13,6 +13,7 @@ import InformationBox from "../components/UI/InformationBox";
 import Confirmation from "../components/UI/Confirmation";
 import SchoolsManager from "../components/settingsComponents/Subpages/SchoolsManager";
 import AccessManager from "../components/settingsComponents/Subpages/AccessManager";
+import Messages from "../components/settingsComponents/Messages";
 
 export default function Settings() {
   const [isMenuActive, setIsMenuActive] = useState(false);
@@ -60,6 +61,7 @@ export default function Settings() {
             <Route path="manage_courses" element={<ManageCourses />} />
             <Route path="manage_schools" element={<SchoolsManager />} />
             <Route path="manage_access" element={<AccessManager />} />
+            <Route path="post_box" element={<Messages />} />
           </Routes>
         </ContentContainer>
       </div>
