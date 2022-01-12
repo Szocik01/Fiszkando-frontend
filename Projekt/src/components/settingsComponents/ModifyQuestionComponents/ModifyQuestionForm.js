@@ -8,7 +8,6 @@ export default function ModifyQuestionForm(props) {
   const [trueQuestionsAmount, setTrueQuestionsAmount] = useState(1);
   const [falseQuestionsAmount, setFlaseQuestionsAmount] = useState(1);
   const [hasDataBeenFetched,setHasDataBeenFetched]=useState(false);
-  const [mainQuestionType,setMainQuestionType]=useState("");
 
   const correctAnswers = useMemo(() => {return [];}, []);
   const wrongAnswers = useMemo(() => {return [];}, []);
@@ -56,7 +55,6 @@ export default function ModifyQuestionForm(props) {
       questionObject.push(data.question.question);
       correctAnswers.push(...data.question.correctAnswears);
       wrongAnswers.push(...data.question.falseAnswears);
-      setMainQuestionType(data.question.type);
       setTrueQuestionsAmount(correctAnswers.length);
       setFlaseQuestionsAmount(wrongAnswers.length);
       setIsSpinnerActive(false);
@@ -78,7 +76,6 @@ export default function ModifyQuestionForm(props) {
     props.setHttpError("");
     let isCorrectFlag=true;
     const formData= new FormData();
-    let mainType=mainQuestionType;
     formData.append("courseId",`${courseId}`);
     formData.append("_id",questionId)
     if(questionObject[0].value.trim()==="")
@@ -86,11 +83,6 @@ export default function ModifyQuestionForm(props) {
       props.setHttpError("Proszę dodać treść pytania.");
       isCorrectFlag=false;
       return;
-    }
-    if(questionObject[0].type==="mixed")
-    {
-      mainType="mixed";
-      console.log("question mixed")
     }
     formData.append("question",JSON.stringify(questionObject[0]));
     console.log(formData.getAll("question"));
@@ -101,11 +93,6 @@ export default function ModifyQuestionForm(props) {
           props.setHttpError("Prosze uzupełnić odpowiedzi.");
           isCorrectFlag=false;
       }
-      if(item.type==="mixed")
-      {
-        console.log("correct mixed");
-        mainType="mixed";
-      }
     });
     wrongAnswers.forEach((item)=>{
       console.log(item);
@@ -114,12 +101,7 @@ export default function ModifyQuestionForm(props) {
           props.setHttpError("Prosze uzupełnić odpowiedzi.");
           isCorrectFlag=false;
       }
-      if(item.type==="mixed")
-      {
-        console.log("wrong mixed");
-        mainType="mixed";
-      }
-    })
+    });
       formData.append("correctAnswears",JSON.stringify(correctAnswers));
       formData.append("falseAnswears",JSON.stringify(wrongAnswers));
       if(imagesArray.length>0)
@@ -128,6 +110,8 @@ export default function ModifyQuestionForm(props) {
           formData.append("images",item);
         });
       }
+      let mainType;
+      correctAnswers.length>1 ? mainType="multiple" : mainType="single";
       formData.append("questionType",mainType);
       for( const [key,value] of formData)
       {
