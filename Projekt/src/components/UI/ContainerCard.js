@@ -1,19 +1,31 @@
 import styles from "./ContainerCard.module.css";
-import { useState } from "react";
-
-
+import { useEffect, useState } from "react";
 
 const ContainerCard = (props) => {
   const [cheackConponet, setCheackComponet] = useState(false);
 
-  const cheackHandler = () =>{
-    setCheackComponet(prev=>!prev);
+  const cheackHandler = () => {
+    setCheackComponet((prev) => !prev);
     props.sellectHandler(props.index);
-  }
+  };
 
+  useEffect(() => {
+    setCheackComponet(false);
+  }, [props.reset]);
 
   return (
-    <div className={cheackConponet ? `${styles.main} ${styles.main_check}`:`${styles.main} ${props.className}`} onClick={cheackHandler}>
+    <div
+      className={`${
+        !props.isAnsweared && cheackConponet
+          ? `${styles.main} ${styles.main_check}`
+          : `${styles.main}`
+      } ${
+        props.isAnsweared && props.isCorrect
+          ? styles.green
+          : props.isAnsweared && !props.answerIsTrue && styles.red
+      }`}
+      onClick={cheackHandler}
+    >
       <div className={styles.title}>
         <p>{props.title}</p>
       </div>

@@ -1,7 +1,7 @@
 import styles from "./AccessManager.module.css";
 
 import UsersSelect from "../AccessManager/UsersSelect";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import CurrentPermissions from "../AccessManager/CurrentPermissions";
 import NewPermissions from "../AccessManager/NewPermissions";
@@ -13,10 +13,9 @@ const AccessManager = () => {
   const [courses, setCourses] = useState([]);
   const [checkedUser, setCheckedUser] = useState({});
   const [reload, setReload] = useState(false);
-  const [reloadAll, setReloadAll] = useState(false);
   const [error, setError] = useState(false);
 
-  const fetchUsersHandler = async () => {
+  const fetchUsersHandler = useCallback(async () => {
     setError(false);
     try {
       const usersRes = await fetch("http://localhost:8080/get-all-users", {
@@ -37,7 +36,7 @@ const AccessManager = () => {
       setError(true);
       console.log(err);
     }
-  };
+  }, [auth]);
 
   const fetchAllCourses = async () => {
     setError(false);
@@ -61,16 +60,19 @@ const AccessManager = () => {
     }
   };
 
-  const checkUserHandler = (uid) => {
-    if (!uid) {
-      return setCheckedUser({});
-    }
-    const id = users.findIndex((u) => u._id === uid);
-    setCheckedUser(users[id]);
-    setReload((p) => !p);
-  };
+  const checkUserHandler = useCallback(
+    (uid) => {
+      if (!uid) {
+        return setCheckedUser({});
+      }
+      const id = users.findIndex((u) => u._id === uid);
+      setCheckedUser(users[id]);
+      setReload((p) => !p);
+    },
+    [users]
+  );
 
-  const completeAction = async () => {
+  const completeAction = useCallback(async () => {
     try {
       await fetchUsersHandler();
       await fetchAllCourses();
@@ -78,7 +80,7 @@ const AccessManager = () => {
         checkUserHandler(checkedUser._id);
       }
     } catch (err) {}
-  };
+  }, [checkUserHandler, checkedUser._id, fetchUsersHandler]);
 
   const toggleReload = (data) => {
     const us = checkedUser;
@@ -89,7 +91,7 @@ const AccessManager = () => {
 
   useEffect(() => {
     completeAction();
-  }, [reloadAll]);
+  }, []);
 
   return (
     <>

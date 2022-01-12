@@ -9,7 +9,7 @@
   flex-wrap: wrap;
   overflow: auto;
   gap: 1rem;
-  padding: 3rem;
+  padding: 0.3rem;
   overflow-y: auto;
 }
 .main {
