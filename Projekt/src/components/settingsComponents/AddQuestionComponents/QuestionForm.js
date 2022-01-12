@@ -48,7 +48,6 @@ export default function QuestionForm(props) {
     props.setHttpError("");
     let isCorrectFlag = true;
     const formData = new FormData();
-    let mainType = "text";
     if (!course) {
       props.setHttpError("Aby dodać pytanie najwierw należy wybrać kurs.");
       isCorrectFlag = false;
@@ -79,11 +78,12 @@ export default function QuestionForm(props) {
     formData.append("correctAnswears", JSON.stringify(correctAnswers));
     formData.append("falseAnswears", JSON.stringify(wrongAnswers));
     if (imagesArray.length > 0) {
-      mainType = "mixed";
       imagesArray.forEach((item) => {
         formData.append("images", item);
       });
     }
+    let mainType;
+    correctAnswers.length>1 ? mainType="multiple" : mainType="single";
     formData.append("questionType", mainType);
     for (const [key, value] of formData) {
       console.log(key, value);
