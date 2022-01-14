@@ -2,8 +2,6 @@ import Input from '../components/formComponents/Input';
 import styles from './FormRetrievePassword.module.css';
 import ButtonShow from "../components/formComponents/ButtonShow";
 import Spiner from "../components/formComponents/Spinner";
-import Circe from '../components/formComponents/Circle';
-import stylesCirce from '../components/formComponents/Circle.module.css';
 import { useState } from 'react';
 import { useNavigate  } from 'react-router-dom';
 
@@ -51,16 +49,6 @@ const FormRetrievePassword = () =>{
     return (
         <div className={styles.container}>
             {loadingSpiner ? <Spiner>Loading...</Spiner> : ''}
-            <Circe />
-            <Circe className={stylesCirce.circe1}/>
-            <Circe className={stylesCirce.circe2}/>
-            <Circe className={stylesCirce.circe3}/>
-            <Circe className={stylesCirce.circe4}/>
-            <Circe className={stylesCirce.circe5}/>
-            <Circe className={stylesCirce.circe6}/>
-            <Circe className={stylesCirce.circe7}/>
-            <Circe className={stylesCirce.circe8}/>
-            <Circe className={stylesCirce.circe9}/>
             <div className={styles.container_all}>
                 <div className={styles.paragraf_h1}>
                     <h1>Wpisz E-Mail</h1>

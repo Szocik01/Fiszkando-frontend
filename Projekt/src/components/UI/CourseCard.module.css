@@ -6,11 +6,12 @@
     transition: all 0.2s ease-in-out;
     z-index: 0;
     overflow: hidden;
-    box-shadow: 10px 0px 20px 3px rgba(66, 68, 90, 1);
+    margin: auto auto;
+    box-shadow: 8px 9px 20px -11px rgba(66, 68, 90, 1);
     border-radius: 10px;
 }
 .mainCard{
-    width: 15rem;
+    width: auto;
     height: 25rem;
     display: flex;
     flex-direction: column;
@@ -26,7 +27,7 @@
     align-items: center;
     justify-content: space-around;
     position: absolute;
-    width: 15rem;
+    width: 100%;
     height: 25rem;
     background-color: rgb(10, 10, 10);
     opacity: 0.9;
@@ -36,6 +37,9 @@
     align-self: flex-end;
     margin-top: 300%;
     cursor: pointer;
+}
+.backdrop_cheack{
+    background-color: rgb(73, 245, 4);
 }
 .backdrop > p{
     color: white;

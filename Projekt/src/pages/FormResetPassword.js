@@ -4,8 +4,6 @@ import ButtonShow from "../components/formComponents/ButtonShow";
 import Spiner from '../components/formComponents/Spinner';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate  } from 'react-router-dom';
-import Circe from '../components/formComponents/Circle';
-import stylesCirce from '../components/formComponents/Circle.module.css';
 import { useCallback } from 'react';
 
 const FormResetPassword = () =>{
@@ -116,16 +114,6 @@ const FormResetPassword = () =>{
     return (
         <div className={styles.container}>
             {loadingSpiner ? <Spiner>Loading...</Spiner> : ''}
-            <Circe />
-            <Circe className={stylesCirce.circe1}/>
-            <Circe className={stylesCirce.circe2}/>
-            <Circe className={stylesCirce.circe3}/>
-            <Circe className={stylesCirce.circe4}/>
-            <Circe className={stylesCirce.circe5}/>
-            <Circe className={stylesCirce.circe6}/>
-            <Circe className={stylesCirce.circe7}/>
-            <Circe className={stylesCirce.circe8}/>
-            <Circe className={stylesCirce.circe9}/>
             <div className={styles.container_all}>
                 <div className={styles.paragraf_h1}>
                     <h1>Ustaw nowe hasło</h1>
