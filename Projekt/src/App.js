@@ -17,6 +17,7 @@ import LoadingSpinner from "./components/UI/LoadingSpinner";
 import PageNotFound from "./pages/PageNotFound";
 import { useState } from "react";
 import styles from "./App.module.css";
+import BuyCourse from "./pages/BuyCourse";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -107,6 +108,7 @@ function App() {
       {!loading && (
         <Routes>
           <Route path="/" element={<Main />} />
+          <Route path="/buy_course" element={<BuyCourse/>}/>
           {uid && token && (
             <Fragment>
               <Route path="/singleCoustions" element={<SingleCoustions />} />

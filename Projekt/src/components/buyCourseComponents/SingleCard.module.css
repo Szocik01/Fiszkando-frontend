@@ -1,0 +1,81 @@
+:root
+{
+    --course-name-color:rgb(59, 1, 107);
+    --university-name-color: rgb(90, 90, 90);
+    --course-price-color:rgb(4, 65, 4);
+}
+
+.cardContainer
+{
+    width: 90%;
+    box-shadow: var(--content-container-shadow) 1px 2px 8px 1px;
+    border-radius: 10px;
+    height: 18rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.overlay
+{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(20, 20, 20, 0.521);
+    transition: ease-out 0.2s opacity, ease-out 0.1s background-color;
+    font-size: 1.1rem;
+    color: white;
+    border-radius: 10px;
+    opacity: 0;
+}
+
+.overlay:hover
+{
+    opacity: 1;
+}
+
+.overlay:active
+{
+    background-color: rgba(20, 20, 20, 0.712);
+}
+
+.image
+{
+    width: 100%;
+    height: 8rem;
+    background-image: url("../../image/banner.jpg");
+    background-size: cover;
+}
+
+.name
+{
+    width: 100%;
+    margin-top: 1rem;
+    text-align: center;
+    color: var(--course-name-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+    height: fit-content;
+}
+
+.price
+{
+    color: var(--course-price-color);
+    font-size: 1rem;
+    text-align: right;
+    height: fit-content;
+}
+
+.universityName
+{
+    color: var(--university-name-color);
+    font-size: 1rem;
+    text-align: center;
+    height: fit-content;
+}
