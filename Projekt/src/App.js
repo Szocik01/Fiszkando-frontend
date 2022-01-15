@@ -11,13 +11,15 @@ import React, { Fragment, useCallback, useEffect } from "react";
 import { Authoindenty } from "./storage/redux-index";
 import { useDispatch, useSelector } from "react-redux";
 import TestStrona from "./pages/TestStrona";
-import AllCourse from "./pages/AllCourse";
-import SingleCoustions from "./pages/SingleCoustions";
+import Questions from "../src/pages/Questions";
+import SingleQuestions from "./components/SingleQuestion/SingleQuestions";
 import LoadingSpinner from "./components/UI/LoadingSpinner";
 import PageNotFound from "./pages/PageNotFound";
 import { useState } from "react";
 import styles from "./App.module.css";
-import BuyCourse from "./pages/BuyCourse";
+import Circe from "../src/components/formComponents/Circle";
+import stylesCirce from "../src/components/formComponents/Circle.module.css";
+import Question_base from '../src/pages/Question_base';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -98,7 +100,18 @@ function App() {
   }, [getCookies, checkInitialCookies]);
 
   return (
-    <div>
+  <div className={styles.container}>
+    <Circe />
+    <Circe className={stylesCirce.circe1} />
+    <Circe className={stylesCirce.circe2} />
+    <Circe className={stylesCirce.circe3} />
+    <Circe className={stylesCirce.circe4} />
+    <Circe className={stylesCirce.circe5} />
+    <Circe className={stylesCirce.circe6} />
+    <Circe className={stylesCirce.circe7} />
+    <Circe className={stylesCirce.circe8} />
+    <Circe className={stylesCirce.circe9} />
+    <div className={styles.main_container}>
       <NavComponents />
       {loading && (
         <div className={styles["loading-container"]}>
@@ -111,8 +124,9 @@ function App() {
           <Route path="/buy_course" element={<BuyCourse/>}/>
           {uid && token && (
             <Fragment>
-              <Route path="/singleCoustions" element={<SingleCoustions />} />
-              <Route path="/questions" element={<AllCourse />} />
+              <Route path="/singleQuestions" element={<SingleQuestions  />} />
+              <Route path="/questions" element={<Questions />} />
+              <Route path="/question_base" element={<Question_base />} />
               <Route path="/TestStrona" element={<TestStrona />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/settings/*" element={<Settings />} />
@@ -131,6 +145,7 @@ function App() {
         </Routes>
       )}
     </div>
+  </div>
   );
 }
 

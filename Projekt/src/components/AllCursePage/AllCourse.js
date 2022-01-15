@@ -1,14 +1,17 @@
 import styles from './AllCourse.module.css';
-import CourseCard from '../components/UI/CourseCard'
-import zdjeice from '../image/banner.jpg'
+import CourseCard from '../UI/CourseCard'
+import zdjeice from '../../image/banner.jpg';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {positionActions} from "../storage/redux-index";
+import {positionActions} from "../../storage/redux-index";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const AllCourse = () =>{
+const AllCourse = (props) =>{
+    const history = useNavigate();
     const courseId = useSelector((state) => state.autoCurseId);
     const [course, setCourse] = useState([]);
+    const [selectedAnswearsIndexes, setSelectedAnswearIndexes] = useState();
     const dispatch=useDispatch();
     // ten useEffect pod spodem jest od Wiktora żeby sidebar dobrze działał. Najlepiej nie ruszać XD
     useEffect(() => {
@@ -45,23 +48,46 @@ const AllCourse = () =>{
         sendQuestion();
     },[sendQuestion]);
 
+    const ChangeCurseHandler = () =>{
+        return history(props.page);
+    };
+
+    const selectAnswearHandler = (index) => {
+        setSelectedAnswearIndexes(indexID=>{
+            if(index===indexID){
+                return undefined;
+            }else{
+                return index;
+            }
+        });
+    };
 
     const courseList = course.map((course) => (
         <CourseCard
             key={course._id}
+            index = {course._id}
             logo={zdjeice}
             title={course.name}
             nameschool={course.school}
             id={course._id}
+            funkcja={selectAnswearHandler}
+            obecnyIndex = {selectedAnswearsIndexes}
         />
     ));
     return (
         <div className={styles.container}>
-            {courseList}
-            <div className={styles.remeberCurse}>
-                <input type="checkbox" onChange={remeberIdCurseHandler} />
-                <p>Zaznacz</p>
-            </div>
+                <div className={styles.main_conatinerCard}>
+                    {courseList}    
+                </div>
+                <div className={styles.main_remeberCurse}>
+                    <div className={styles.remeberCurse}>
+                        <p className={styles.remeber_p}>Zapamiętaj kurs</p>
+                        <input className={styles.input_checkBox} type="checkbox" onChange={remeberIdCurseHandler} />
+                    </div>
+                    <div className={styles.remeberCurseBtn} onClick={ChangeCurseHandler}>
+                        <p>Wybierz</p>
+                    </div>
+                </div>
         </div>
     );
 };
