@@ -15,24 +15,17 @@ export default function Sidebar(props) {
     dispatch(positionActions.onLeavePositionChange());
   }
 
- 
-  
   return (
     <nav
       className={`${style.sidebarContainer} ${
-        props.isUnfolded && style.sidebarUnfolded
-      }`}
-    >
+        props.isUnfolded && style.sidebarUnfolded}`}>
       <div className={style.taggerDiv}>
         <div
           className={style.taggerElement}
           style={{ marginTop: `${position}rem` }}></div>
       </div>
       <div className={style.linkContainer} onClick={props.onUnfolding}>
-        <i className={`icon-main ${style.icon} ${
-            props.isUnfolded ? style.rotate : ""
-          }`}
-        ></i>
+        <i className={`icon-main ${style.icon} ${props.isUnfolded ? style.rotate : ""}`}></i>
         <div className={style.textContainer}>Zamknij</div>
       </div>
       <ul className={style.sidebarLinkList} onMouseLeave={onMouseLeaveHandler}>
@@ -55,16 +48,22 @@ export default function Sidebar(props) {
           marginValue={2 * 3.4}
         />
         <SidebarElement
+          iconClass="icon-koszyk"
+          link="/buy_course"
+          linkText="Zakup kursu"
+          marginValue={3 * 3.4}
+        />
+        <SidebarElement
           iconClass="icon-ustawienia"
           link="/settings/change_password"
           linkText="Ustawienia"
-          marginValue={3 * 3.4}
+          marginValue={4 * 3.4}
         />
         <SidebarElement
           iconClass="icon-my"
           link="/contact"
           linkText="Kontakt"
-          marginValue={4 * 3.4}
+          marginValue={5 * 3.4}
         />
       </ul>
     </nav>

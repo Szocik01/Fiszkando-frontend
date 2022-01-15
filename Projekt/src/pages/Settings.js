@@ -45,7 +45,7 @@ export default function Settings() {
   },[permissionsArray]);
 
   useEffect(() => {
-    dispatch(positionActions.pagePositionChange(3 * 3.4));
+    dispatch(positionActions.pagePositionChange(4 * 3.4));
   }, [dispatch]);
 
   function toggleMenuHandler() {

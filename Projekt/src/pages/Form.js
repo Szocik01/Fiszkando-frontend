@@ -8,8 +8,6 @@ import Spiner from "../components/formComponents/Spinner";
 import ButtonShow from "../components/formComponents/ButtonShow";
 import { Authoindenty } from "../storage/redux-index";
 import { Link, useNavigate } from "react-router-dom";
-import Circe from "../components/formComponents/Circle";
-import stylesCirce from "../components/formComponents/Circle.module.css";
 import { Fragment } from "react";
 
 const Form = () => {
@@ -274,16 +272,6 @@ const Form = () => {
         ""
       )}
       <div className={styles.image}>
-        <Circe />
-        <Circe className={stylesCirce.circe1} />
-        <Circe className={stylesCirce.circe2} />
-        <Circe className={stylesCirce.circe3} />
-        <Circe className={stylesCirce.circe4} />
-        <Circe className={stylesCirce.circe5} />
-        <Circe className={stylesCirce.circe6} />
-        <Circe className={stylesCirce.circe7} />
-        <Circe className={stylesCirce.circe8} />
-        <Circe className={stylesCirce.circe9} />
         <div className={styles.container}>
           <div className={styles.nav}>
             <div

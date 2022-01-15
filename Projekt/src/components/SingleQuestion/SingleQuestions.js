@@ -1,10 +1,10 @@
-import styles from "./SingleCoustions.module.css";
+import styles from "./SingleQuestions.module.css";
 import { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Question from "../components/SingleQuestion/Querstions";
+import Question from "./Querstions";
 
-const SingleCoustions = () => {
+const SingleQuestions = () => {
   const history = useNavigate();
   const [allQuestions, setAllQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState({});
@@ -40,7 +40,7 @@ const SingleCoustions = () => {
         // console.log(key_of_Cookies);
         if (key_of_Cookies === "idCurse") {
           Saved_Cookie_Object[key_of_Cookies] = key[key_of_Cookies];
-          console.log(Saved_Cookie_Object[key_of_Cookies], "cookiesv1");
+          // console.log(Saved_Cookie_Object[key_of_Cookies], "cookiesv1");
         }
       }
     }
@@ -105,4 +105,4 @@ const SingleCoustions = () => {
   );
 };
 
-export default SingleCoustions;
+export default SingleQuestions;
