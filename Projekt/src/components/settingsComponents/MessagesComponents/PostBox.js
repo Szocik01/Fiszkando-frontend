@@ -7,6 +7,18 @@ import styles from "./styles/PostBox.module.css";
 const PostBox = (props) => {
   const auth = useSelector((state) => state.autoIndentification);
   const [messages, setMessages] = useState([]);
+  const [messagesToDelete, setMessagesToDelete] = useState([]);
+
+  const setMessageToDeleteHandler = (id) =>
+    setMessagesToDelete((p) => {
+      const idIndex = p.findIndex((i) => i.toString() === id.toString());
+      if (idIndex < 0) {
+        return [...p, id];
+      } else {
+        const filteredIndexes = p.filter((i) => i.toString() !== id.toString());
+        return filteredIndexes;
+      }
+    });
 
   const fetchPostBoxHandler = useCallback(async () => {
     const res = await fetch("http://localhost:8080/get-all-messages", {
@@ -25,6 +37,52 @@ const PostBox = (props) => {
     setMessages(parsRes);
   }, [auth]);
 
+  const readMessageHandler = async (id) => {
+    const messIndex = messages.findIndex(
+      (m) => m._id.toString() === id.toString()
+    );
+
+    if (messages[messIndex].readed) {
+      return;
+    }
+
+    const res = await fetch("http://localhost:8080/email-readed", {
+      method: "POST",
+      body: JSON.stringify({ _id: id }),
+      headers: {
+        uid: auth.uid,
+        token: auth.token,
+        remeberMe: auth.remeberMe,
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.ok) {
+      messages[messIndex].readed = true;
+    }
+  };
+
+  const delteMessagesHandler = async () => {
+    const res = await fetch("http://localhost:8080/delete-messages", {
+      method: "POST",
+      body: JSON.stringify({ _ids: messagesToDelete }),
+      headers: {
+        uid: auth.uid,
+        token: auth.token,
+        remeberMe: auth.remeberMe,
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.ok) {
+      // let db = messages;
+      // for (const id of messagesToDelete) {
+      //   const filteredTMP = db.filter((i) => i._id !== id);
+      //   db = filteredTMP;
+      // }
+      // setMessages(db);
+      fetchPostBoxHandler();
+    }
+  };
+
   useEffect(() => {
     fetchPostBoxHandler();
   }, [fetchPostBoxHandler]);
@@ -32,7 +90,12 @@ const PostBox = (props) => {
   return (
     <div className={styles.container}>
       <div className={styles.actions}>
-        <div className={`${styles.deleteBtn} ${styles["deleteBtn--active"]}`}>
+        <div
+          className={`${styles.deleteBtn} ${
+            messagesToDelete.length && styles["deleteBtn--active"]
+          }`}
+          onClick={messagesToDelete.length ? delteMessagesHandler : () => {}}
+        >
           Usuń
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -56,6 +119,8 @@ const PostBox = (props) => {
             readed={m.readed}
             showMessgaeBox={props.showMessageHandler}
             chooseMessageHandler={props.chooseMessageHandler}
+            setMessagesToDelete={setMessageToDeleteHandler}
+            readMessageHandler={readMessageHandler}
           />
         ))}
       </ul>
