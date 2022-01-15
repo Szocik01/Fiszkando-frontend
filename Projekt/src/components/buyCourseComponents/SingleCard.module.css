@@ -10,11 +10,12 @@
     width: 90%;
     box-shadow: var(--content-container-shadow) 1px 2px 8px 1px;
     border-radius: 10px;
-    height: 18rem;
+    height: 23rem;
     position: relative;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    background-color: white;
 }
 
 .overlay
@@ -27,7 +28,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(20, 20, 20, 0.521);
+    background-color: rgba(0, 0, 0, 0.548);
     transition: ease-out 0.2s opacity, ease-out 0.1s background-color;
     font-size: 1.1rem;
     color: white;
@@ -42,7 +43,7 @@
 
 .overlay:active
 {
-    background-color: rgba(20, 20, 20, 0.712);
+    background-color: rgba(0, 0, 0, 0.712);
 }
 
 .image
@@ -56,26 +57,41 @@
 .name
 {
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 1.8rem;
     text-align: center;
     color: var(--course-name-color);
     font-size: 1.5rem;
     font-weight: bold;
-    height: fit-content;
+    min-height: 4rem;
 }
 
 .price
 {
     color: var(--course-price-color);
-    font-size: 1rem;
+    font-size: 1.3rem;
     text-align: right;
+    margin-right: 0.2rem;
+    margin-top: 1.8rem;
     height: fit-content;
 }
 
 .universityName
 {
     color: var(--university-name-color);
-    font-size: 1rem;
+    font-size: 1.3rem;
     text-align: center;
+    margin-top: 1.8rem;
     height: fit-content;
+}
+
+@media screen and (min-width:376px)
+{
+    .cardContainer
+    {
+        width: 13rem;
+        
+    }
+
+    
+
 }

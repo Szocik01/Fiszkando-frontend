@@ -13,6 +13,7 @@ export default function UniversitiesContainer(props) {
     setIsSpinnerActive(true);
     try {
       const response = await fetch("http://localhost:8080/get-all-schools");
+      console.log(response.status)
       if (!response.ok) {
         throw new Error("Wystąpił błąd serwera. Proszę czekać.");
       }
@@ -45,7 +46,7 @@ export default function UniversitiesContainer(props) {
   return (
     <div className={`${style.universitiesContainer} ${isCourses && style.hidden}`}>
       {isSpinnerActive ? <LoadingSpinner /> : ""} 
-      {universityList}
+      {!isSpinnerActive && universityList}
     </div>
   );
 }

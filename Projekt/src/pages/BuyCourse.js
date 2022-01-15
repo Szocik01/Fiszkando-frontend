@@ -4,11 +4,11 @@ import UniversitiesContainer from "../components/buyCourseComponents/Universitie
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { positionActions } from "../storage/redux-index";
+import { informationBoxManagerActions } from "../storage/information-box";
 
 export default function BuyCourse() {
   const [isCourses, setIsCourses] = useState(false);
   const [university, setUniversity] = useState("");
-  const [course, setCourse] = useState("");
   const [httpError, setHttpError] = useState("");
   const [isSpinnerActive, setIsSpinnerActive] = useState(false);
 
@@ -19,6 +19,21 @@ export default function BuyCourse() {
   });
   const uid = logindata.uid;
   const token = logindata.token;
+
+  const basketData=useSelector((state)=>{
+    return state.basket;
+  });
+
+  console.log(basketData)
+
+  useEffect(()=>{
+    if(httpError)
+    {
+      dispatch(informationBoxManagerActions.setBox({message:httpError,isError:true}));
+      dispatch(informationBoxManagerActions.toggleVisibility());
+      setHttpError("");
+    }
+  },[httpError,dispatch]);
 
   useEffect(() => {
     dispatch(positionActions.pagePositionChange(3 * 3.4));
@@ -38,10 +53,10 @@ export default function BuyCourse() {
         setIsCourses={setIsCourses}
         setHttpError={setHttpError}
         setIsSpinnerActive={setIsSpinnerActive}
-        setCourse={setCourse}
         university={university}
         isSpinnerActive={isSpinnerActive}
         isCourses={isCourses}
+        basketData={basketData}
       />
     </div>
   );
