@@ -20,6 +20,7 @@ import styles from "./App.module.css";
 import Circe from "../src/components/formComponents/Circle";
 import stylesCirce from "../src/components/formComponents/Circle.module.css";
 import Question_base from '../src/pages/Question_base';
+import BuyCourse from "./pages/BuyCourse";
 
 function App() {
   const [loading, setLoading] = useState(true);
