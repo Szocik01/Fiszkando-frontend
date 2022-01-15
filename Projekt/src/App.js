@@ -19,8 +19,9 @@ import { useState } from "react";
 import styles from "./App.module.css";
 import Circe from "../src/components/formComponents/Circle";
 import stylesCirce from "../src/components/formComponents/Circle.module.css";
-import Question_base from '../src/pages/Question_base';
+import Question_base from "../src/pages/Question_base";
 import BuyCourse from "./pages/BuyCourse";
+import Stripe from "./components/buyCourseComponents/Stripe";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -101,52 +102,57 @@ function App() {
   }, [getCookies, checkInitialCookies]);
 
   return (
-  <div className={styles.container}>
-    <Circe />
-    <Circe className={stylesCirce.circe1} />
-    <Circe className={stylesCirce.circe2} />
-    <Circe className={stylesCirce.circe3} />
-    <Circe className={stylesCirce.circe4} />
-    <Circe className={stylesCirce.circe5} />
-    <Circe className={stylesCirce.circe6} />
-    <Circe className={stylesCirce.circe7} />
-    <Circe className={stylesCirce.circe8} />
-    <Circe className={stylesCirce.circe9} />
-    <div className={styles.main_container}>
-      <NavComponents />
-      {loading && (
-        <div className={styles["loading-container"]}>
-          <LoadingSpinner />
-        </div>
-      )}
-      {!loading && (
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/buy_course" element={<BuyCourse/>}/>
-          {uid && token && (
-            <Fragment>
-              <Route path="/singleQuestions" element={<SingleQuestions  />} />
-              <Route path="/questions" element={<Questions />} />
-              <Route path="/question_base" element={<Question_base />} />
-              <Route path="/TestStrona" element={<TestStrona />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/settings/*" element={<Settings />} />
-            </Fragment>
-          )}
-          <Route path="/retrieve_password" element={<FormRetrievePassword />} />
-          {!(uid && token) && (
-            <Route path="/authentication" element={<Form />} />
-          )}
-          <Route
-            path="/authorize/reset/:uid/:token"
-            element={<FormResetPassword />}
-          />
-          <Route path="/notification" element={<Notification />} />
-          <Route path="*" element={<PageNotFound/>}/>
-        </Routes>
-      )}
+    <div className={styles.container}>
+      <Circe />
+      <Circe className={stylesCirce.circe1} />
+      <Circe className={stylesCirce.circe2} />
+      <Circe className={stylesCirce.circe3} />
+      <Circe className={stylesCirce.circe4} />
+      <Circe className={stylesCirce.circe5} />
+      <Circe className={stylesCirce.circe6} />
+      <Circe className={stylesCirce.circe7} />
+      <Circe className={stylesCirce.circe8} />
+      <Circe className={stylesCirce.circe9} />
+      <div className={styles.main_container}>
+        <NavComponents />
+        {loading && (
+          <div className={styles["loading-container"]}>
+            <LoadingSpinner />
+          </div>
+        )}
+        {!loading && (
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/buy_course" element={<BuyCourse />} />
+
+            {uid && token && (
+              <Fragment>
+                <Route path="/checkout" element={<Stripe />} />
+                <Route path="/singleQuestions" element={<SingleQuestions />} />
+                <Route path="/questions" element={<Questions />} />
+                <Route path="/question_base" element={<Question_base />} />
+                <Route path="/TestStrona" element={<TestStrona />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/settings/*" element={<Settings />} />
+              </Fragment>
+            )}
+            <Route
+              path="/retrieve_password"
+              element={<FormRetrievePassword />}
+            />
+            {!(uid && token) && (
+              <Route path="/authentication" element={<Form />} />
+            )}
+            <Route
+              path="/authorize/reset/:uid/:token"
+              element={<FormResetPassword />}
+            />
+            <Route path="/notification" element={<Notification />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        )}
+      </div>
     </div>
-  </div>
   );
 }
 
