@@ -23,7 +23,10 @@ const ContainerCard = (props) => {
         props.isAnsweared && props.isCorrect
           ? styles.green
           : props.isAnsweared && !props.answerIsTrue && styles.red
-      }`}
+      } ${props.trueAnsweared && props.isCorrect
+          ? styles.green
+          : ''}`
+      }
       onClick={cheackHandler}
     >
       <div className={styles.title}>
