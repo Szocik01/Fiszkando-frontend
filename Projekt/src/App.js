@@ -19,7 +19,8 @@ import { useState } from "react";
 import styles from "./App.module.css";
 import Circe from "../src/components/formComponents/Circle";
 import stylesCirce from "../src/components/formComponents/Circle.module.css";
-import Question_base from "../src/pages/Question_base";
+import QuestionBase from '../src/pages/QuestionBase';
+import QuestionBaseGenerator from "../src/components/Question_base/QuestionBaseGenerator";
 import BuyCourse from "./pages/BuyCourse";
 import Stripe from "./components/buyCourseComponents/Stripe";
 import Confirmation from "./components/buyCourseComponents/Confirmation";
@@ -132,7 +133,8 @@ function App() {
                 <Route path="/checkout/:uid" element={<Confirmation />} />
                 <Route path="/singleQuestions" element={<SingleQuestions />} />
                 <Route path="/questions" element={<Questions />} />
-                <Route path="/question_base" element={<Question_base />} />
+                <Route path="/questions_baseGenerator" element={<QuestionBaseGenerator  />} />
+                <Route path="/question_base" element={<QuestionBase />} />
                 <Route path="/TestStrona" element={<TestStrona />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/settings/*" element={<Settings />} />
