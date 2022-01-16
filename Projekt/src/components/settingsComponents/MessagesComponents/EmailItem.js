@@ -7,11 +7,23 @@ const EmailItem = (props) => {
     if (e.target !== checkbox.current) {
       props.chooseMessageHandler(props.wholeMsg);
       props.showMessgaeBox();
+      if (!props.readed) {
+        props.readMessageHandler(props.id);
+      }
     }
+  };
+
+  const setMessageToDeleteHandler = () => {
+    props.setMessagesToDelete(props.id);
   };
   return (
     <li className={styles.container} onClick={showMessageBox}>
-      <input type="checkbox" className={styles.checkbox} ref={checkbox} />
+      <input
+        type="checkbox"
+        className={styles.checkbox}
+        ref={checkbox}
+        onChange={setMessageToDeleteHandler}
+      />
       <div>Temat: {props.topic}</div>
       <div>Od: {props.author}</div>
       <div

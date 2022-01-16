@@ -1,7 +1,7 @@
 :root {
   --sidebar-color-light: rgb(132, 101, 255);
   --icon-color: white;
-  --icon-color-hovered:rgb(118, 84, 253);
+  --icon-color-hovered: rgb(118, 84, 253);
 }
 
 .sidebarContainer {
@@ -14,7 +14,7 @@
   overflow: hidden;
   background-color: var(--sidebar-color-light);
   transform: translateX(-100%);
-  transition: width 0.3s ease-out , transform 0.15s ease-in 0.1s;
+  transition: width 0.3s ease-out, transform 0.15s ease-in 0.1s;
 }
 
 .sidebarUnfolded {
@@ -60,9 +60,8 @@
 }
 
 .hovered .icon,
-.hovered .linkTextContainer
-{
-  color: var(--icon-color-hovered) ;
+.hovered .linkTextContainer {
+  color: var(--icon-color-hovered);
 }
 
 .linkStyle {
@@ -87,39 +86,32 @@
 }
 
 @media screen and (min-width: 426px) {
-  .sidebarContainer 
-  {
+  .sidebarContainer {
     padding-top: 1rem;
     width: 4rem;
   }
 
-  .sidebarUnfolded
-  {
+  .sidebarUnfolded {
     width: 14.5rem;
   }
 
-  .icon
-  {
+  .icon {
     font-size: 1.5rem;
     margin-left: 1rem;
   }
 
-  .textContainer
-  {
+  .textContainer {
     margin-left: 1.2rem;
     font-size: 1rem;
   }
 
-  .taggerDiv
-  {
+  .taggerDiv {
     padding: 0 0.6rem;
   }
 }
 
-@media screen and (min-width:769px)
-{
-  .sidebarContainer
-  {
+@media screen and (min-width: 768px) {
+  .sidebarContainer {
     transform: none;
     transition: width 0.2s ease-out;
   }

@@ -7,18 +7,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 export default function QuestionForm(props) {
   const [shouldReset, setShouldReset] = useState(false);
 
-  const correctAnswers = useMemo(() => {
-    return [];
-  }, []);
-  const wrongAnswers = useMemo(() => {
-    return [];
-  }, []);
-  const imagesArray = useMemo(() => {
-    return [];
-  }, []);
-  const questionObject = useMemo(() => {
-    return [];
-  }, []);
+  const correctAnswers = useMemo(() => {return [];}, []);
+  const wrongAnswers = useMemo(() => {return [];}, []);
+  const imagesArray = useMemo(() => {return [];}, []);
+  const questionObject = useMemo(() => {return [];}, []);
 
   const { setTrueQuestionsAmount, setFlaseQuestionsAmount, course } = props;
 

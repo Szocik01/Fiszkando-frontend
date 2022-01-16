@@ -83,12 +83,6 @@ const QuestionBaseGenerator = () =>{
         sendQuestions(cookies);
       }, [sendQuestions, getCookies]);
 
-    // const shuffledArray = shuffledArray.map((pytanie) => (
-      // <QuestionsBase 
-        // currentQuestion={pytanie.currentQuestion}
-      // />
-    // ));
-
 
     return (
         <div className={styles.container}>
