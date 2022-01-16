@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const QuestionBaseGenerator = () =>{
     const history = useNavigate();
-    const [allQuestions, setAllQuestions] = useState([]);
+    // const [allQuestions, setAllQuestions] = useState([]);
     const courseId = useSelector((state) => state.autoCurseId);
     const auth = useSelector((state) => state.autoIndentification);
     const [currentQuestion, setCurrentQuestion] = useState({});
@@ -69,11 +69,10 @@ const QuestionBaseGenerator = () =>{
             allAnswears = allAnswears.sort((a, b) => 0.5 - Math.random());
             allAnswears.forEach((a, index) => (a.index = index));
             q.allAnswears = allAnswears;
+            // setAllQuestions(allAnswears)
           });
-          // const shuffledArray = parsedResponse.sort((a, b) => 0.5 - Math.random());
-          // setAllQuestions(shuffledArray);
-          setCurrentQuestion(parsedResponse[3]);
-          console.log(parsedResponse);
+
+          setCurrentQuestion(parsedResponse[1]);
           setLoading(false);
         },
         [auth, courseId, history]

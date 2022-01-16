@@ -1,11 +1,11 @@
 import styles from "./Form.module.css";
-import stylesButton from "../components/formComponents/ButtonShow.module.css";
+import stylesButton from "../components/formComponents/buttonShow.module.css";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import Input from "../components/formComponents/Input";
 import InputChexBox from "../components/formComponents/InputChexbox";
 import Spiner from "../components/formComponents/Spinner";
-import ButtonShow from "../components/formComponents/ButtonShow";
+import ButtonShow from "../components/formComponents/buttonShow";
 import { Authoindenty } from "../storage/redux-index";
 import { Link, useNavigate } from "react-router-dom";
 import { Fragment } from "react";
