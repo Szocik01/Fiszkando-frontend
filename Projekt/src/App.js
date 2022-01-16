@@ -19,14 +19,10 @@ import { useState } from "react";
 import styles from "./App.module.css";
 import Circe from "../src/components/formComponents/Circle";
 import stylesCirce from "../src/components/formComponents/Circle.module.css";
-<<<<<<< HEAD
 import QuestionBase from '../src/pages/QuestionBase';
 import QuestionBaseGenerator from "../src/components/Question_base/QuestionBaseGenerator";
-=======
-import Question_base from "../src/pages/Question_base";
 import BuyCourse from "./pages/BuyCourse";
 import Stripe from "./components/buyCourseComponents/Stripe";
->>>>>>> d1cf19b3f6a7042ad3ddc0cc71b13cdd58cbc4f8
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -107,52 +103,6 @@ function App() {
   }, [getCookies, checkInitialCookies]);
 
   return (
-<<<<<<< HEAD
-  <div className={styles.container}>
-    <Circe />
-    <Circe className={stylesCirce.circe1} />
-    <Circe className={stylesCirce.circe2} />
-    <Circe className={stylesCirce.circe3} />
-    <Circe className={stylesCirce.circe4} />
-    <Circe className={stylesCirce.circe5} />
-    <Circe className={stylesCirce.circe6} />
-    <Circe className={stylesCirce.circe7} />
-    <Circe className={stylesCirce.circe8} />
-    <Circe className={stylesCirce.circe9} />
-    <div className={styles.main_container}>
-      <NavComponents />
-      {loading && (
-        <div className={styles["loading-container"]}>
-          <LoadingSpinner />
-        </div>
-      )}
-      {!loading && (
-        <Routes>
-          <Route path="/" element={<Main />} />
-          {uid && token && (
-            <Fragment>
-              <Route path="/singleQuestions" element={<SingleQuestions  />} />
-              <Route path="/questions" element={<Questions />} />
-              <Route path="/questions_baseGenerator" element={<QuestionBaseGenerator  />} />
-              <Route path="/question_base" element={<QuestionBase />} />
-              <Route path="/TestStrona" element={<TestStrona />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/settings/*" element={<Settings />} />
-            </Fragment>
-          )}
-          <Route path="/retrieve_password" element={<FormRetrievePassword />} />
-          {!(uid && token) && (
-            <Route path="/authentication" element={<Form />} />
-          )}
-          <Route
-            path="/authorize/reset/:uid/:token"
-            element={<FormResetPassword />}
-          />
-          <Route path="/notification" element={<Notification />} />
-          <Route path="*" element={<PageNotFound/>}/>
-        </Routes>
-      )}
-=======
     <div className={styles.container}>
       <Circe />
       <Circe className={stylesCirce.circe1} />
@@ -181,7 +131,8 @@ function App() {
                 <Route path="/checkout" element={<Stripe />} />
                 <Route path="/singleQuestions" element={<SingleQuestions />} />
                 <Route path="/questions" element={<Questions />} />
-                <Route path="/question_base" element={<Question_base />} />
+                <Route path="/questions_baseGenerator" element={<QuestionBaseGenerator  />} />
+                <Route path="/question_base" element={<QuestionBase />} />
                 <Route path="/TestStrona" element={<TestStrona />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/settings/*" element={<Settings />} />
@@ -203,7 +154,6 @@ function App() {
           </Routes>
         )}
       </div>
->>>>>>> d1cf19b3f6a7042ad3ddc0cc71b13cdd58cbc4f8
     </div>
   );
 }
