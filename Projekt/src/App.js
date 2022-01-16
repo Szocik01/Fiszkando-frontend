@@ -22,6 +22,7 @@ import stylesCirce from "../src/components/formComponents/Circle.module.css";
 import Question_base from "../src/pages/Question_base";
 import BuyCourse from "./pages/BuyCourse";
 import Stripe from "./components/buyCourseComponents/Stripe";
+import Confirmation from "./components/buyCourseComponents/Confirmation";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -128,6 +129,7 @@ function App() {
             {uid && token && (
               <Fragment>
                 <Route path="/checkout" element={<Stripe />} />
+                <Route path="/checkout/:uid" element={<Confirmation />} />
                 <Route path="/singleQuestions" element={<SingleQuestions />} />
                 <Route path="/questions" element={<Questions />} />
                 <Route path="/question_base" element={<Question_base />} />
