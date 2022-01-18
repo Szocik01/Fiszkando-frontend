@@ -40,6 +40,7 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  text-decoration: none;
 }
 
 .itemsCount
@@ -52,102 +53,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.basketDisplay
-{
-  position: absolute;
-  left: 0;
-  top: 3rem;
-  width: 100%;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: var(--content-container-shadow) 2px 2px 10px 0.5px;
-  height: 14rem;
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  animation: displayAnimation 0.1s ease-out forwards;
-}
-
-.header
-{
-  padding: 0 0.6rem;
-  width: 100%;
-  height: 2rem;
-  position: sticky;
-  top:0;
-  border-bottom: 1px rgb(206, 206, 206) solid;
-  background-color: #eee;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  font-size: 1.1rem;
-  gap: 0.4rem;
-}
-
-.confirmPurchase
-{
-  width: 7rem;
-  padding: 0.2rem;
-  background-color: rgb(0, 122, 0);
-  color: white;
-  margin-left: auto;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.confirmPurchase:active
-{
-  animation: btnClick 0.5s ease-in-out forwards;
-}
-
-.itemsList
-{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  height: calc(100% - 4rem);
-  overflow: auto;
-}
-
-.itemsList::-webkit-scrollbar
-{
-  width: 7px;
-  border-radius: 0.5rem;
-}
-
-
-.itemsList::-webkit-scrollbar {
-  border-radius: 0.5rem;
-  background-color: #eee;
-}
-
-.itemsList::-webkit-scrollbar-thumb {
-  border-radius: 0.5rem;
-  background-color: rgb(187, 187, 187);
-}
-
-.footer
-{
-  width: 100%;
-  position: sticky;
-  bottom: 0;
-  background-color: #eee;
-  min-height: 2rem;
-  font-size: 1rem;
-  left: 0;
-  bottom: 0;
-  height: 1rem;
-  border-top: 1px rgb(206, 206, 206) solid;
-  z-index: 11;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0 0.8rem;
 }
 
 .returnButton 
@@ -172,6 +77,7 @@
   margin-left: 0.5rem;
 }
 
+.basket:active,
 .returnButton:active 
 {
   animation: btnClick 0.5s ease-in-out forwards;
@@ -227,15 +133,3 @@
     }
   }
 
-@keyframes displayAnimation
-{
-  0%
-  {
-    opacity: 0;
-  }
-  100%
-  {
-    opacity: 1;
-  }
-}
-  

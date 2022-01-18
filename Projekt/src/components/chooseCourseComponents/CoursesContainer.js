@@ -2,13 +2,10 @@ import style from "./CoursesContainer.module.css";
 import LoadingSpinner from "../UI/LoadingSpinner";
 import SingleCard from "./SingleCard";
 import { useEffect, useCallback, useState, Fragment } from "react";
-import BasketItem from "./BasketItem";
 import { Link } from "react-router-dom";
 
 export default function CoursesContainer(props) {
   const [coursesList, setCoursesList] = useState([]);
-  const [showBasket, setShowBasket] = useState(false);
-  const [basketItems, setBasketItems] = useState([]);
 
   const {
     setIsCourses,
@@ -58,32 +55,9 @@ export default function CoursesContainer(props) {
     }
   }, [setHttpError, setIsSpinnerActive, university]);
 
-  function showBasketHandler() {
-    setShowBasket(true);
-  }
-
-  function closeBasketHandler() {
-    setShowBasket(false);
-  }
-
   function hideForm() {
     setIsCourses(false);
   }
-
-  useEffect(() => {
-    setBasketItems(
-      basketData.items.map((item) => {
-        return (
-          <BasketItem
-            courseName={item.name}
-            price={item.price}
-            id={item.id}
-            key={item.id}
-          />
-        );
-      })
-    );
-  }, [basketData, setBasketItems]);
 
   useEffect(() => {
     getCourses();
@@ -95,7 +69,7 @@ export default function CoursesContainer(props) {
       {!isSpinnerActive && (
         <Fragment>
           <div className={style.buttonContainer}>
-            <div className={style.basket} onClick={showBasketHandler}>
+            <Link to="/buy_course" className={style.basket} >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"
@@ -108,7 +82,7 @@ export default function CoursesContainer(props) {
               </svg>
               Koszyk
               <div className={style.itemsCount}>{basketData.items.length}</div>
-            </div>
+            </Link>
             <button
               type="button"
               onClick={hideForm}
@@ -127,30 +101,6 @@ export default function CoursesContainer(props) {
               </svg>
             </button>
           </div>
-          {showBasket && (
-            <div className={style.basketDisplay}>
-              <div className={style.header} onClick={closeBasketHandler}>
-                Zamknij{" "}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  height="24px"
-                  viewBox="0 0 24 24"
-                  width="24px"
-                  fill="#000000"
-                >
-                  <path d="M0 0h24v24H0V0z" fill="none" />
-                  <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
-                </svg>
-              </div>
-              <div className={style.itemsList}>{basketItems}</div>
-              <div className={style.footer}>
-                Razem: {basketData.price} zł
-                <Link to="/checkout">
-                  <div className={style.confirmPurchase}>Zapłać</div>
-                </Link>
-              </div>
-            </div>
-          )}
           {coursesList}
         </Fragment>
       )}

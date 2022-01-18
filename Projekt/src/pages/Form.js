@@ -1,5 +1,5 @@
 import styles from "./Form.module.css";
-import stylesButton from "../components/formComponents/buttonShow.module.css";
+import stylesButton from "../components/formComponents/ButtonShow.module.css";
 import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import Input from "../components/formComponents/Input";

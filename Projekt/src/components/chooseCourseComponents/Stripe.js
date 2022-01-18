@@ -12,9 +12,13 @@ const Stripe = () => {
   const products = useSelector((s) => s.basket);
   const [loading, setLoading] = useState(true);
 
+  console.log(products)
+
   const fetchSecretKey = async () => {
     setLoading(true);
-    const prodIds = products.items.map((p) => p.id);
+    const prodIds = products.items.map((p) => {
+      console.log(p.id)
+      return p.id});
     console.log(prodIds);
     try {
       const res = await fetch("http://localhost:8080/get-checkout", {

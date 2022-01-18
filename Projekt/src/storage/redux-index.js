@@ -32,6 +32,9 @@ const basketSlice = createSlice({
       state.price = +state.items.reduce((total,currentValue)=>{
         return total + currentValue.price; 
       },0).toFixed(2);
+      state.items.forEach((item,index)=>{
+        document.cookie = `basketItem${index}=${JSON.stringify(item)};`
+      })
     },
     removeFromBasket(state,action)
     {
@@ -41,6 +44,29 @@ const basketSlice = createSlice({
       state.price = +state.items.reduce((total,currentValue)=>{
         return total + currentValue.price; 
       },0).toFixed(2); 
+      const cookieArray=document.cookie.split(";")
+      const filteredArray=cookieArray.filter((item)=>{
+        return item.split("=")[0].includes("basketItem");
+      });
+      filteredArray.forEach((item)=>{
+        document.cookie=`${item.split("=")[0]}= ; expires = Thu, 01 Jan 1970 00:00:00 GMT`
+      });
+      state.items.forEach((item,index)=>{
+        document.cookie = `basketItem${index}=${JSON.stringify(item)};`
+      });
+    },
+    getBasketFromCookies(state)
+    {
+      const cookiesArray=document.cookie.split(";");
+      const filteredArray = cookiesArray.filter((item)=>{
+        return item.split("=")[0].includes("basketItem");
+      });
+      filteredArray.forEach((item)=>{
+        state.items.push(JSON.parse(item.split("=")[1]))
+      });
+      state.price = +state.items.reduce((total,currentValue)=>{
+        return total + currentValue.price; 
+      },0).toFixed(2);
     }
   }
 })
