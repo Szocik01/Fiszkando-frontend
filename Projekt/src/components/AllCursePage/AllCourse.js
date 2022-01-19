@@ -5,10 +5,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { SelectedCourseActions } from "../../storage/redux-index";
 import { positionActions } from "../../storage/redux-index";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const AllCourse = (props) => {
   const history = useNavigate();
+  const action = useParams().action;
+  console.log(action);
   const rememeberCheckbox = useRef();
   const [course, setCourse] = useState([]);
   const [selectedCourseIndex, setSelectedCourseIndex] = useState();
@@ -31,6 +33,7 @@ const AllCourse = (props) => {
           school: parseJSON[key].school.name,
         });
       }
+      console.log("--->", parseJSON);
       setCourse(loadedCurse);
     } catch (error) {
       console.log(error);
@@ -49,7 +52,7 @@ const AllCourse = (props) => {
       SelectedCourseActions.setId({
         id: selectedCourseIndex,
         cb: () => {
-          history(props.page);
+          history(`/${action}`);
         },
       })
     );
@@ -79,16 +82,7 @@ const AllCourse = (props) => {
   ));
 
   useEffect(() => {
-    dispatch(
-      SelectedCourseActions.fetchCourseFromCookies({
-        success: () => {
-          history(props.page);
-        },
-        failure: () => {
-          sendQuestion();
-        },
-      })
-    );
+    sendQuestion();
   }, []);
   return (
     <div className={styles.container}>

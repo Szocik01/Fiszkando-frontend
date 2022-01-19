@@ -66,15 +66,21 @@ const SingleQuestions = () => {
   }, [auth, courseId, history]);
 
   useEffect(() => {
-    dispatch(
-      SelectedCourseActions.fetchCourseFromCookies({
-        success: () => {
-          sendQuestions();
-        },
-        failure: () => {},
-      })
-    );
-  }, [sendQuestions]);
+    if (!courseId.id) {
+      dispatch(
+        SelectedCourseActions.fetchCourseFromCookies({
+          success: () => {
+            sendQuestions();
+          },
+          failure: () => {
+            history("/questions");
+          },
+        })
+      );
+    } else {
+      sendQuestions();
+    }
+  }, [sendQuestions, courseId.id, history, dispatch]);
 
   return (
     <div className={styles.container}>

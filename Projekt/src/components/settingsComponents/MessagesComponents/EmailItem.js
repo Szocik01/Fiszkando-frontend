@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useRef } from "react";
 import styles from "./styles/EmailItem.module.css";
 
 const EmailItem = (props) => {

@@ -2,19 +2,18 @@ import { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import style from "./SelectInputs.module.css";
 
-export default function SelectInputs (props) {
+export default function SelectInputs(props) {
+  const [universityList, setUniversityList] = useState([]);
+  const [courseList, setCourseList] = useState([]);
+  const { setHttpError, setIsSpinnerActive, university } = props;
 
-    const [universityList,setUniversityList] = useState([]);
-    const [courseList, setCourseList] = useState([]);
-    const {setHttpError, setIsSpinnerActive, university}=props;
+  const logindata = useSelector((state) => {
+    return state.autoIndentification;
+  });
+  const isHeadAdmin = logindata.isHeadAdmin;
+  const permissionsArray = logindata.permissions;
 
-    const logindata = useSelector((state) => {
-      return state.autoIndentification;
-    });
-    const isHeadAdmin = logindata.isHeadAdmin;
-    const permissionsArray = logindata.permissions;
-
-    const getUniversities = useCallback(async () => {
+  const getUniversities = useCallback(async () => {
     setHttpError("");
     setIsSpinnerActive(true);
     try {
@@ -38,7 +37,7 @@ export default function SelectInputs (props) {
       setIsSpinnerActive(false);
       setHttpError(error.message);
     }
-  }, [setHttpError,setIsSpinnerActive]);
+  }, [setHttpError, setIsSpinnerActive]);
 
   const getCourses = useCallback(async () => {
     setHttpError("");
@@ -55,9 +54,8 @@ export default function SelectInputs (props) {
         throw new Error("Wystąpił błąd serwera. Proszę czekać.");
       }
       const data = await response.json();
-      if(isHeadAdmin)
-      {
-        console.log(data)
+      if (isHeadAdmin) {
+        console.log(data);
         setCourseList(
           data.map((item) => {
             return (
@@ -67,16 +65,11 @@ export default function SelectInputs (props) {
             );
           })
         );
-      }
-      else if(permissionsArray.length>0)
-      {
-        const filteredCourses=[];
-        for(const perm of permissionsArray)
-        {
-          for(const course of data)
-          {
-            if(perm.courseId===course._id && perm.modify.write)
-            {
+      } else if (permissionsArray.length > 0) {
+        const filteredCourses = [];
+        for (const perm of permissionsArray) {
+          for (const course of data) {
+            if (perm.courseId === course._id && perm.modify.write) {
               filteredCourses.push(course);
             }
           }
@@ -96,7 +89,13 @@ export default function SelectInputs (props) {
       setIsSpinnerActive(false);
       setHttpError(error.message);
     }
-  }, [setHttpError,setIsSpinnerActive,university]);
+  }, [
+    setHttpError,
+    setIsSpinnerActive,
+    university,
+    isHeadAdmin,
+    permissionsArray,
+  ]);
 
   function selectInputChangeHandler(event) {
     if (event.target.id === "university") {
@@ -107,8 +106,7 @@ export default function SelectInputs (props) {
     }
   }
 
-  function showForm()
-  {
+  function showForm() {
     props.setIsQuestionVisible(true);
   }
 
@@ -121,25 +119,39 @@ export default function SelectInputs (props) {
   }, [props.university, getCourses]);
 
   return (
-    <div className={`${style.selectContainer} ${props.isQuestionVisible?`${style.hide}`:""}`}>
+    <div
+      className={`${style.selectContainer} ${
+        props.isQuestionVisible ? `${style.hide}` : ""
+      }`}
+    >
       <div className={style.singleContainer}>
-      <label htmlFor="university">Wybierz uniwersytet</label>
-      <select
-        id="university"
-        onChange={selectInputChangeHandler}
-        defaultValue="">
-        <option value="">-</option>
-        {universityList}
-      </select>
+        <label htmlFor="university">Wybierz uniwersytet</label>
+        <select
+          id="university"
+          onChange={selectInputChangeHandler}
+          defaultValue=""
+        >
+          <option value="">-</option>
+          {universityList}
+        </select>
       </div>
       <div className={style.singleContainer}>
         <label htmlFor="course">Wybierz kurs</label>
-      <select id="course" onChange={selectInputChangeHandler} defaultValue="">
-        <option value="">-</option>
-        {courseList}
-      </select>
+        <select id="course" onChange={selectInputChangeHandler} defaultValue="">
+          <option value="">-</option>
+          {courseList}
+        </select>
       </div>
-      <button type="button" disabled={props.showQuestionForm?false:true} className={`${props.showQuestionForm ? style.confirmButton:""} ${style.confirmStaticClass}`} onClick={showForm}>Potwierdź</button>
+      <button
+        type="button"
+        disabled={props.showQuestionForm ? false : true}
+        className={`${props.showQuestionForm ? style.confirmButton : ""} ${
+          style.confirmStaticClass
+        }`}
+        onClick={showForm}
+      >
+        Potwierdź
+      </button>
     </div>
   );
 }

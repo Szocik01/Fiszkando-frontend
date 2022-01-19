@@ -25,6 +25,7 @@ import BuyCourse from "./pages/BuyCourse";
 import Stripe from "./components/buyCourseComponents/Stripe";
 import Confirmation from "./components/buyCourseComponents/Confirmation";
 import io from "socket.io-client";
+import AllCourse from "./components/AllCursePage/AllCourse";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -33,23 +34,16 @@ function App() {
   const socket = io.connect("http://localhost:8080");
 
   useEffect(() => {
-    // const cookies = getCookies();
-    socket.on("grant_access", (data) => {
-      console.log(data);
-      // if (data.session !== socket.id) {
-      //   socket.emit("look_for_session", socket.id, cookies.uid);
-      // }
+    socket.on("connect", () => {
+      if (socket.connect_error) {
+        setAccess(false);
+      }
     });
-
-    // socket.on("remove_access_for_session", (session) => {
-    //   console.log("Session from remove--->", session);
-    //   console.log("My session: ", socket.id);
-    //   if (session === socket.id) {
-    //     setAccess(false);
-    //   } else {
-    //     setAccess(true);
-    //   }
-    // });
+    socket.on("to_many_users", (data) => {
+      if (socket.id !== data.validSession) {
+        setAccess(false);
+      }
+    });
   }, [socket]);
 
   useEffect(() => {
@@ -164,6 +158,7 @@ function App() {
                 <Route path="/checkout" element={<Stripe />} />
                 <Route path="/checkout/:uid" element={<Confirmation />} />
                 <Route path="/singleQuestions" element={<SingleQuestions />} />
+                <Route path="/chooseCourse/:action" element={<AllCourse />} />
                 <Route path="/questions" element={<Questions />} />
                 <Route
                   path="/questions_baseGenerator"

@@ -1,12 +1,13 @@
 import styles from "./styles/QuestionBaseGenerator.module.css";
-// import QuestionsBase from "./Questions_base";
 import { useState, useEffect, useCallback } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import QusetionItem from "./QuestionItem";
+import { SelectedCourseActions } from "../../storage/redux-index";
 
 const QuestionBaseGenerator = () => {
   const history = useNavigate();
+  const dispatch = useDispatch();
   const [allQuestions, setAllQuestions] = useState([]);
   const selectedCourse = useSelector((state) => state.selectedCourse);
   const auth = useSelector((state) => state.autoIndentification);
@@ -37,11 +38,20 @@ const QuestionBaseGenerator = () => {
   }, [auth, history]);
   useEffect(() => {
     if (!selectedCourse.id) {
-      console.log("ok");
-      return history("/question_base");
+      dispatch(
+        SelectedCourseActions.fetchCourseFromCookies({
+          success: () => {
+            sendQuestions();
+          },
+          failure: () => {
+            history("/chooseCourse/question_base");
+          },
+        })
+      );
+    } else {
+      sendQuestions();
     }
-    sendQuestions();
-  }, [sendQuestions]);
+  }, [sendQuestions, dispatch, history, selectedCourse]);
 
   return (
     <div className={styles.container}>

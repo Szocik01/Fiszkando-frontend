@@ -7,10 +7,18 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 export default function QuestionForm(props) {
   const [shouldReset, setShouldReset] = useState(false);
 
-  const correctAnswers = useMemo(() => {return [];}, []);
-  const wrongAnswers = useMemo(() => {return [];}, []);
-  const imagesArray = useMemo(() => {return [];}, []);
-  const questionObject = useMemo(() => {return [];}, []);
+  const correctAnswers = useMemo(() => {
+    return [];
+  }, []);
+  const wrongAnswers = useMemo(() => {
+    return [];
+  }, []);
+  const imagesArray = useMemo(() => {
+    return [];
+  }, []);
+  const questionObject = useMemo(() => {
+    return [];
+  }, []);
 
   const { setTrueQuestionsAmount, setFlaseQuestionsAmount, course } = props;
 
@@ -75,7 +83,7 @@ export default function QuestionForm(props) {
       });
     }
     let mainType;
-    correctAnswers.length>1 ? mainType="multiple" : mainType="single";
+    correctAnswers.length > 1 ? (mainType = "multiple") : (mainType = "single");
     formData.append("questionType", mainType);
     for (const [key, value] of formData) {
       console.log(key, value);
@@ -111,15 +119,35 @@ export default function QuestionForm(props) {
   const trueAnswerElementArray = [];
   const falseAnswerElementArray = [];
 
-     for (let i = 0; i < props.trueQuestionsAmount; i++) {
-        trueAnswerElementArray.push(
-      <SingleAnswer key={`${i}`} id={i} isModify={false} shouldReset={shouldReset} setShouldReset={setShouldReset} answerObjects={correctAnswers} imagesArray={imagesArray} currentCourse={props.course} uniqueClass={"correct"} />
+  for (let i = 0; i < props.trueQuestionsAmount; i++) {
+    trueAnswerElementArray.push(
+      <SingleAnswer
+        key={`${i}`}
+        id={i}
+        isModify={false}
+        shouldReset={shouldReset}
+        setShouldReset={setShouldReset}
+        answerObjects={correctAnswers}
+        imagesArray={imagesArray}
+        currentCourse={props.course}
+        uniqueClass={"correct"}
+      />
     );
   }
 
-    for (let i = 0; i < props.falseQuestionsAmount; i++) {
-        falseAnswerElementArray.push(
-      <SingleAnswer key={`${i}`} id={i} isModify={false} shouldReset={shouldReset} setShouldReset={setShouldReset} answerObjects={wrongAnswers} imagesArray={imagesArray} currentCourse={props.course}  uniqueClass={"wrong"} />
+  for (let i = 0; i < props.falseQuestionsAmount; i++) {
+    falseAnswerElementArray.push(
+      <SingleAnswer
+        key={`${i}`}
+        id={i}
+        isModify={false}
+        shouldReset={shouldReset}
+        setShouldReset={setShouldReset}
+        answerObjects={wrongAnswers}
+        imagesArray={imagesArray}
+        currentCourse={props.course}
+        uniqueClass={"wrong"}
+      />
     );
   }
 
@@ -145,7 +173,7 @@ export default function QuestionForm(props) {
   useEffect(() => {
     removeArraysData();
     console.log(correctAnswers, wrongAnswers, imagesArray);
-  }, [course, removeArraysData]);
+  }, [course, removeArraysData, correctAnswers, wrongAnswers, imagesArray]);
 
   useEffect(() => {
     if (shouldReset) {
@@ -153,24 +181,38 @@ export default function QuestionForm(props) {
     }
   }, [shouldReset, removeArraysData]);
 
-    return (
-      <div className={`${style.questionDataContainer} ${props.isQuestionVisible?`${style.visible}`:""}`}>
-        <button type="button" onClick={hideForm} className={style.returnButton}>
-          Powrót
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="2rem"
-            viewBox="0 0 24 24"
-            width="2rem"
-            fill="white">
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
-          </svg>
-        </button>
-        <div className={style.inputsContainer}>
-          <h4>Dodaj treść pytania</h4>
-          <SingleAnswer id={0} shouldReset={shouldReset} isModify={false} setShouldReset={setShouldReset} answerObjects={questionObject} imagesArray={imagesArray} currentCourse={props.course} uniqueClass={"question"}/>
-        </div>
+  return (
+    <div
+      className={`${style.questionDataContainer} ${
+        props.isQuestionVisible ? `${style.visible}` : ""
+      }`}
+    >
+      <button type="button" onClick={hideForm} className={style.returnButton}>
+        Powrót
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="2rem"
+          viewBox="0 0 24 24"
+          width="2rem"
+          fill="white"
+        >
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" />
+        </svg>
+      </button>
+      <div className={style.inputsContainer}>
+        <h4>Dodaj treść pytania</h4>
+        <SingleAnswer
+          id={0}
+          shouldReset={shouldReset}
+          isModify={false}
+          setShouldReset={setShouldReset}
+          answerObjects={questionObject}
+          imagesArray={imagesArray}
+          currentCourse={props.course}
+          uniqueClass={"question"}
+        />
+      </div>
       <div className={style.inputsContainer}>
         <h4>Poprawne odpowiedzi</h4>
         {trueAnswerElementArray}
