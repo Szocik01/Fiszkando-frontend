@@ -5,31 +5,31 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    min-height: 3rem;
+    min-height: 2.2rem;
     padding: 0 0.2rem;
 }
 
 .courseName
 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: black;
 }
 
 .price
 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: rgb(49, 99, 0);
     margin-left: auto;
     margin-right: 1rem;
 }
 
 .deleteButton{
-    padding: 0.2rem;
+    padding: 0.1rem;
     border-radius: 0.2rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.1rem;
+    font-size: 1rem;
     cursor: pointer;
     background-color: var(--delete-question-background-color);
     transition: all 0.1s ease-in-out;

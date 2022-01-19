@@ -10,9 +10,9 @@ import { Authoindenty } from "../storage/redux-index";
 import { Link, useNavigate } from "react-router-dom";
 import { Fragment } from "react";
 
-const Form = (props) => {
+const Form = () => {
   const history = useNavigate();
-
+  
   const [inputsInfo, setinputsInfo] = useState({
     mailL: "",
     passwordL: "",
@@ -198,7 +198,6 @@ const Form = (props) => {
       console.log(token);
       if (res.status === 200) {
         const dateToken = new Date(token.auth.token.expire);
-        props.socket.emit("user_logged_in", token.auth.UID);
 
         console.log("Dane są poprawne!");
         dispatch(
@@ -216,7 +215,7 @@ const Form = (props) => {
           document.cookie = `rememberToken=${token.auth.rememberMeToken.token}; expires=${dateTokenRemember}`;
         }
         setLoadingSpiner(false);
-        history(`/`, { replace: true });
+        history(`/`,{replace: true})
       }
     } catch (error) {
       console.log(error);

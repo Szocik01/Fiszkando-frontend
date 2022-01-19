@@ -20,32 +20,30 @@ const sidebarPositionSlice = createSlice({
 });
 
 const basketSlice = createSlice({
-  name: "basket",
+  name:"basket",
   initialState: {
-    items: [],
-    price: 0,
+    items:[],
+    price:0
   },
   reducers: {
-    addToBasket(state, action) {
+    addToBasket(state,action)
+    {
       state.items.push(action.payload);
-      state.price = +state.items
-        .reduce((total, currentValue) => {
-          return total + currentValue.price;
-        }, 0)
-        .toFixed(2);
+      state.price = +state.items.reduce((total,currentValue)=>{
+        return total + currentValue.price; 
+      },0).toFixed(2);
     },
-    removeFromBasket(state, action) {
-      state.items = state.items.filter((item) => {
+    removeFromBasket(state,action)
+    {
+      state.items = state.items.filter((item)=>{
         return item.id !== action.payload;
       });
-      state.price = +state.items
-        .reduce((total, currentValue) => {
-          return total + currentValue.price;
-        }, 0)
-        .toFixed(2);
-    },
-  },
-});
+      state.price = +state.items.reduce((total,currentValue)=>{
+        return total + currentValue.price; 
+      },0).toFixed(2); 
+    }
+  }
+})
 
 const AuthIdentificationInfo = createSlice({
   name: "autoIndentification",
@@ -70,35 +68,16 @@ const AuthIdentificationInfo = createSlice({
   },
 });
 
-const SelectedCourse = createSlice({
-  name: "selectedCourse",
-  initialState: {
-    id: "",
+const AuthoCurseId = createSlice({
+  name: 'autoCurseId',
+  initialState:{
+    id: ""
   },
-  reducers: {
-    setId(state, action) {
-      state.id = action.payload.id;
-      action.payload.cb();
-    },
-    fetchCourseFromCookies(state, action) {
-      const cookies = document.cookie.split(";");
-      let index = -1;
-      cookies.forEach((c, i) => {
-        const include = c.includes("courseId");
-        if (include) {
-          index = i;
-        }
-      });
-
-      if (index > -1) {
-        const id = cookies[index].split("=")[1];
-        state.id = id;
-        action.payload.success();
-      } else {
-        action.payload.failure();
-      }
-    },
-  },
+  reducers:{
+    IndetificationCurseId(state, action){
+      state.id = action.payload.id
+    }
+  }
 });
 
 const store = configureStore({
@@ -107,8 +86,8 @@ const store = configureStore({
     autoIndentification: AuthIdentificationInfo.reducer,
     informationBoxManager: informationBoxManager.reducer,
     confirmation: confirmation.reducer,
-    selectedCourse: SelectedCourse.reducer,
-    basket: basketSlice.reducer,
+    autoCurseId: AuthoCurseId.reducer,
+    basket: basketSlice.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -119,5 +98,5 @@ const store = configureStore({
 export default store;
 export const positionActions = sidebarPositionSlice.actions;
 export const Authoindenty = AuthIdentificationInfo.actions;
-export const SelectedCourseActions = SelectedCourse.actions;
+export const AuthCurseId = AuthoCurseId.actions;
 export const basketActions = basketSlice.actions;

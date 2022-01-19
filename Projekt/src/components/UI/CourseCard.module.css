@@ -1,84 +1,84 @@
-.container {
-  max-width: 15rem;
-  min-height: 20rem;
-  width: 100%;
-  position: relative;
-  transition: all 0.2s ease-in-out;
-  z-index: 0;
-  overflow: hidden;
-  box-shadow: 8px 9px 20px -11px rgba(66, 68, 90, 1);
-  border-radius: 10px;
-  font-family: Verdana;
+.container{
+    max-width: 15rem;
+    min-height: 20rem;
+    width: 100%;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+    z-index: 0;
+    overflow: hidden;
+    margin: auto auto;
+    box-shadow: 8px 9px 20px -11px rgba(66, 68, 90, 1);
+    border-radius: 10px;
 }
-.mainCard {
-  width: auto;
-  height: 25rem;
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-  background-color: #fff;
-  cursor: pointer;
+.mainCard{
+    width: auto;
+    height: 25rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: #fff;
+    cursor: pointer;
 }
-.container:hover {
-  transform: scale(1.1);
+.container:hover{
+    transform: scale(1.1);
 }
-.backdrop {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  position: absolute;
-  width: 100%;
-  height: 25rem;
-  background-color: rgb(10, 10, 10);
-  opacity: 0.9;
-  border-radius: 10px;
-  z-index: 10;
-  transition: 0.5s ease;
-  align-self: flex-end;
-  margin-top: 300%;
-  cursor: pointer;
+.backdrop{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    width: 100%;
+    height: 25rem;
+    background-color: rgb(10, 10, 10);
+    opacity: 0.9;
+    border-radius: 10px;
+    z-index: 10;
+    transition: 0.5s ease;
+    align-self: flex-end;
+    margin-top: 300%;
+    cursor: pointer;
 }
-.backdrop_cheack {
-  background-color: rgb(73, 245, 4);
+.backdrop_cheack{
+    background-color: rgb(73, 245, 4);
 }
-.backdrop > p {
-  color: white;
-  font-size: 1.5rem;
+.backdrop > p{
+    color: white;
+    font-size: 1.5rem;
 }
-.backdropMove {
-  margin: 0;
+.backdropMove{
+    margin: 0;
 }
-.image {
-  width: 100%;
-  height: 40%;
+.image{
+    width: 100%;
+    height: 40%;
 }
-.image > img {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
+.image > img{
+    width: 100%;
+    height: 100%;
+    background-size: cover;
 }
-.title {
-  width: 100%;
-  height: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  text-align: center;
+.title{
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    text-align: center;
 }
-.title > p {
-  font-family: Georgia, "Times New Roman", Times, serif;
+.title > p{
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
-.info {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  text-align: center;
-  padding: 2rem;
-  width: 100%;
-  height: 10rem;
-  color: rgb(121, 117, 117);
+.info{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+    height: 10rem;
+    color: rgb(121, 117, 117);
 }
-.info > p {
-  font-family: Georgia, "Times New Roman", Times, serif;
+.info > p{
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
