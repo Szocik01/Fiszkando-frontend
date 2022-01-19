@@ -1,6 +1,7 @@
 .main {
   width: 100%;
   border: 1px solid #ccc;
+  background-color: white;
   margin: auto auto;
   border-radius: 10px;
   padding: 0.5rem;
