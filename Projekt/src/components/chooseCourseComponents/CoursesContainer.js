@@ -3,6 +3,7 @@ import LoadingSpinner from "../UI/LoadingSpinner";
 import SingleCard from "./SingleCard";
 import { useEffect, useCallback, useState, Fragment } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function CoursesContainer(props) {
   const [coursesList, setCoursesList] = useState([]);
@@ -17,6 +18,12 @@ export default function CoursesContainer(props) {
     university,
     basketData,
   } = props;
+
+  const logindata = useSelector((state) => {
+    return state.autoIndentification;
+  });
+  const uid = logindata.uid;
+  const token = logindata.token;
 
   const getCourses = useCallback(async () => {
     try {
@@ -69,7 +76,7 @@ export default function CoursesContainer(props) {
       {!isSpinnerActive && (
         <Fragment>
           <div className={style.buttonContainer}>
-            <Link to="/buy_course" className={style.basket} >
+            {uid && token && <Link to="/buy_course" className={style.basket} >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"
@@ -82,7 +89,7 @@ export default function CoursesContainer(props) {
               </svg>
               Koszyk
               <div className={style.itemsCount}>{basketData.items.length}</div>
-            </Link>
+            </Link>}
             <button
               type="button"
               onClick={hideForm}

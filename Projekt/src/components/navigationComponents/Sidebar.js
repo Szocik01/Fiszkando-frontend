@@ -49,7 +49,7 @@ export default function Sidebar(props) {
         />
         <SidebarElement
           iconClass="icon-koszyk"
-          link="/choose_course"
+          link="/choose_course_to_buy"
           linkText="Wybór kursów"
           marginValue={3 * 3.4}
         />
