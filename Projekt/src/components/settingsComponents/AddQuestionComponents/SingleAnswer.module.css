@@ -1,0 +1,164 @@
+:root
+{
+    --error-message-color:rgb(201, 0, 0);
+    --data-display-background-color:rgb(238, 238, 238);
+    --delete-image-background-color:red;
+    --image-name-text-color:black;
+}
+
+.answerContainer
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.6rem;
+    box-shadow: var(--content-container-shadow) 1px 2px 8px 1px;
+    border-radius: 10px;
+    width: 100%;
+    position: relative;
+}
+
+.answerContainer.question
+{
+    box-shadow: none;
+    gap: 1rem;
+}
+
+.answerContainer input
+{
+    width: 90%;
+    height: 2rem;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--background-color);
+    font-size: 1.2rem;
+}
+
+.container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.errorsContainer
+{
+    width: 100%;
+    border-radius: 8px;
+    background-color: var(--data-display-background-color) ;
+}
+
+.errorsContainer p
+{
+    color: var(--error-message-color);
+    margin: 0.4rem 0;
+}
+
+.imagePreviewContainer
+{
+    position: relative;
+}
+
+.imagePreview
+{
+    box-shadow: rgba(117, 117, 117, 0.692) 0px 0px 7px 1px;
+    border-radius: 8px;
+    min-width: 11rem;
+    max-width: 12rem;
+    min-height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image
+{
+    border-radius: 8px;
+    max-width: 100%;
+}
+
+.errorsContainer .imageNameText
+{
+    color: var(--image-name-text-color);
+}
+
+.deleteImage,
+.deleteAnswerButton
+{
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-top: 4px;
+    margin-right: 4px;
+    display: flex;
+    align-items: center;
+    background-color: var(--delete-image-background-color);
+    border-radius: 3px;
+}
+
+.deleteAnswerButton
+{
+    border: none;
+}
+
+@media screen and (min-width: 550px) {
+    .answerContainer
+    {
+        width: 100%;
+    }
+
+    .questionImageAndErrorContainer
+    {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content:space-evenly;
+        align-items: center;
+    }
+
+    .questionImageAndErrorContainer .errorsContainer
+    {
+        width: 13rem;
+        height: 7rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+
+    .questionImageAndErrorContainer .errorsContainer
+    {
+        width: 18rem;
+        height: 8rem;
+    }
+
+    .imagePreview
+    {
+        min-width: 13rem;
+        max-width: 14rem;
+        min-height: 8rem;
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .imagePreview
+    {
+        min-width: 16rem;
+        max-width: 17rem;
+        min-height: 9rem;
+    }
+
+    .questionImageAndErrorContainer .errorsContainer
+    {
+        width: 23rem;
+        height: 9rem;
+    }
+}

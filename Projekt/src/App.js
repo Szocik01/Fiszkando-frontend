@@ -19,15 +19,42 @@ import { useState } from "react";
 import styles from "./App.module.css";
 import Circe from "../src/components/formComponents/Circle";
 import stylesCirce from "../src/components/formComponents/Circle.module.css";
-import QuestionBase from '../src/pages/QuestionBase';
+import QuestionBase from "../src/pages/QuestionBase";
 import QuestionBaseGenerator from "../src/components/Question_base/QuestionBaseGenerator";
 import BuyCourse from "./pages/BuyCourse";
 import Stripe from "./components/buyCourseComponents/Stripe";
 import Confirmation from "./components/buyCourseComponents/Confirmation";
+import io from "socket.io-client";
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [access, setAccess] = useState(true);
   const dispatch = useDispatch();
+  const socket = io.connect("http://localhost:8080");
+
+  useEffect(() => {
+    // const cookies = getCookies();
+    socket.on("grant_access", (data) => {
+      console.log(data);
+      // if (data.session !== socket.id) {
+      //   socket.emit("look_for_session", socket.id, cookies.uid);
+      // }
+    });
+
+    // socket.on("remove_access_for_session", (session) => {
+    //   console.log("Session from remove--->", session);
+    //   console.log("My session: ", socket.id);
+    //   if (session === socket.id) {
+    //     setAccess(false);
+    //   } else {
+    //     setAccess(true);
+    //   }
+    // });
+  }, [socket]);
+
+  useEffect(() => {
+    console.log("Acces changed: ", access);
+  }, [access]);
 
   const logindata = useSelector((state) => {
     return state.autoIndentification;
@@ -64,6 +91,7 @@ function App() {
 
   const checkInitialCookies = useCallback(
     async (authCookies) => {
+      setLoading(true);
       try {
         const res = await fetch("http://localhost:8080/login-checker", {
           method: "POST",
@@ -78,6 +106,7 @@ function App() {
         });
         const parsedRes = await res.json();
         if (res.status === 200) {
+          socket.emit("user_logged_in", authCookies.uid);
           dispatch(
             Authoindenty.IndetificationShow({
               rememberToken: authCookies.rememberToken,
@@ -100,7 +129,10 @@ function App() {
 
   useEffect(() => {
     const authCookies = getCookies();
-    checkInitialCookies(authCookies);
+    if ((authCookies.rememberToken || authCookies.token) && authCookies.uid) {
+      checkInitialCookies(authCookies);
+    }
+    setLoading(false);
   }, [getCookies, checkInitialCookies]);
 
   return (
@@ -127,13 +159,16 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="/buy_course" element={<BuyCourse />} />
 
-            {uid && token && (
+            {uid && token && access && (
               <Fragment>
                 <Route path="/checkout" element={<Stripe />} />
                 <Route path="/checkout/:uid" element={<Confirmation />} />
                 <Route path="/singleQuestions" element={<SingleQuestions />} />
                 <Route path="/questions" element={<Questions />} />
-                <Route path="/questions_baseGenerator" element={<QuestionBaseGenerator  />} />
+                <Route
+                  path="/questions_baseGenerator"
+                  element={<QuestionBaseGenerator />}
+                />
                 <Route path="/question_base" element={<QuestionBase />} />
                 <Route path="/TestStrona" element={<TestStrona />} />
                 <Route path="/contact" element={<Contact />} />
@@ -145,7 +180,10 @@ function App() {
               element={<FormRetrievePassword />}
             />
             {!(uid && token) && (
-              <Route path="/authentication" element={<Form />} />
+              <Route
+                path="/authentication"
+                element={<Form socket={socket} />}
+              />
             )}
             <Route
               path="/authorize/reset/:uid/:token"

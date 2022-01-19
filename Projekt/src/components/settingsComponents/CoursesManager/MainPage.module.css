@@ -1,0 +1,71 @@
+.container {
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease-in;
+  flex: none;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  width: calc(100% - 0.5rem);
+}
+
+.wraper {
+  display: flex;
+  flex-wrap: wrap;
+  height: calc(100% - 4rem);
+  position: relative;
+  overflow-y: auto;
+  margin-top: 4rem;
+}
+
+.wraper::-webkit-scrollbar {
+  border-radius: 0.5rem;
+  background-color: #eee;
+}
+.wraper::-webkit-scrollbar-thumb {
+  border-radius: 0.5rem;
+  background-color: rgb(132, 101, 255);
+}
+
+.addBtn {
+  padding: 1rem;
+  border-radius: 50%;
+  border: 2px solid rgb(8, 70, 8);
+  background-color: rgb(26, 173, 33);
+  position: sticky;
+  bottom: 1rem;
+  z-index: 99;
+  justify-self: flex-end;
+  align-self: flex-end;
+  margin-left: auto;
+  margin-right: 1rem;
+  box-shadow: 1px 1px 10px 2px rgb(221, 213, 213);
+}
+
+.addBtn:active {
+  animation: btnClick 0.5s ease-in-out;
+}
+
+/* .move {
+  transform: translateX(110%);
+}
+
+.moveToLeft {
+  transform: translateX(-110%);
+} */
+
+@keyframes btnClick {
+  0% {
+    transform: scale(0.95);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

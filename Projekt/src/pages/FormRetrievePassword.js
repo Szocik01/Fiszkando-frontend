@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 import Input from "../components/formComponents/Input";
 import styles from "./FormRetrievePassword.module.css";
-=======
-import Input from '../components/formComponents/Input';
-import styles from './FormRetrievePassword.module.css';
->>>>>>> parent of c3d3e60 (Merge branch 'Development' of https://github.com/Szocik01/Frontend into Development)
 import ButtonShow from "../components/formComponents/ButtonShow";
 import Spiner from "../components/formComponents/Spinner";
 import { useState } from "react";

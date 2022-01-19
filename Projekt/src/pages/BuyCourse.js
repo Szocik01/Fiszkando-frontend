@@ -1,63 +1,21 @@
-import style from "./BuyCourse.module.css";
-import CoursesContainer from "../components/buyCourseComponents/CoursesContainer";
-import UniversitiesContainer from "../components/buyCourseComponents/UniversitiesContainer";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { positionActions } from "../storage/redux-index";
-import { informationBoxManagerActions } from "../storage/information-box";
+import style from "./BuyCourse.module.css"
+import Stripe from "../components/chooseCourseComponents/Stripe"
+import BasketContainer from "../components/buyCourseComponents/BasketContainer"
+import { useEffect,useState } from "react"
+import { useDispatch } from "react-redux"
+import { positionActions } from "../storage/redux-index"
 
-export default function BuyCourse() {
-  const [isCourses, setIsCourses] = useState(false);
-  const [university, setUniversity] = useState("");
-  const [httpError, setHttpError] = useState("");
-  const [isSpinnerActive, setIsSpinnerActive] = useState(false);
+export default function BuyCourse()
+{
+    const [showStripe,setShowStripe]=useState(false);
 
-  const dispatch = useDispatch();
+    const dispatch=useDispatch();
 
-  const logindata = useSelector((state) => {
-    return state.autoIndentification;
-  });
-  const uid = logindata.uid;
-  const token = logindata.token;
+    useEffect(() => {
+        dispatch(positionActions.pagePositionChange(4 * 3.4));
+      }, [dispatch]);
 
-  const basketData=useSelector((state)=>{
-    return state.basket;
-  });
-
-  console.log(basketData)
-
-  useEffect(()=>{
-    if(httpError)
-    {
-      dispatch(informationBoxManagerActions.setBox({message:httpError,isError:true}));
-      dispatch(informationBoxManagerActions.toggleVisibility());
-      setHttpError("");
-    }
-  },[httpError,dispatch]);
-
-  useEffect(() => {
-    dispatch(positionActions.pagePositionChange(3 * 3.4));
-  }, [dispatch]);
-
-  return (
-    <div className={`${style.siteContainer} ${uid && token && style.logged}`}>
-      <UniversitiesContainer
-        setUniversity={setUniversity}
-        setHttpError={setHttpError}
-        setIsSpinnerActive={setIsSpinnerActive}
-        setIsCourses={setIsCourses}
-        isSpinnerActive={isSpinnerActive}
-        isCourses={isCourses}
-      />
-      <CoursesContainer
-        setIsCourses={setIsCourses}
-        setHttpError={setHttpError}
-        setIsSpinnerActive={setIsSpinnerActive}
-        university={university}
-        isSpinnerActive={isSpinnerActive}
-        isCourses={isCourses}
-        basketData={basketData}
-      />
+    return <div className={style.siteContainer}>
+        {showStripe ? <Stripe/> :<BasketContainer setShowStripe={setShowStripe}/>}
     </div>
-  );
 }

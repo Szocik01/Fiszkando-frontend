@@ -1,0 +1,120 @@
+:root
+{
+  --item-active-background-color:rgb(240, 240, 240);
+  --item-box-shadow-color:rgb(219, 219, 219);
+  --delete-question-background-color:rgb(255, 72, 72);
+  --item-border-color:#eee;
+}
+
+li {
+    list-style: none;
+  }
+  
+.item {
+    width: 100%;
+    border: 1px solid var(--item-border-color);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 2px 2px 5px var(--item-box-shadow-color);
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+    gap: 1rem;
+}
+
+.item:active
+{
+    background-color: var(--item-active-background-color);
+    animation: buttonClick ease-out 0.5s forwards;
+}
+  
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 60%;
+    color: var(--font-title-color)
+}
+
+.title.question
+{
+  font-size: 1.3rem;
+}
+  
+.schoolName {
+    font-weight: bold;
+    width: 50%;
+    font-size: 1.2rem;
+}
+  
+.price {
+    justify-self: flex-end;
+    width: calc(40% - 1rem);
+    margin-top: 0.5rem;
+    text-align: end;
+    font-size: 1.3rem;
+    color: var(--price-font-color);
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.deleteBtn{
+  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border: 1px solid;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  gap: 0.5rem;
+  cursor: pointer;
+  background-color: var(--delete-question-background-color);
+  transition: all 0.1s ease-in-out;
+}
+
+.deleteBtn:active{
+  animation: btnClick 0.5s ease-in-out forwards;
+}
+
+.price.question
+{
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+@media screen and (min-width:376px)
+{
+  .price.question
+  {
+    font-size: 1.3rem;
+  }
+
+  .title.question
+  {
+    font-size: 1.5rem;
+  }
+  
+}
+
+@keyframes buttonClick
+{
+    0% {
+        transform: scale(0.99);
+      }
+      50% {
+        transform: scale(1.01);
+      }
+      100% {
+        transform: scale(1);
+      }
+}

@@ -1,0 +1,97 @@
+.container {
+  display: flex;
+  justify-content: flex-end;
+  width: calc(100% - 1rem);
+  position: absolute;
+  top: 5rem;
+  z-index: 1001;
+  margin: 0 0 2rem 0;
+}
+.main {
+  margin: 0.5rem;
+  width: 90vh;
+  min-height: 7vh;
+  text-align: center;
+  background-color: rgb(14, 179, 14);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  border-radius: 8px;
+  border: 2px solid rgb(11, 71, 11);
+  box-shadow: 0px 0px 24px -4px rgb(24, 124, 2);
+  color: rgb(11, 71, 11);
+}
+.container_paragraf {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+.container_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+.paragraf {
+  font-family: sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.button {
+  font-family: sans-serif;
+  font-size: bold;
+  width: 100%;
+  border-radius: 8px;
+  width: 100%;
+  padding: 0.4rem;
+  cursor: pointer;
+  border: 0;
+  color: black;
+}
+.mainError {
+  border-color: rgb(87, 8, 8);
+  background-color: rgb(238, 20, 20);
+  color: rgb(87, 8, 8);
+  box-shadow: 0px 0px 24px -4px rgb(151, 7, 7);
+}
+.button:active {
+  animation: btnClick 0.5s ease-in-out;
+}
+@media (min-width: 768px) {
+  .container {
+    top: auto;
+    bottom: 0;
+  }
+  .main {
+    height: 5vh;
+    width: 50vh;
+    padding: 1.5rem;
+  }
+  .container_paragraf {
+    width: 40vh;
+  }
+  .container_button {
+    width: 10vh;
+  }
+  .button {
+    height: 2rem;
+    padding: 0;
+  }
+  .paragraf {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+}
+@keyframes btnClick {
+  0% {
+    transform: scale(0.95);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

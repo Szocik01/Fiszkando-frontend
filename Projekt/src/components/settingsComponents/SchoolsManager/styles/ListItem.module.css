@@ -1,0 +1,79 @@
+:root {
+  --font-name-color: rgb(133, 40, 255);
+}
+
+.container {
+  width: 100%;
+  border: 1px solid #eee;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  box-shadow: 2px 2px 5px #eee;
+  background-color: white;
+}
+
+.actions {
+  width: fit-content;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--font-name-color);
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.deleteBtn,
+.modifyBtn {
+  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border: 1px solid;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.deleteBtn:active,
+.modifyBtn:active {
+  animation: btnClick 0.5s ease-in-out;
+}
+
+.deleteBtn {
+  border-color: rgb(201, 0, 0);
+  background-color: rgb(255, 72, 72);
+}
+
+.modifyBtn {
+  border-color: rgb(4, 4, 168);
+  background-color: rgb(94, 94, 252);
+}
+
+@keyframes btnClick {
+  0% {
+    transform: scale(0.95);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

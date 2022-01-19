@@ -1,0 +1,8 @@
+.formContainer
+{
+    width: 100%;
+    margin:0;  
+    /* border: yellow 2px solid; */
+    display: flex;
+    height: 100%;
+}

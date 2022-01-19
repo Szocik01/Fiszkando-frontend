@@ -1,0 +1,135 @@
+.coursesContainer
+{
+  /* border: purple solid 2px; */
+  min-height: 100%;
+  width: 100%;
+  flex: none;
+  transition: 0.3s ease-out transform;
+  transform: translateX(-220%);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.coursesContainer.visible
+{
+  transform: translateX(-100%);
+}
+
+.buttonContainer
+{
+  width: 100%;
+  height: fit-content;
+  display: flex;
+}
+
+.basket
+{
+  background-color: var(--background-color);
+  width: 8rem;
+  color: white;
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: rgb(214 214 214 / 53%) 2px 2px 10px 0.5px;
+  padding: 0.3rem 0rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  text-decoration: none;
+}
+
+.itemsCount
+{
+  width: 1.2rem;
+  background-color: rgb(240, 240, 240);
+  height: 1.2rem;
+  border-radius: 5px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.returnButton 
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  font-size: 1.2rem;
+  border-radius: 2rem;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  padding: 0.3rem 0rem;
+  color: white;
+  width: 8rem;
+  cursor: pointer;
+  box-shadow: rgba(214, 214, 214, 0.527) 2px 2px 10px 0.5px;
+}
+
+.returnButton svg 
+{
+  margin-left: 0.5rem;
+}
+
+.basket:active,
+.returnButton:active 
+{
+  animation: btnClick 0.5s ease-in-out forwards;
+}
+
+@media screen and (min-width:426px)
+{
+  .coursesContainer
+  {
+    transition: 0.5s ease-out transform;
+  }
+  
+  .basket
+  {
+    font-size: 1.2rem;
+    width: 10rem;
+  }
+
+  .basketDisplay
+  {
+    width: 25rem;
+  }
+
+  .returnButton
+  {
+    width: 9rem;
+  }
+
+  .footer
+  {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (min-width:769px)
+{
+  .basketDisplay
+  {
+    width: 34rem;
+    height: 18rem;
+  }
+}
+
+@keyframes btnClick {
+    0% {
+      transform: scale(0.95);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+

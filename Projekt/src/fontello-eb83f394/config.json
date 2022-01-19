@@ -1,0 +1,58 @@
+{
+  "name": "",
+  "css_prefix_text": "icon-",
+  "css_use_suffix": false,
+  "hinting": true,
+  "units_per_em": 1000,
+  "ascent": 850,
+  "glyphs": [
+    {
+      "uid": "27531040afb54140f4d449321c9cec3a",
+      "css": "pytanie",
+      "code": 59394,
+      "src": "typicons"
+    },
+    {
+      "uid": "1b58555745e7378f7634ee7c63eada46",
+      "css": "baza",
+      "code": 61449,
+      "src": "mfglabs"
+    },
+    {
+      "uid": "7b6c617d6d1e3f22db493839f0483bf6",
+      "css": "test",
+      "code": 59395,
+      "src": "elusive"
+    },
+    {
+      "uid": "26aba7edd46944209b4961670675a813",
+      "css": "ustawienia",
+      "code": 59396,
+      "src": "websymbols"
+    },
+    {
+      "uid": "e36d581e4f2844db345bddc205d15dda",
+      "css": "my",
+      "code": 59393,
+      "src": "elusive"
+    },
+    {
+      "uid": "dc4a03854ef986d64565143bea4241aa",
+      "css": "main",
+      "code": 59392,
+      "src": "elusive"
+    },
+    {
+      "uid": "cddbeffea9d90c5db93d5d3e77b8893e",
+      "css": "koszyk",
+      "code": 61975,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "d58dc0a0927a7dea2992f615f2fbf400",
+      "css": "portfel",
+      "code": 59397,
+      "src": "linecons"
+    }
+  ]
+}
