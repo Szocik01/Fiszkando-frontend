@@ -1,0 +1,26 @@
+.universitiesContainer
+{
+  /* border: green solid 2px; */
+  min-height: 100%;
+  width: 100%;
+  flex: none;
+  transition: 0.3s ease-out transform;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.universitiesContainer.hidden
+{
+    transform: translateX(130%);
+}
+
+@media screen and (min-width:426px)
+{
+  .universitiesContainer
+  {
+    transition: 0.5s ease-out transform;
+  }
+}

@@ -1,11 +1,7 @@
-import AllCourse from "../components/AllCursePage/AllCourse";
+import SingleQuestions from "../components/SingleQuestion/SingleQuestions";
 
-const Questions = () =>{
-    return (
-        <AllCourse 
-            page={'/singleQuestions'}
-        />
-    );
+const Questions = () => {
+  return <SingleQuestions />;
 };
 
 export default Questions;

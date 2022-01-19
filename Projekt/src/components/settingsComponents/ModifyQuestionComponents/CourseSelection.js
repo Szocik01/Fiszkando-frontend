@@ -14,7 +14,7 @@ export default function CourseSelection(props) {
   });
   const isHeadAdmin = logindata.isHeadAdmin;
   const permissionsArray = logindata.permissions;
-  console.log(permissionsArray)
+  console.log(permissionsArray);
 
   const { setHttpError, setIsSpinnerActive } = props;
 
@@ -26,20 +26,14 @@ export default function CourseSelection(props) {
         throw new Error("Nieoczekiwany błąd serwera");
       }
       const data = await response.json();
-      if(isHeadAdmin)
-      {
+      if (isHeadAdmin) {
         setInitialCourses(data);
         setCurrentCourses(data);
-      }
-      else if(permissionsArray.length>0)
-      {
-        const filteredCourses=[];
-        for(const perm of permissionsArray)
-        {
-          for(const course of data)
-          {
-            if(perm.courseId===course._id && perm.modify.write)
-            {
+      } else if (permissionsArray.length > 0) {
+        const filteredCourses = [];
+        for (const perm of permissionsArray) {
+          for (const course of data) {
+            if (perm.courseId === course._id && perm.modify.write) {
               filteredCourses.push(course);
             }
           }
@@ -52,7 +46,13 @@ export default function CourseSelection(props) {
       setHttpError(error.message);
       setIsSpinnerActive(false);
     }
-  }, [setHttpError, setCurrentCourses, setIsSpinnerActive]);
+  }, [
+    setHttpError,
+    setCurrentCourses,
+    setIsSpinnerActive,
+    isHeadAdmin,
+    permissionsArray,
+  ]);
 
   function filter(array) {
     console.log(array);
@@ -72,7 +72,8 @@ export default function CourseSelection(props) {
       <SearchBar
         filter={filter}
         courses={currentCourses}
-        initialCourses={initialCourses}/>
+        initialCourses={initialCourses}
+      />
       <div className={style.wraper}>
         {currentCourses.length > 0 && (
           <ul className={style.listContainer}>

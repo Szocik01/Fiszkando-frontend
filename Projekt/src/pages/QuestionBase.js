@@ -1,11 +1,7 @@
-import AllCourse from "../components/AllCursePage/AllCourse";
+import QuestionBaseGenerator from "../components/Question_base/QuestionBaseGenerator";
 
-const QuestionBase = () =>{
-    return (
-        <AllCourse 
-            page={'/questions_baseGenerator'}
-        />
-    );
+const QuestionBase = () => {
+  return <QuestionBaseGenerator />;
 };
 
 export default QuestionBase;
