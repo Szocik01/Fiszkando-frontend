@@ -1,0 +1,31 @@
+.container {
+  width: 100vw;
+  height: calc(100vh - 3rem);
+  padding: 0.25rem 0.25rem 5rem;
+  overflow: auto;
+}
+
+.list {
+  width: 100%;
+  max-width: 80rem;
+}
+
+.questions__container {
+  width: 100%;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+@media (min-width: 768px) {
+  .container {
+    width: calc(100vw - 4rem);
+    margin-left: auto;
+    padding: 1rem 1rem 5rem;
+  }
+}
