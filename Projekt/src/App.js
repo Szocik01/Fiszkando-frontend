@@ -23,6 +23,7 @@ import QuestionBase from "../src/pages/QuestionBase";
 import QuestionBaseGenerator from "../src/components/Question_base/QuestionBaseGenerator";
 import BuyCourse from "./pages/BuyCourse";
 import Stripe from "./components/buyCourseComponents/Stripe";
+import ChooseCourse from "./pages/ChooseCourse"
 import Confirmation from "./components/buyCourseComponents/Confirmation";
 import io from "socket.io-client";
 import AllCourse from "./components/AllCursePage/AllCourse";
@@ -151,10 +152,10 @@ function App() {
         {!loading && (
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/buy_course" element={<BuyCourse />} />
-
+            <Route path="/choose_course_to_buy" element={<ChooseCourse/>}/>
             {uid && token && access && (
               <Fragment>
+                <Route path="/buy_course" element={<BuyCourse />}/>
                 <Route path="/checkout" element={<Stripe />} />
                 <Route path="/checkout/:uid" element={<Confirmation />} />
                 <Route path="/singleQuestions" element={<SingleQuestions />} />
