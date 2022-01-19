@@ -66,6 +66,7 @@ const Question = (props) => {
     <div className={styles.main}>
       <div className={styles.managerContainer}>
         <svg
+          onClick={props.reporthandler}
           className={styles.svg}
           xmlns="http://www.w3.org/2000/svg"
           height="40px"
