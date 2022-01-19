@@ -1,6 +1,6 @@
 import styles from '../../../pages/FormResetPassword.module.css';
 import Input from '../../formComponents/Input';
-import ButtonShow from "../../formComponents/ButtonShow";
+import ButtonShow from "../../formComponents/buttonShow";
 import Spiner from '../../formComponents/Spinner';
 import { useEffect, useState } from 'react';
 import { useCallback } from 'react';

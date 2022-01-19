@@ -1,6 +1,6 @@
 import Input from '../components/formComponents/Input';
 import styles from './FormRetrievePassword.module.css';
-import ButtonShow from "../components/formComponents/ButtonShow";
+import ButtonShow from "../components/formComponents/buttonShow";
 import Spiner from "../components/formComponents/Spinner";
 import { useState } from 'react';
 import { useNavigate  } from 'react-router-dom';

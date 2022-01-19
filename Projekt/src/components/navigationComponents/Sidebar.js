@@ -49,21 +49,27 @@ export default function Sidebar(props) {
         />
         <SidebarElement
           iconClass="icon-koszyk"
-          link="/buy_course"
-          linkText="Zakup kursu"
+          link="/choose_course"
+          linkText="Wybór kursów"
           marginValue={3 * 3.4}
+        />
+          <SidebarElement
+          iconClass="icon-portfel"
+          link="/buy_course"
+          linkText="Płatności"
+          marginValue={4 * 3.4}
         />
         <SidebarElement
           iconClass="icon-ustawienia"
           link="/settings/change_password"
           linkText="Ustawienia"
-          marginValue={4 * 3.4}
+          marginValue={5 * 3.4}
         />
         <SidebarElement
           iconClass="icon-my"
           link="/contact"
           linkText="Kontakt"
-          marginValue={5 * 3.4}
+          marginValue={6 * 3.4}
         />
       </ul>
     </nav>

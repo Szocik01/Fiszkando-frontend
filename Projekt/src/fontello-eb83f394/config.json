@@ -43,10 +43,16 @@
       "src": "elusive"
     },
     {
-      "uid": "f5686c8ccdc0213b081ef95678160b6d",
+      "uid": "cddbeffea9d90c5db93d5d3e77b8893e",
       "css": "koszyk",
-      "code": 59398,
-      "src": "elusive"
+      "code": 61975,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "d58dc0a0927a7dea2992f615f2fbf400",
+      "css": "portfel",
+      "code": 59397,
+      "src": "linecons"
     }
   ]
 }
