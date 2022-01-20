@@ -15,36 +15,37 @@
 .managerContainer {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 0.3rem;
-}
-.managerContainer_btn{
-  display: flex;
-  padding: 0.3rem;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  margin: 0.5rem 0;
+  border-radius: 10px;
 }
 .buttonBtn{
-  width: 100%;
-  padding: 0.7rem;
   border-radius: 10px;
   border: none;
   font-size: 1.2rem;
-  background: linear-gradient(to right, #7810ff, #d606ff);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: white;
   font-weight: bold;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
   transition: 0.3s ease-in-out;
+  width: 10%;
+  position: relative;
+  overflow: hidden;
 }
 .buttonBtn:hover {
-  transform: scale(1.04);
+  width: 20%;
+  color: black;
+  justify-content:flex-end;
+  padding-left: 1rem;
+  cursor: pointer;
 }
-.managerContainer_svg{
-  border: 1px solid #ccc;
-  padding: 0.3rem 0.7rem;
-  border-radius: 10px;
-  box-shadow: 0px 0px 18px -7px rgba(66, 68, 90, 1);
+.titleP{
+  position: absolute;
+  top: 0.65rem;
+  left: 3.5rem;
 }
 .titleContainer {
   display: flex;
@@ -99,5 +100,8 @@
   }
   .managerContainer_btn{
     width: 50%;
+  }
+  .buttonBtn{
+    width: 4%;
   }
 }

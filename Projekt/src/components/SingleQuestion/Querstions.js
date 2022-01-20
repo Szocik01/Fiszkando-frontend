@@ -2,11 +2,9 @@ import styles from "./styles/Question.module.css";
 import { useState } from "react";
 import TitleContainerCard from "../UI/TitleContainerCard";
 import ContainerCard from "../UI/ContainerCard";
-import { useNavigate } from "react-router-dom";
 
 
 const Question = (props) => {
-  const history = useNavigate();
   const [changeTitle, setChangeTitle] = useState(false);
   const [selectedAnswearsIndexes, setSelectedAnswearIndexes] = useState([]);
   const [answearIsCorrect, setAnswearIsCorrect] = useState(true);
@@ -65,17 +63,10 @@ const Question = (props) => {
       setAnswearIsCorrect(false);
     }
   };
-  const AllCoursesHandler = () =>{
-    return history('/chooseCourse/questions')
-  };
 
   return (
     <div className={styles.main}>
       <div className={styles.managerContainer}>
-        <div className={styles.managerContainer_btn}>
-          <button className={styles.buttonBtn} onClick={AllCoursesHandler}>Zmień kurs</button>
-        </div>
-        <div className={styles.managerContainer_svg}>
           <svg
             onClick={props.reporthandler}
             className={styles.svg}
@@ -86,7 +77,6 @@ const Question = (props) => {
             >
             <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
           </svg>
-        </div>
       </div>
       <div className={styles.titleContainer}>
         <TitleContainerCard

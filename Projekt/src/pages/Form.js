@@ -198,6 +198,7 @@ const Form = (props) => {
       console.log(token);
       if (res.status === 200) {
         const dateToken = new Date(token.auth.token.expire);
+        const dataUID = new Date(token.auth.rememberMeToken.expire);
         props.socket.emit("user_logged_in", token.auth.UID);
 
         console.log("Dane są poprawne!");
@@ -209,7 +210,7 @@ const Form = (props) => {
             permissions: token.permissions,
           })
         );
-        document.cookie = `uid=${token.auth.UID}; expires=${dateToken}`;
+        document.cookie = `uid=${token.auth.UID}; expires=${dataUID}`;
         document.cookie = `token=${token.auth.token.token}; expires=${dateToken}`;
         if (token.auth.rememberMeToken) {
           const dateTokenRemember = new Date(token.auth.rememberMeToken.expire);
