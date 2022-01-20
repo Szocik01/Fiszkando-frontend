@@ -245,7 +245,6 @@ const Form = (props) => {
           username: enteredLogin,
           email: enteredMail,
           password: enteredPassword,
-          // repate: enteredPasswordRepat
         }),
         headers: {
           "Content-Type": "application/json",

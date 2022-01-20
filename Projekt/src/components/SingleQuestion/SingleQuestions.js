@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { SelectedCourseActions } from "../../storage/redux-index";
 import Question from "./Querstions";
 
-const SingleQuestions = () => {
+const SingleQuestions = (props) => {
   const history = useNavigate();
   const dispatch = useDispatch();
   const [allQuestions, setAllQuestions] = useState([]);
@@ -25,6 +25,7 @@ const SingleQuestions = () => {
       newInd = 0;
     }
     setCurrentIndex(newInd);
+    props.fetchId(allQuestions[newInd]);
   };
 
   const sendQuestions = useCallback(async () => {
@@ -61,6 +62,7 @@ const SingleQuestions = () => {
     const shuffledArray = parsedResponse.sort((a, b) => 0.5 - Math.random());
     setAllQuestions(shuffledArray);
     setCurrentQuestion(shuffledArray[0]);
+    props.fetchId(shuffledArray[0]);
 
     setLoading(false);
   }, [auth, courseId, history]);
@@ -88,6 +90,7 @@ const SingleQuestions = () => {
         <Question
           currentQuestion={currentQuestion}
           switchQuestion={switchQuestion}
+          reporthandler={props.reporthandler}
         />
       )}
     </div>

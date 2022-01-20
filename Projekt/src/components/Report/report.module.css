@@ -1,0 +1,103 @@
+.container{
+    width: 100%;
+    height: calc(100vh - 3rem);
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 18px -7px rgba(66, 68, 90, 1);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 0.5rem;
+}
+.main{
+    width: 100%;
+    height: 35rem;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 18px -7px rgba(66, 68, 90, 1);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+}
+.main_input_checkArea{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+}
+.main_title{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+}
+.main_inputs{
+    width: 100%;
+    min-height: 25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    padding: 0.5rem;
+}
+.main_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem;
+}
+.btn{
+    border: 0;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(to right, #7810ff, #d606ff);
+    border-radius: 10px;
+    transition: .5s;  
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: white;
+}
+.btn:hover{
+    transform: scale(1.05);
+}
+.areaText{
+    width: 100%;
+    height: 10rem;
+    padding: 1rem;
+    border-radius: 10px;
+}
+@media (min-width: 768px) {
+    .main {
+      width: 50%;
+    }
+    .main_inputs{
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+    .btn{
+        width: 80%;
+        padding: 0.8rem;
+    }
+    .areaText{
+        height: 12rem;
+    }
+    .main_input_checkArea{
+        justify-content: flex-start;
+    }
+    .main_input_checkArea > input{
+        margin-right: 0.4rem;
+    }
+  }
+  
