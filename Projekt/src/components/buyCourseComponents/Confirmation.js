@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import PaymentAuthorized from "../UI/PaymentAuthorized";
 
 const Confirmation = () => {
   const uid = useParams().uid;
@@ -25,7 +26,11 @@ const Confirmation = () => {
     grantAccessHandler();
   }, []);
 
-  return <></>;
+  return (
+    <>
+      <PaymentAuthorized />
+    </>
+  );
 };
 
 export default Confirmation;

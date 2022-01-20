@@ -1,0 +1,60 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rounded {
+  width: 20rem;
+  height: 20rem;
+  border: 1px solid green;
+  animation: success 1s forwards ease-in-out;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.firstArm {
+  height: 2px;
+  background-color: green;
+  transform: rotate(45deg) translateX(0.4rem);
+  animation: firstArm 0.5s forwards;
+  animation-delay: 1.3s;
+}
+.secondArm {
+  height: 2px;
+  background-color: green;
+  transform: rotate(-45deg) translateX(-1.9rem);
+  animation: secondArm 0.5s forwards;
+  animation-delay: 1s;
+}
+
+@keyframes firstArm {
+  from {
+    width: 0;
+  }
+  to {
+    width: 7rem;
+  }
+}
+
+@keyframes secondArm {
+  from {
+    width: 0;
+  }
+  to {
+    width: 4rem;
+  }
+}
+
+@keyframes success {
+  from {
+    border-radius: 100% 0% 100% 0% / 100% 0% 100% 0%;
+  }
+  to {
+    border-radius: 50%;
+  }
+}

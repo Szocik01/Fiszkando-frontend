@@ -1,0 +1,55 @@
+.container {
+  width: 100vw;
+  margin-left: auto;
+  margin-top: 3rem;
+  height: calc(100vh - 3rem);
+  background: rgba(136, 136, 136, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.svg {
+  max-width: 24rem;
+  fill: white;
+}
+
+.small-svg {
+  max-width: 23rem;
+  position: absolute;
+  inset: 0 0 0 0;
+  margin: auto auto;
+  fill: #8465ff;
+}
+
+.leftMove {
+  width: 1.5rem;
+}
+
+.message {
+  position: absolute;
+  inset: auto 1rem clamp(0.5rem, 1rem, 5rem) 1rem;
+  background: rgba(136, 136, 136, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 10px 1px rgb(136, 136, 136);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1rem, 1.5rem, 2rem);
+  font-weight: bold;
+  color: #8465ff;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: calc(100vw - 4rem);
+    height: calc(100vh - 5rem);
+    margin-top: 5rem;
+  }
+}

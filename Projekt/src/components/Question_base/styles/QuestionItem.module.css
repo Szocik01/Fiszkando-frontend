@@ -29,7 +29,12 @@
 }
 
 .rotated_svg {
-  transform: rotate(0deg);
+  transform: rotate(90deg);
+  transition: all 0.3s ease-in-out;
+}
+
+.svg {
+  transition: all 0.3s ease-in-out;
 }
 
 .img > img {

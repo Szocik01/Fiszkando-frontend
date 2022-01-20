@@ -23,14 +23,16 @@ import QuestionBase from "../src/pages/QuestionBase";
 import QuestionBaseGenerator from "../src/components/Question_base/QuestionBaseGenerator";
 import BuyCourse from "./pages/BuyCourse";
 import Stripe from "./components/buyCourseComponents/Stripe";
-import ChooseCourse from "./pages/ChooseCourse"
+import ChooseCourse from "./pages/ChooseCourse";
 import Confirmation from "./components/buyCourseComponents/Confirmation";
 import io from "socket.io-client";
 import AllCourse from "./components/AllCursePage/AllCourse";
+import RefuseAccess from "./components/UI/RefuseAccess";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [access, setAccess] = useState(true);
+  const [renewToken, setRenewToken] = useState(true);
   const dispatch = useDispatch();
   const socket = io.connect("http://localhost:8080");
 
@@ -102,6 +104,7 @@ function App() {
         const parsedRes = await res.json();
         if (res.status === 200) {
           socket.emit("user_logged_in", authCookies.uid);
+          setInterval(() => setRenewToken((p) => !p), 3600000);
           dispatch(
             Authoindenty.IndetificationShow({
               rememberToken: authCookies.rememberToken,
@@ -128,7 +131,7 @@ function App() {
       checkInitialCookies(authCookies);
     }
     setLoading(false);
-  }, [getCookies, checkInitialCookies]);
+  }, [getCookies, checkInitialCookies, renewToken]);
 
   return (
     <div className={styles.container}>
@@ -152,10 +155,10 @@ function App() {
         {!loading && (
           <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/choose_course_to_buy" element={<ChooseCourse/>}/>
+            <Route path="/choose_course_to_buy" element={<ChooseCourse />} />
             {uid && token && access && (
               <Fragment>
-                <Route path="/buy_course" element={<BuyCourse />}/>
+                <Route path="/buy_course" element={<BuyCourse />} />
                 <Route path="/checkout" element={<Stripe />} />
                 <Route path="/checkout/:uid" element={<Confirmation />} />
                 <Route path="/singleQuestions" element={<SingleQuestions />} />
@@ -186,10 +189,11 @@ function App() {
               element={<FormResetPassword />}
             />
             <Route path="/notification" element={<Notification />} />
-            <Route path="*" element={<PageNotFound />} />
+            {access && <Route path="*" element={<PageNotFound />} />}
           </Routes>
         )}
       </div>
+      {!access && <RefuseAccess />}
     </div>
   );
 }
