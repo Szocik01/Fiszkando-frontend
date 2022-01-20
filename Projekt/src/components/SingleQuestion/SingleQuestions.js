@@ -73,7 +73,7 @@ const SingleQuestions = () => {
             sendQuestions();
           },
           failure: () => {
-            history("/questions");
+            history("/chooseCourse/questions");
           },
         })
       );
