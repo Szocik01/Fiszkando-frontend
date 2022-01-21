@@ -69,7 +69,9 @@ export default function AddQuestion() {
     <Fragment>
       {isSpinnerActive && <Spiner>Loading...</Spiner>}
       <form className={style.formContainer}>
-        <SelectInputs isQuestionVisible={isQuestionVisible} setIsQuestionVisible={setIsQuestionVisible} setHttpError={setHttpError} setIsSpinnerActive={setIsSpinnerActive} setUniversity={setUniversity} setCourse={setCourse} showQuestionForm={showQuestionForm} university={university}/>
+        <div className={style.centringContainer}>
+          <SelectInputs isQuestionVisible={isQuestionVisible} setIsQuestionVisible={setIsQuestionVisible} setHttpError={setHttpError} setIsSpinnerActive={setIsSpinnerActive} setUniversity={setUniversity} setCourse={setCourse} showQuestionForm={showQuestionForm} university={university}/>
+        </div>
         {showQuestionForm && <QuestionForm setSuccessMessage={setSuccessMessage} isQuestionVisible={isQuestionVisible} setIsQuestionVisible={setIsQuestionVisible} setTrueQuestionsAmount={setTrueQuestionsAmount} setFlaseQuestionsAmount={setFlaseQuestionsAmount} setHttpError={setHttpError} course={course} trueQuestionsAmount={trueQuestionsAmount} falseQuestionsAmount={falseQuestionsAmount}/>}
       </form>
     </Fragment>

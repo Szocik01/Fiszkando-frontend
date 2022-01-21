@@ -19,11 +19,11 @@ export default function Sidebar(props) {
     <nav
       className={`${style.sidebarContainer} ${
         props.isUnfolded && style.sidebarUnfolded}`}>
-      <div className={style.taggerDiv}>
+      {!(position===null) && <div className={style.taggerDiv}>
         <div
           className={style.taggerElement}
           style={{ marginTop: `${position}rem` }}></div>
-      </div>
+      </div>}
       <div className={style.linkContainer} onClick={props.onUnfolding}>
         <i className={`icon-main ${style.icon} ${props.isUnfolded ? style.rotate : ""}`}></i>
         <div className={style.textContainer}>Zamknij</div>

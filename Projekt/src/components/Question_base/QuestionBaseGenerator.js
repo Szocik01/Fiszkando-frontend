@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import QusetionItem from "./QuestionItem";
+import { positionActions } from "../../storage/redux-index";
 import { SelectedCourseActions } from "../../storage/redux-index";
 
 const QuestionBaseGenerator = () => {
@@ -52,6 +53,11 @@ const QuestionBaseGenerator = () => {
       sendQuestions();
     }
   }, [sendQuestions, dispatch, history, selectedCourse]);
+
+  useEffect(() => {
+    dispatch(positionActions.pagePositionChange(2*3.4));
+  }, [dispatch]);
+
 
   return (
     <div className={styles.container}>

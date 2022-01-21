@@ -4,7 +4,6 @@ import zdjeice from "../../image/banner.jpg";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { SelectedCourseActions } from "../../storage/redux-index";
-import { positionActions } from "../../storage/redux-index";
 import { useNavigate, useParams } from "react-router-dom";
 
 const AllCourse = (props) => {
@@ -15,10 +14,6 @@ const AllCourse = (props) => {
   const [course, setCourse] = useState([]);
   const [selectedCourseIndex, setSelectedCourseIndex] = useState();
   const dispatch = useDispatch();
-  // ten useEffect pod spodem jest od Wiktora żeby sidebar dobrze działał. Najlepiej nie ruszać XD
-  useEffect(() => {
-    dispatch(positionActions.pagePositionChange(0));
-  }, [dispatch]);
 
   const sendQuestion = useCallback(async () => {
     try {

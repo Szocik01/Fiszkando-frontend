@@ -8,13 +8,17 @@
 
 .selectContainer
 {
+    padding:0.8rem ;
+    border: 2px rgb(73, 47, 173) solid;
+    background-color: white;
+    border-radius: 10px;
     display: flex;
     width: 100%;
+    height: fit-content;
     flex-direction: column;
     justify-content: center;
     transition: 0.4s ease-in-out transform;
     transform: translateX(0%);
-    flex: none;
 }
 
 .singleContainer
@@ -67,6 +71,15 @@
 .confirmStaticClass:active
 {
   animation: btnClick 0.5s ease-in-out forwards;
+}
+
+@media screen and (min-width:501px)
+{
+  .selectContainer
+  {
+    width: 75%;
+    padding: 3rem;
+  }
 }
 
 @keyframes btnClick {

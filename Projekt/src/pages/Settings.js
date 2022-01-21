@@ -31,10 +31,8 @@ export default function Settings() {
   const permissionsArray = logindata.permissions;
 
   useEffect(()=>{
-    console.log("Wykonało się");
     for(const element of permissionsArray)
     {
-      console.log("ile razy się wykona nie na linkach");
       if(element.modify.write)
       {
         setCanModify(true);

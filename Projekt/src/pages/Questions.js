@@ -1,6 +1,8 @@
 import SingleQuestions from "../components/SingleQuestion/SingleQuestions";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
 import Report from "../components/Report/report";
+import { positionActions } from "../storage/redux-index";
+import { useDispatch } from "react-redux";
 
 const Questions = () => {
   const [information, setInformation] = useState({});
@@ -9,6 +11,14 @@ const Questions = () => {
   const fetchId = (id) =>{
     setInformation(id);
   };
+
+  const dispatch = useDispatch()
+
+
+    useEffect(() => {
+      dispatch(positionActions.pagePositionChange(0));
+    }, [dispatch]);
+
 
   return (
     <Fragment>

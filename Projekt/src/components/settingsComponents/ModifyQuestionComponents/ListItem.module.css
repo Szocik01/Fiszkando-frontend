@@ -13,6 +13,7 @@ li {
 .item {
     width: 100%;
     border: 1px solid var(--item-border-color);
+    background-color: rgb(255, 255, 255);
     padding: 1rem;
     border-radius: 0.5rem;
     box-shadow: 2px 2px 5px var(--item-box-shadow-color);

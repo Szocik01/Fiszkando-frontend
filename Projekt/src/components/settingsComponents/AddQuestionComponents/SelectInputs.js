@@ -119,18 +119,15 @@ export default function SelectInputs(props) {
   }, [props.university, getCourses]);
 
   return (
-    <div
-      className={`${style.selectContainer} ${
+    <div className={`${style.selectContainer} ${
         props.isQuestionVisible ? `${style.hide}` : ""
-      }`}
-    >
+      }`}>
       <div className={style.singleContainer}>
         <label htmlFor="university">Wybierz uniwersytet</label>
         <select
           id="university"
           onChange={selectInputChangeHandler}
-          defaultValue=""
-        >
+          defaultValue="">
           <option value="">-</option>
           {universityList}
         </select>
@@ -148,8 +145,7 @@ export default function SelectInputs(props) {
         className={`${props.showQuestionForm ? style.confirmButton : ""} ${
           style.confirmStaticClass
         }`}
-        onClick={showForm}
-      >
+        onClick={showForm}>
         Potwierdź
       </button>
     </div>
