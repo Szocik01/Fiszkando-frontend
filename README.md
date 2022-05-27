@@ -8,12 +8,29 @@
 <p><b>React, React Redux Toolkit, React Router v6, REST API, CSS, CSS modules, Web Sockets, Stripe, Git.</b></p> <br/>
 <h2>Project Status</h2> </br>
 <p>First version finished (except some small things like logo which we haven't created yet) and fully functional, but not deployed for commercial purposes.</p> <br/>
+<p><b>***IMPORTANT***</b></p><br/>
+<p>THE SITE IS NOT WORKING CORRECTLY AT THE MOMENT BECAUSE OF BACK-END SERVER PROBLEMS. DUE TO THAT FACT LOGGING IN AND OTHER CRUCIAL FEATURES ARE NOT AVALIABLE. OUR BACK-END TEAM WILL TRY TO FIX IT. UNTIL THEN THE SOURCE CODE AND MAIN PAGE ARE THE ONLY THINGS THAT CAN BE VIEWED. EVEN THOUGH WE ENCOURAGE TO LOOK AT OUR SOURCE CODE DURING RECRUITMENT PROCESS. WISH US LUCK.</p> <br/>
 <h2>Created Features</h2> </br>
-<p><b>Wiktor Szot: </b> <br/>
-  - Setting up Redux Toolkit and React Router <br/>
+<p><b>Wiktor Szot: </b></p>
+  <p>- Setting up Redux Toolkit and React Router <br/>
   - Creating navbar and sidebar<br/>
-  - Creating cart and its logic <br/>
-  - 
+  - Creating cart, its logic and whole frontend logic that is behind buying courses <br/>
+  - Creating settings container and settings sidebar<br/>
+  - Creating main page<br/>
+  - Creating adding questions logic<br/>
+  - Creating modify questions logic
 </p> <br/>
-<h2>Visit Website</h2> </br>
+<p>Folders and files created by Wiktor Szot:</p>
+<p>- entire buyCourseComponents <br/>
+  - entire chooseCourseComponents<br/>
+  - entire mainPageComponents<br/>
+  - entire navigationComponents<br/>
+  - entire settingsComponents/addQuestionComponents<br/>
+  - entire settingsComponents/modifyQuestionComponents<br/>
+  - ContentContainer.js, SettingsNavigation.js, SidebarLinks.js in settingsComponents and all css files that come with files mentioned earlier<br/>
+  - BuyCourse.js, ChooseCourse.js, Main.js, Settings.js in pages and all css files that come with files mentioned earlier<br/>
+  - entire routing <br/>
+  - redux-index.js in storage
+</p> <br/>
+<h2>Visit Website</h2> <br/>
 <p>https://fiszkando.web.app/</p><br/>
